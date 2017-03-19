@@ -14,7 +14,7 @@ public enum KijaratEnum {
   
   private final EnumMap<IranyEnum, HelyszinEnum> kijaratok;
 
-  KijaratEnum(HelyszinEnum... celHelyszinek) {
+  private KijaratEnum(HelyszinEnum... celHelyszinek) {
     kijaratok = new EnumMap(IranyEnum.class);
     // célhelyszínből nyilván ugyanannyi legyen, mint irányból
     for (int i = 0; i < celHelyszinek.length; i++) {

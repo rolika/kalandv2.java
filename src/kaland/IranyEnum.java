@@ -21,7 +21,7 @@ enum IranyEnum implements ParancsInterface {
   
   private final Set<String> szinonimak;
 
-  IranyEnum(String... szinonimak) {
+  private IranyEnum(String... szinonimak) {
     this.szinonimak = new HashSet<>(Arrays.asList(szinonimak));
   }
 

@@ -11,6 +11,7 @@ import java.util.Set;
  */
 enum ParancsEnum implements ParancsInterface {
   
+  KILEP("kilépek", "abbahagyom", "feladom"),
   MEGY("megyek", "elmegyek", "indulok"),
   LELTAR("leltár", "leltárt", "leltárba"),
   AKTIVAL("bekapcsolom", "felkapcsolom", "használom", "mozgatom", "forgatom"),
@@ -27,7 +28,7 @@ enum ParancsEnum implements ParancsInterface {
 
   private final Set<String> szinonimak;
 
-  ParancsEnum(String... szinonimak) {
+  private ParancsEnum(String... szinonimak) {
     this.szinonimak = new HashSet<>(Arrays.asList(szinonimak));
   }
 
