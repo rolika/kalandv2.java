@@ -15,6 +15,16 @@ class Helyszin {
     this.kijaratok = KijaratEnum.valueOf(helyszin.toString()); // !!!
   }
 
+  HelyszinEnum getHelyszin() {
+    return helyszin;
+  }
+
+  HelyszinEnum getKijarat(IranyEnum irany) {
+    return kijaratok.getKijarat(irany);
+  }
+  
+  
+
   @Override
   public String toString() {
     StringBuilder repr = new StringBuilder();
