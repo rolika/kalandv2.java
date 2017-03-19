@@ -1,7 +1,7 @@
 package kaland;
 
-import com.sun.xml.internal.bind.v2.runtime.output.SAXOutput;
 import java.util.Scanner;
+import java.util.Set;
 import org.apache.commons.lang3.text.WordUtils;
 
 /**
@@ -31,8 +31,10 @@ public class Kaland {
         // ellenségek befűzése 
         System.out.print(jatekSzoveg.toString());
         // játékos utasításának beolvasása
-        for (SzotarInterface akarmi : Ertelmezo.szetbont(utasitas(bevitel))) {
-          System.out.println(akarmi);
+        Set<SzotarInterface> parancsszavak = Ertelmezo.szetbont(utasitas(bevitel));
+        if (parancsszavak.remove(ParancsEnum.KILEP)) {
+          // tényleg kilépsz?
+          break;
         }
         // utasítása értelmezése
         // utasítás végrehajtása
@@ -48,6 +50,7 @@ public class Kaland {
       }
       sortoro(UzenetEnum.UJ_JATEK.toString());
       System.out.print(jatekSzoveg.toString());
+      break;
     }
     
   }
@@ -57,10 +60,18 @@ public class Kaland {
     return bevitel.nextLine();
   }
   
+  /**
+   * Új játékot indít, mindent alaphelyzetbe állítva.
+   */
   static void ujJatek() {
     jatekos = new Jatekos(HelyszinEnum.HAZ_ELOTT);
   }
   
+  /**
+   * Az adott szöveget meghatározott szélességű sorokra tördeli a szóhatárokon,
+   * és beilleszt egy újsort is az egész mögé.
+   * @param szoveg 
+   */
   static void sortoro(String szoveg) {
     jatekSzoveg.append(WordUtils.wrap(szoveg + "\n", WRAP));
   }
