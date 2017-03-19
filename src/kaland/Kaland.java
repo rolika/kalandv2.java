@@ -31,7 +31,9 @@ public class Kaland {
         // ellenségek befűzése 
         System.out.print(jatekSzoveg.toString());
         // játékos utasításának beolvasása
-        utasitas(bevitel);
+        for (ParancsInterface akarmi : Ertelmezo.szetbont(utasitas(bevitel))) {
+          System.out.println(akarmi);
+        }
         // utasítása értelmezése
         // utasítás végrehajtása
         // visszajelzés
