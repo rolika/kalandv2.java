@@ -9,7 +9,7 @@ import java.util.Set;
  * 
  * @author rolika
  */
-enum IranyEnum implements ParancsInterface {
+enum IranyEnum implements SzotarInterface {
   
   ESZAK("é", "észak", "északra", "északnak"),
   DEL("d", "dél", "délre", "délnek"),
@@ -26,7 +26,7 @@ enum IranyEnum implements ParancsInterface {
   }
 
   @Override
-  public ParancsInterface getParancs(String szo) {
+  public SzotarInterface getParancs(String szo) {
     return szinonimak.contains(szo) ? this : null;
   }
 }

@@ -11,19 +11,19 @@ import java.util.Set;
  */
 class Ertelmezo {
   
-  private static Set<ParancsInterface> parancsszavak;
+  private static Set<SzotarInterface> parancsszavak;
 
-  static Set<ParancsInterface> szetbont(String parancs) {
+  static Set<SzotarInterface> szetbont(String parancs) {
     parancsszavak = new HashSet<>();
     for (String szo : parancs.toLowerCase().split(" a?z?\\b ?")) {
-      for (ParancsInterface parancsszo : ParancsEnum.values()) {
-        ParancsInterface szoEnum = parancsszo.getParancs(szo);
+      for (SzotarInterface parancsszo : ParancsEnum.values()) {
+        SzotarInterface szoEnum = parancsszo.getParancs(szo);
         if (szoEnum != null) {
           parancsszavak.add(szoEnum);
         }
       }
     }
-    return parancsszavak;
+    return parancsszavak;   
     
   }
   

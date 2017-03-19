@@ -9,7 +9,7 @@ import java.util.Set;
  * 
  * @author rolika
  */
-enum ParancsEnum implements ParancsInterface {
+enum ParancsEnum implements SzotarInterface {
   
   KILEP("kilépek", "abbahagyom", "feladom"),
   MEGY("megyek", "elmegyek", "indulok"),
@@ -33,7 +33,7 @@ enum ParancsEnum implements ParancsInterface {
   }
 
   @Override
-  public ParancsInterface getParancs(String szo) {
+  public SzotarInterface getParancs(String szo) {
     return szinonimak.contains(szo) ? this : null;
   }
 }

@@ -9,8 +9,8 @@ package kaland;
  *
  * @author rolika
  */
-interface ParancsInterface {
+interface SzotarInterface {
   
-  ParancsInterface getParancs(String szo);
+  SzotarInterface getParancs(String szo);
   
 }
