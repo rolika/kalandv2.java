@@ -36,19 +36,19 @@ public class Kaland {
         // látható tárgyak befűzése
         // ellenségek befűzése 
         System.out.print(jatekSzoveg.toString());
-        
+      
         /*
         Játékos utasításának beolvasása és kezelése
         */
+        jatekSzoveg = new StringBuilder();
         Set<SzotarInterface> parancsszavak = Ertelmezo.szetbont(utasitas(bevitel));
         if (parancsszavak.remove(ParancsEnum.KILEP)) {
           break;
+        } else if (parancsszavak.remove(IranyEnum.ESZAK)) {
+          sortoro(jatekos.megy(IranyEnum.ESZAK));
         }
         
-        /*
-        Reakció a játékos utasítására
-        */
-        
+        System.out.print(jatekSzoveg.toString());
       }
       
       /*

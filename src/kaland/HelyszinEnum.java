@@ -17,15 +17,16 @@ enum HelyszinEnum {
   PADLAS_VEGE("Padlás vége", "A mestergerendáról vaskos, poros pókháló lógnak le. A padlás végébe, a gerenda alá, óriási, vasalt faládát építettek; olyan nagy, hogy egyben nem fért volna fel a padláslépcsőn. Nyugat felé a padlás eleje játszik halvány kísértetfényben.", true),
   REJTETT_PINCE("Rejtett pince", "A ház elrejtett helyisége olyan régi benyomást kelt, hogy bele sem mersz gondolni. A falak, a kövek illesztési technikái furcsa, hátborzongató idegenséggel vesznek körül. A nyugati fal boltívének újabb keletű falazása, bár nem a kőműves mesterség csúcsa, mégis szinte otthonos barátsággal vonzza szemeidet. A keleti falra pillantva megáll benned az ütő: valami mintha átszivárgott volna a túloldalról egy alig kivehető, kolosszális kő ajtólap körvonalain át.", true),
   ODAAT("Odaát", "Egy idegen világban vagy, éjszaka van. Az égbolton soha nem látott alakzatban ragyognak a csillagok, és egy vérszínű hold vonja kétségbeejtő árnyalatba a környezetet. A köves, sivatagos táj vigasztalan látványa alig elviselhető, amit nem enyhít a kifacsart, elszáradt, torz, tüskés bokrok és kaktuszok szívszorító magánya. Nyugatra egy kő ajtólap áll a levegőben, egy lépcsőfoknyi magasságban lebegve.", false);
-  
+
   private final String nev, leiras;
   private boolean sotet, bejart;
+  private KijaratEnum kijaratok;
 
   private HelyszinEnum(String nev, String leiras, boolean sotet) {
     this.nev = nev;
     this.leiras = leiras;
     this.sotet = sotet;
-    this.bejart = false;
+    bejart = false;
   }
 
   String getNev() {
@@ -44,6 +45,10 @@ enum HelyszinEnum {
     return bejart;
   }
 
+  public HelyszinEnum getKijarat(IranyEnum irany) {
+    return kijaratok.getKijarat(irany);
+  }
+
   void setSotet(boolean sotet) {
     this.sotet = sotet;
   }
@@ -51,5 +56,9 @@ enum HelyszinEnum {
   void setBejart(boolean bejart) {
     this.bejart = bejart;
   }
-  
+
+  public void setKijaratok(KijaratEnum kijaratok) {
+    this.kijaratok = kijaratok;
+  }
+
 }
