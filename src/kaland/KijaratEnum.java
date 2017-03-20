@@ -23,12 +23,6 @@ enum KijaratEnum {
   private final EnumMap<IranyEnum, HelyszinEnum> kijaratok;
 
   private KijaratEnum(HelyszinEnum... celHelyszinek) {
-    
-    for (HelyszinEnum kijarat : celHelyszinek) {
-      System.out.print(kijarat + " ");
-    }
-    System.out.println();
-    
     kijaratok = new EnumMap(IranyEnum.class);
     // célhelyszínből nyilván ugyanannyi legyen, mint irányból
     for (int i = 0; i < celHelyszinek.length; i++) {
