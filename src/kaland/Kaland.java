@@ -21,8 +21,14 @@ public class Kaland {
     
     
     while (true) {
+      
       ujJatek();
+      
       while (!(jatekos.isMeghalt() && jatekos.isNyert() && jatekos.isVesztett())) { // játékciklus
+        
+        /*
+        Játékos helyzete
+        */
         jatekSzoveg = new StringBuilder();
         // helyszín leírás befűzése
         sortoro(jatekos.getHelyszin().getLeiras());
@@ -30,16 +36,24 @@ public class Kaland {
         // látható tárgyak befűzése
         // ellenségek befűzése 
         System.out.print(jatekSzoveg.toString());
-        // játékos utasításának beolvasása
+        
+        /*
+        Játékos utasításának beolvasása és kezelése
+        */
         Set<SzotarInterface> parancsszavak = Ertelmezo.szetbont(utasitas(bevitel));
         if (parancsszavak.remove(ParancsEnum.KILEP)) {
-          // tényleg kilépsz?
           break;
         }
-        // utasítása értelmezése
-        // utasítás végrehajtása
-        // visszajelzés
+        
+        /*
+        Reakció a játékos utasítására
+        */
+        
       }
+      
+      /*
+      A játék - így vagy úgy - végetért
+      */
       jatekSzoveg = new StringBuilder();
       if (jatekos.isMeghalt()) {
         sortoro(UzenetEnum.MEGHALT.toString());
@@ -50,7 +64,10 @@ public class Kaland {
       }
       sortoro(UzenetEnum.UJ_JATEK.toString());
       System.out.print(jatekSzoveg.toString());
-      break;
+      Set<SzotarInterface> valasz = Ertelmezo.szetbont(utasitas(bevitel));
+      if (!valasz.remove(ParancsEnum.MEGEROSIT)) {
+        break;
+      }      
     }
     
   }
