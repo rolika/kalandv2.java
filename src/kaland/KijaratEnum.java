@@ -9,16 +9,21 @@ import java.util.EnumMap;
  */
 enum KijaratEnum {
   
+  // észak, kelet, dél, nyugat, le, fel, indirekt
   HAZ_ELOTT(HelyszinEnum.ELOTER, null, null, null, null, null, HelyszinEnum.ELOTER),
   ELOTER(HelyszinEnum.FOLYOSO, null, HelyszinEnum.HAZ_ELOTT, null, null, null, HelyszinEnum.FOLYOSO),
-  FOLYOSO(null, null, null, null, null, null, null),
-  SZOBA(null, null, null, null, null, null, null),
-  KONYHA(null, null, null, null, null, null, null),
-  PINCE(null, null, null, null, null, null, null),
-  PADLAS_ELEJE(null, null, null, null, null, null, null),
-  PADLAS_VEGE(null, null, null, null, null, null, null),
-  REJTETT_PINCE(null, null, null, null, null, null, null),
-  ODAAT(null, null, null, null, null, null, null);
+  FOLYOSO(null, HelyszinEnum.KONYHA, HelyszinEnum.FOLYOSO, HelyszinEnum.SZOBA, HelyszinEnum.PINCE,
+    HelyszinEnum.PADLAS_ELEJE, HelyszinEnum.SZOBA),
+  SZOBA(null, HelyszinEnum.FOLYOSO, null, null, null, null, HelyszinEnum.FOLYOSO),
+  KONYHA(null, null, null, HelyszinEnum.FOLYOSO, null, null, HelyszinEnum.FOLYOSO),
+  PINCE(null, null, null, null, null, HelyszinEnum.FOLYOSO, HelyszinEnum.FOLYOSO),
+  PADLAS_ELEJE(null, null, null, HelyszinEnum.PADLAS_VEGE, HelyszinEnum.FOLYOSO, null,
+    HelyszinEnum.FOLYOSO),
+  PADLAS_VEGE(null, HelyszinEnum.PADLAS_ELEJE, null, null, HelyszinEnum.REJTETT_PINCE, null,
+    HelyszinEnum.PADLAS_ELEJE),
+  REJTETT_PINCE(null, null, null, HelyszinEnum.ODAAT, null, HelyszinEnum.PADLAS_VEGE,
+    HelyszinEnum.PADLAS_VEGE),
+  ODAAT(null, HelyszinEnum.REJTETT_PINCE, null, null, null, null, HelyszinEnum.REJTETT_PINCE);
   
   private final EnumMap<IranyEnum, HelyszinEnum> kijaratok;
 
