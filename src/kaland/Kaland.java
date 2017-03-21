@@ -46,6 +46,20 @@ public class Kaland {
           break;
         } else if (parancsszavak.remove(IranyEnum.ESZAK)) {
           sortoro(jatekos.megy(IranyEnum.ESZAK));
+        } else if (parancsszavak.remove(IranyEnum.KELET)) {
+          sortoro(jatekos.megy(IranyEnum.KELET));
+        } else if (parancsszavak.remove(IranyEnum.DEL)) {
+          sortoro(jatekos.megy(IranyEnum.DEL));
+        } else if (parancsszavak.remove(IranyEnum.NYUGAT)) {
+          sortoro(jatekos.megy(IranyEnum.NYUGAT));
+        } else if (parancsszavak.remove(IranyEnum.LE)) {
+          sortoro(jatekos.megy(IranyEnum.LE));
+        } else if (parancsszavak.remove(IranyEnum.FEL)) {
+          sortoro(jatekos.megy(IranyEnum.FEL));
+        } else if (parancsszavak.remove(IranyEnum.INDIREKT)) {
+          sortoro(jatekos.megy(IranyEnum.INDIREKT));
+        } else {
+          sortoro(UzenetEnum.NEM_ERTEM.toString());
         }
         
         System.out.print(jatekSzoveg.toString());

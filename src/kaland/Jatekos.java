@@ -57,7 +57,7 @@ class Jatekos {
     if (ujHelyszin == null) {
       return UzenetEnum.ARRA_NEM.toString();
     } else {
-      helyszin = ujHelyszin;
+      setHelyszin(ujHelyszin);
       return UzenetEnum.RENDBEN.toString();
     }
   }

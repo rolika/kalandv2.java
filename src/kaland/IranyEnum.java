@@ -12,11 +12,11 @@ import java.util.Set;
 enum IranyEnum implements SzotarInterface {
   
   ESZAK("é", "észak", "északra", "északnak"),
-  DEL("d", "dél", "délre", "délnek"),
   KELET("k", "kelet", "keletre", "keletnek"),
+  DEL("d", "dél", "délre", "délnek"),
   NYUGAT("ny", "nyugat", "nyugatra", "nyugatnak"),
-  LE("le", "lefelé", "lefele"),
-  FEL("fel", "felfelé", "felfele"),
+  LE("l", "le", "lefelé", "lefele"),
+  FEL("f", "fel", "felfelé", "felfele"),
   INDIREKT("ki", "be", "kimegyek", "bemegyek", "átmegyek");
   
   private final Set<String> szinonimak;
