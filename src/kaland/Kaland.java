@@ -77,7 +77,7 @@ public class Kaland {
    * @return játékos által begépelt utasítás
    */
   static String utasitas() {
-    System.out.print("- ");
+    System.out.print(UzenetEnum.PROMPT.toString());
     return bevitel.nextLine();
   }
 

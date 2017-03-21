@@ -14,7 +14,8 @@ public enum UzenetEnum {
   NYERT("Gratulálok, megnyerted a játékot!"),
   VESZTETT("Sajnálom, nem sikerült a játék végére érned."),
   UJ_JATEK("Játszol még egyet (igen/nem)?"),
-  NEM_ERTEM("Nem értem, próbálkozz valami mással.");
+  NEM_ERTEM("Nem értem, próbálkozz valami mással."),
+  PROMPT("- ");
   
   private final String uzenet;
   
