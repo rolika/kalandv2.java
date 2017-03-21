@@ -1,5 +1,7 @@
 package kaland;
 
+import java.util.Set;
+
 /**
  * A játékost megvalósító osztály kalandjátékhoz
  *
@@ -60,6 +62,10 @@ class Jatekos {
       setHelyszin(ujHelyszin);
       return UzenetEnum.RENDBEN.toString();
     }
+  }
+  
+  void vizsgal() {
+    System.out.println("A játékos vizsgál");
   }
 
 }

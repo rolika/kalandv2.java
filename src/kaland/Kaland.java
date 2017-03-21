@@ -16,46 +16,25 @@ public class Kaland {
   static StringBuilder jatekSzoveg;
   static Scanner bevitel = new Scanner(System.in);
 
-  public static void main(String[] args) {
+  public static void main(String[] args) throws NoSuchMethodException {
 
     while (true) {
 
       ujJatek();
 
-      while (!(jatekos.isMeghalt() && jatekos.isNyert() && jatekos.isVesztett())) { // játékciklus
-
-        /*
-        Játékos helyzete
-         */
-        jatekSzoveg = new StringBuilder();
-        // helyszín leírás befűzése
-        sortoro(jatekos.getHelyszin().getLeiras());
-        jatekos.getHelyszin().setBejart(true);
-        // látható tárgyak befűzése
-        // ellenségek befűzése
-        System.out.print(jatekSzoveg.toString());
-
+      while (!(jatekos.isMeghalt() && jatekos.isNyert() && jatekos.isVesztett())) {
+        
+        System.out.print(helyzet());
+        
         /*
         Játékos utasításának beolvasása és kezelése
          */
         jatekSzoveg = new StringBuilder();
         Set<SzotarInterface> parancsszavak = Ertelmezo.szetbont(utasitas());
-        if (parancsszavak.remove(ParancsEnum.KILEP)) {
-          break;
-        } else if (parancsszavak.remove(IranyEnum.ESZAK)) {
-          sortoro(jatekos.megy(IranyEnum.ESZAK));
-        } else if (parancsszavak.remove(IranyEnum.KELET)) {
-          sortoro(jatekos.megy(IranyEnum.KELET));
-        } else if (parancsszavak.remove(IranyEnum.DEL)) {
-          sortoro(jatekos.megy(IranyEnum.DEL));
-        } else if (parancsszavak.remove(IranyEnum.NYUGAT)) {
-          sortoro(jatekos.megy(IranyEnum.NYUGAT));
-        } else if (parancsszavak.remove(IranyEnum.LE)) {
-          sortoro(jatekos.megy(IranyEnum.LE));
-        } else if (parancsszavak.remove(IranyEnum.FEL)) {
-          sortoro(jatekos.megy(IranyEnum.FEL));
-        } else if (parancsszavak.remove(IranyEnum.INDIREKT)) {
-          sortoro(jatekos.megy(IranyEnum.INDIREKT));
+        if (mozgasiSzandek(parancsszavak)) {
+          // nincs teendő, csak az else if miatt kell, hogy csak az egyik hajtódjon végre
+        } else if (cselekvesiSzandek(parancsszavak)) {
+          // nincs teendő, csak az else if kell
         } else {
           sortoro(UzenetEnum.NEM_ERTEM.toString());
         }
@@ -69,6 +48,20 @@ public class Kaland {
       }
     }
 
+  }
+  
+  /**
+   * Játékos helyzetének felderítése
+   * 
+   * @return helyszín, tárgyak stb. leírása
+   */
+  static String helyzet() {
+    jatekSzoveg = new StringBuilder();
+    sortoro(jatekos.getHelyszin().getLeiras());
+    jatekos.getHelyszin().setBejart(true);
+    // látható tárgyak befűzése
+    // ellenségek befűzése
+    return jatekSzoveg.toString();
   }
 
   /**
@@ -106,6 +99,32 @@ public class Kaland {
     System.out.print(jatekSzoveg.toString());
     Set<SzotarInterface> valasz = Ertelmezo.szetbont(utasitas());
     return !valasz.remove(ParancsEnum.MEGEROSIT);
+  }
+  
+  /**
+   * Ellenőrzi a parancsszavakat irányok szerint, ha talál, végrehajtja
+   * 
+   * @param parancsszavak
+   * @return igaz, ha volt irányt jelző parancsszó
+   */
+  static boolean mozgasiSzandek(Set<SzotarInterface> parancsszavak) {
+    for (IranyEnum parancsszo: IranyEnum.values()) {
+      if (parancsszavak.remove(parancsszo)) {
+        sortoro(jatekos.megy(parancsszo));
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  static boolean cselekvesiSzandek(Set<SzotarInterface> parancsszavak) throws NoSuchMethodException {
+    for (ParancsEnum parancsszo: ParancsEnum.values()) {
+      if (parancsszavak.remove(parancsszo)) {
+        //Jatekos.class.getMethod(parancsszo.toString().toLowerCase());
+        return true;
+      }
+    }
+    return false;
   }
 
   /**
