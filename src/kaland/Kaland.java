@@ -1,5 +1,7 @@
 package kaland;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Scanner;
 import java.util.Set;
 import org.apache.commons.lang3.text.WordUtils;
@@ -16,7 +18,7 @@ public class Kaland {
   static StringBuilder jatekSzoveg;
   static Scanner bevitel = new Scanner(System.in);
 
-  public static void main(String[] args) throws NoSuchMethodException {
+  public static void main(String[] args) {
 
     while (true) {
 
@@ -117,10 +119,16 @@ public class Kaland {
     return false;
   }
   
-  static boolean cselekvesiSzandek(Set<SzotarInterface> parancsszavak) throws NoSuchMethodException {
+  static boolean cselekvesiSzandek(Set<SzotarInterface> parancsszavak) {
     for (ParancsEnum parancsszo: ParancsEnum.values()) {
       if (parancsszavak.remove(parancsszo)) {
-        //Jatekos.class.getMethod(parancsszo.toString().toLowerCase());
+        try {
+          Method kezelo = jatekos.getClass().getMethod(parancsszo.toString().toLowerCase());
+          kezelo.invoke(jatekos);
+        } catch (IllegalAccessException | IllegalArgumentException | NoSuchMethodException | InvocationTargetException e) {
+          System.out.println(e.toString());
+          return false;
+        }
         return true;
       }
     }

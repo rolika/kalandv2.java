@@ -12,7 +12,6 @@ import java.util.Set;
 enum ParancsEnum implements SzotarInterface {
   
   KILEP("kilépek", "abbahagyom", "feladom"),
-  MEGY("megyek", "elmegyek", "indulok"),
   LELTAR("leltár", "leltárt", "leltárba"),
   AKTIVAL("bekapcsolom", "felkapcsolom", "használom", "mozgatom", "forgatom"),
   DEAKTIVAL("kikapcsolom", "lekapcsolom"),

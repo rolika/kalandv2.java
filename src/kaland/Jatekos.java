@@ -1,5 +1,6 @@
 package kaland;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -64,7 +65,7 @@ class Jatekos {
     }
   }
   
-  void vizsgal() {
+  public void vizsgal() {
     System.out.println("A játékos vizsgál");
   }
 
