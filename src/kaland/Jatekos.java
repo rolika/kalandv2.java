@@ -65,8 +65,9 @@ class Jatekos {
     }
   }
   
-  public void vizsgal() {
-    System.out.println("A játékos vizsgál");
+  void vizsgal(Set<SzotarInterface> parancsszavak) {
+    System.out.println("Játékos vizsgál.");
+    parancsszavak.forEach(System.out::println);
   }
 
 }

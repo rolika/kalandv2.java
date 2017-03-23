@@ -2,6 +2,7 @@ package kaland;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.EnumSet;
 import java.util.Scanner;
 import java.util.Set;
 import org.apache.commons.lang3.text.WordUtils;
@@ -110,7 +111,7 @@ public class Kaland {
    * @return igaz, ha volt irányt jelző parancsszó
    */
   static boolean mozgasiSzandek(Set<SzotarInterface> parancsszavak) {
-    for (IranyEnum parancsszo: IranyEnum.values()) {
+    for (IranyEnum parancsszo : IranyEnum.values()) {
       if (parancsszavak.remove(parancsszo)) {
         sortoro(jatekos.megy(parancsszo));
         return true;
@@ -120,12 +121,15 @@ public class Kaland {
   }
   
   static boolean cselekvesiSzandek(Set<SzotarInterface> parancsszavak) {
-    for (ParancsEnum parancsszo: ParancsEnum.values()) {
+    for (ParancsEnum parancsszo : ParancsEnum.values()) {
       if (parancsszavak.remove(parancsszo)) {
         try {
-          Method kezelo = jatekos.getClass().getMethod(parancsszo.toString().toLowerCase());
-          kezelo.invoke(jatekos);
-        } catch (IllegalAccessException | IllegalArgumentException | NoSuchMethodException | InvocationTargetException e) {
+          System.out.println(parancsszavak.size());
+          String kezeloNev = parancsszo.toString().toLowerCase();
+          Method kezelo = jatekos.getClass().getDeclaredMethod(kezeloNev, Set.class);
+          kezelo.invoke(jatekos, parancsszavak);
+        } catch (NoSuchMethodException | IllegalAccessException | IllegalArgumentException
+          | InvocationTargetException e) {
           System.out.println(e.toString());
           return false;
         }
