@@ -28,9 +28,6 @@ public class Kaland {
         
         System.out.print(helyzet());
         
-        /*
-        Játékos utasításának beolvasása és kezelése
-         */
         jatekSzoveg = new StringBuilder();
         Set<SzotarInterface> parancsszavak = Ertelmezo.szetbont(utasitas());
         if (mozgasiSzandek(parancsszavak)) {
@@ -100,6 +97,9 @@ public class Kaland {
    * Új játékot indít, mindent alaphelyzetbe állítva.
    */
   static void ujJatek() {
+    for (HelyszinEnum helyszin : HelyszinEnum.values()) {
+      helyszin.setBejart(false);
+    }
     jatekos = new Jatekos(HelyszinEnum.HAZ_ELOTT);
   }
 
