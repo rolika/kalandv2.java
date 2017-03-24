@@ -21,9 +21,9 @@ enum KijaratEnum {
     HelyszinEnum.FOLYOSO),
   PADLAS_VEGE(null, HelyszinEnum.PADLAS_ELEJE, null, null, HelyszinEnum.REJTETT_PINCE, null,
     HelyszinEnum.PADLAS_ELEJE),
-  REJTETT_PINCE(null, null, null, HelyszinEnum.ODAAT, null, HelyszinEnum.PADLAS_VEGE,
+  REJTETT_PINCE(null, HelyszinEnum.ODAAT, null, null, null, HelyszinEnum.PADLAS_VEGE,
     HelyszinEnum.PADLAS_VEGE),
-  ODAAT(null, HelyszinEnum.REJTETT_PINCE, null, null, null, null, HelyszinEnum.REJTETT_PINCE);
+  ODAAT(null, null, null, HelyszinEnum.REJTETT_PINCE, null, null, HelyszinEnum.REJTETT_PINCE);
   
   private final EnumMap<IranyEnum, HelyszinEnum> kijaratok;
 
