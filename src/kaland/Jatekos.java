@@ -12,6 +12,7 @@ class Jatekos {
 
   private boolean meghalt, nyert, vesztett;
   private HelyszinEnum helyszin;
+  private LeiroEnum leiroMod;
   //private EnumSet<HelyszinEnum, TargyEnum> leltar;
 
   Jatekos(HelyszinEnum helyszin) {
@@ -19,7 +20,7 @@ class Jatekos {
     nyert = false;
     vesztett = false;
     setHelyszin(helyszin);
-
+    leiroMod = LeiroEnum.NORMAL;
   }
 
   boolean isMeghalt() {
@@ -36,6 +37,10 @@ class Jatekos {
 
   public HelyszinEnum getHelyszin() {
     return helyszin;
+  }
+
+  public LeiroEnum getLeiroMod() {
+    return leiroMod;
   }
 
   void setMeghalt(boolean meghalt) {
@@ -90,7 +95,7 @@ class Jatekos {
     System.out.println("Játékos aktivál.");
   }
   
-  void dekatival(Set<SzotarInterface> parancsszavak) {
+  void deaktival(Set<SzotarInterface> parancsszavak) {
     System.out.println("Játékos deaktivál.");
   }
   
@@ -124,15 +129,15 @@ class Jatekos {
   }
   
   void hosszu(Set<SzotarInterface> parancsszavak) {
-    System.out.println("Játékos hosszú leírást kér.");
+    leiroMod = LeiroEnum.HOSSZU;
   }
   
   void rovid(Set<SzotarInterface> parancsszavak) {
-    System.out.println("Játékos rövid leírást kér.");
+    leiroMod = LeiroEnum.ROVID;
   }
   
   void normal(Set<SzotarInterface> parancsszavak) {
-    System.out.println("Játékos normál leírást kér.");
+    leiroMod = LeiroEnum.NORMAL;
   }
   
   void info(Set<SzotarInterface> parancsszavak) {

@@ -2,8 +2,6 @@ package kaland;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.EnumSet;
-import java.util.HashSet;
 import java.util.Scanner;
 import java.util.Set;
 import org.apache.commons.lang3.text.WordUtils;
@@ -61,11 +59,31 @@ public class Kaland {
    */
   static String helyzet() {
     jatekSzoveg = new StringBuilder();
-    sortoro(jatekos.getHelyszin().getLeiras());
-    jatekos.getHelyszin().setBejart(true);
+    sortoro(getHelyszinLeiras());
+    
     // látható tárgyak befűzése
     // ellenségek befűzése
     return jatekSzoveg.toString();
+  }
+  
+  /**
+   * Helyszínleírás a beállított módnak megfelelően (alapból normál)
+   * 
+   * @return 
+   */
+  static String getHelyszinLeiras() {
+    switch (jatekos.getLeiroMod()) {
+      case HOSSZU:
+        jatekos.getHelyszin().setBejart(false);
+        return jatekos.getHelyszin().getLeiras();
+      case ROVID:
+        jatekos.getHelyszin().setBejart(true);
+        return jatekos.getHelyszin().getNev();
+      default:
+        String leiras = jatekos.getHelyszin().getNormalLeiras();
+        jatekos.getHelyszin().setBejart(true);
+        return leiras;
+    }
   }
 
   /**
