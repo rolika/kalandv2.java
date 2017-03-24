@@ -12,7 +12,7 @@ enum KijaratEnum {
   // észak, kelet, dél, nyugat, le, fel, indirekt
   HAZ_ELOTT(HelyszinEnum.ELOTER, null, null, null, null, null, HelyszinEnum.ELOTER),
   ELOTER(HelyszinEnum.FOLYOSO, null, HelyszinEnum.HAZ_ELOTT, null, null, null, HelyszinEnum.FOLYOSO),
-  FOLYOSO(null, HelyszinEnum.KONYHA, HelyszinEnum.FOLYOSO, HelyszinEnum.SZOBA, HelyszinEnum.PINCE,
+  FOLYOSO(null, HelyszinEnum.KONYHA, HelyszinEnum.ELOTER, HelyszinEnum.SZOBA, HelyszinEnum.PINCE,
     HelyszinEnum.PADLAS_ELEJE, HelyszinEnum.SZOBA),
   SZOBA(null, HelyszinEnum.FOLYOSO, null, null, null, null, HelyszinEnum.FOLYOSO),
   KONYHA(null, null, null, HelyszinEnum.FOLYOSO, null, null, HelyszinEnum.FOLYOSO),
