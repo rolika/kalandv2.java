@@ -55,6 +55,11 @@ class Jatekos {
     helyszin.setKijaratok(KijaratEnum.valueOf(helyszin.toString())); // ugyanaz a konstans nevük
   }
 
+  /**
+   * Játékos mozgásának kezelése
+   * @param irany
+   * @return szöveges reakció a mozgási szándékra
+   */
   String megy(IranyEnum irany) {
     HelyszinEnum ujHelyszin = helyszin.getKijarat(irany);
     if (ujHelyszin == null) {
@@ -63,6 +68,18 @@ class Jatekos {
       setHelyszin(ujHelyszin);
       return UzenetEnum.RENDBEN.toString();
     }
+  }
+  
+  /**
+   * Kilépés-kezelő
+   * 
+   * @param parancsszavak nem használja, de az általánosítás miatt szükség van rá
+   */
+  void kilep(Set<SzotarInterface> parancsszavak) {
+    if (Kaland.jatekVege()) {
+      System.exit(0);
+    }
+    Kaland.ujJatek();
   }
   
   void vizsgal(Set<SzotarInterface> parancsszavak) {
