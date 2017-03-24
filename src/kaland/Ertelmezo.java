@@ -30,8 +30,9 @@ class Ertelmezo {
           parancsszavak.add(szoEnum);
         }
       }
-      // majd a tárgyakat
-      // és a csapdákat
+      // majd a tárgyakat,
+      // ajtókat,
+      // csapdákat
       // végül az ellenségeket
     }
     return parancsszavak;
