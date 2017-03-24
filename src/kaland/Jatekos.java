@@ -82,9 +82,65 @@ class Jatekos {
     Kaland.ujJatek();
   }
   
+  void leltar(Set<SzotarInterface> parancsszavak) {
+    System.out.println("Játékos leltározik.");
+  }
+  
+  void aktival(Set<SzotarInterface> parancsszavak) {
+    System.out.println("Játékos aktivál.");
+  }
+  
+  void dekatival(Set<SzotarInterface> parancsszavak) {
+    System.out.println("Játékos deaktivál.");
+  }
+  
+  void nyit(Set<SzotarInterface> parancsszavak) {
+    System.out.println("Játékos kinyit.");
+  }
+  
+  void csuk(Set<SzotarInterface> parancsszavak) {
+    System.out.println("Játékos becsuk.");
+  }
+  
+  void zar(Set<SzotarInterface> parancsszavak) {
+    System.out.println("Játékos bezár.");
+  }
+  
+  void vesz(Set<SzotarInterface> parancsszavak) {
+    System.out.println("Játékos felvesz.");
+  }
+  
+  void tesz(Set<SzotarInterface> parancsszavak) {
+    System.out.println("Játékos letesz.");
+  }
+  
   void vizsgal(Set<SzotarInterface> parancsszavak) {
     System.out.println("Játékos vizsgál.");
     parancsszavak.forEach(System.out::println);
+  }
+  
+  void tamad(Set<SzotarInterface> parancsszavak) {
+    System.out.println("Játékos leltározik.");
+  }
+  
+  void hosszu(Set<SzotarInterface> parancsszavak) {
+    System.out.println("Játékos hosszú leírást kér.");
+  }
+  
+  void rovid(Set<SzotarInterface> parancsszavak) {
+    System.out.println("Játékos rövid leírást kér.");
+  }
+  
+  void normal(Set<SzotarInterface> parancsszavak) {
+    System.out.println("Játékos normál leírást kér.");
+  }
+  
+  void info(Set<SzotarInterface> parancsszavak) {
+    System.out.println("Játékos információt kér.");
+  }
+  
+  void megerosit(Set<SzotarInterface> parancsszavak) {
+    System.out.println("Játékos megerősít.");
   }
 
 }
