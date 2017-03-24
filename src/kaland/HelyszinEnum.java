@@ -36,6 +36,10 @@ enum HelyszinEnum {
   String getLeiras() {
     return leiras;
   }
+  
+  String getNormalLeiras() {
+    return bejart ? nev : leiras;
+  }
 
   boolean isSotet() {
     return sotet;
