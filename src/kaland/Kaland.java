@@ -19,8 +19,10 @@ public class Kaland {
   static Scanner bevitel = new Scanner(System.in);
 
   public static void main(String[] args) {
+    
+    new Konzol();
 
-    while (true) {
+    /*while (true) {
 
       ujJatek();
 
@@ -45,7 +47,7 @@ public class Kaland {
       if (jatekVege()) {
         break;
       }
-    }
+    }*/
 
   }
   
