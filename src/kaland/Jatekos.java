@@ -75,77 +75,76 @@ class Jatekos {
     }
   }
   
-  /**
-   * Kilépés-kezelő
-   * 
-   * @param parancsszavak nem használja, de az általánosítás miatt szükség van rá
-   */
-  void kilep(Set<SzotarInterface> parancsszavak) {
-    if (Kaland.jatekVege()) {
+  String kilep(Set<SzotarInterface> parancsszavak) {
+    /*if (Kaland.jatekVege()) {
       System.exit(0);
     }
-    Kaland.ujJatek();
+    Kaland.ujJatek();*/
+    return "Játékos kilép.";
   }
   
-  void leltar(Set<SzotarInterface> parancsszavak) {
-    System.out.println("Játékos leltározik.");
+  String leltar(Set<SzotarInterface> parancsszavak) {
+    return "Játékos leltározik.";
   }
   
-  void aktival(Set<SzotarInterface> parancsszavak) {
-    System.out.println("Játékos aktivál.");
+  String aktival(Set<SzotarInterface> parancsszavak) {
+    return "Játékos aktivál.";
   }
   
-  void deaktival(Set<SzotarInterface> parancsszavak) {
-    System.out.println("Játékos deaktivál.");
+  String deaktival(Set<SzotarInterface> parancsszavak) {
+    return "Játékos deaktivál.";
   }
   
-  void nyit(Set<SzotarInterface> parancsszavak) {
-    System.out.println("Játékos kinyit.");
+  String nyit(Set<SzotarInterface> parancsszavak) {
+    return "Játékos kinyit.";
   }
   
-  void csuk(Set<SzotarInterface> parancsszavak) {
-    System.out.println("Játékos becsuk.");
+  String csuk(Set<SzotarInterface> parancsszavak) {
+    return "Játékos becsuk.";
   }
   
-  void zar(Set<SzotarInterface> parancsszavak) {
-    System.out.println("Játékos bezár.");
+  String zar(Set<SzotarInterface> parancsszavak) {
+    return "Játékos bezár.";
   }
   
-  void vesz(Set<SzotarInterface> parancsszavak) {
-    System.out.println("Játékos felvesz.");
+  String vesz(Set<SzotarInterface> parancsszavak) {
+    return "Játékos felvesz.";
   }
   
-  void tesz(Set<SzotarInterface> parancsszavak) {
-    System.out.println("Játékos letesz.");
+  String tesz(Set<SzotarInterface> parancsszavak) {
+    return "Játékos letesz.";
   }
   
-  void vizsgal(Set<SzotarInterface> parancsszavak) {
-    System.out.println("Játékos vizsgál.");
-    parancsszavak.forEach(System.out::println);
+  String vizsgal(Set<SzotarInterface> parancsszavak) {
+    return "Játékos vizsgál.";
+    // parancsszavak.forEach(System.out::println);
   }
   
-  void tamad(Set<SzotarInterface> parancsszavak) {
-    System.out.println("Játékos leltározik.");
+  String tamad(Set<SzotarInterface> parancsszavak) {
+    return "Játékos leltározik.";
   }
   
-  void hosszu(Set<SzotarInterface> parancsszavak) {
+  String hosszu(Set<SzotarInterface> parancsszavak) {
     leiroMod = LeiroEnum.HOSSZU;
+    return UzenetEnum.RENDBEN.toString();
   }
   
-  void rovid(Set<SzotarInterface> parancsszavak) {
+  String rovid(Set<SzotarInterface> parancsszavak) {
     leiroMod = LeiroEnum.ROVID;
+    return UzenetEnum.RENDBEN.toString();
   }
   
-  void normal(Set<SzotarInterface> parancsszavak) {
+  String normal(Set<SzotarInterface> parancsszavak) {
     leiroMod = LeiroEnum.NORMAL;
+    return UzenetEnum.RENDBEN.toString();
   }
   
-  void info(Set<SzotarInterface> parancsszavak) {
-    System.out.println("Játékos információt kér.");
+  String info(Set<SzotarInterface> parancsszavak) {
+    return "Játékos információt kér.";
   }
   
-  void megerosit(Set<SzotarInterface> parancsszavak) {
-    System.out.println("Játékos megerősít.");
+  String megerosit(Set<SzotarInterface> parancsszavak) {
+    return "Játékos megerősít.";
   }
 
 }

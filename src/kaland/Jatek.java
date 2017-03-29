@@ -1,15 +1,18 @@
 package kaland;
 
-import org.apache.commons.lang3.text.WordUtils;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Set;
+import static kaland.Kaland.jatekos;
 
 /**
  * A játék logikáját tartalmazó osztály
+ * Alapvetően stringeket ad vissza, a játékos helyzetének, akcióinak függvényében
  * 
  * @author rolika
  */
 class Jatek {
   
-  private static final int WRAP = 80; // sortörés szélessége
   private static final HelyszinEnum KEZDO_HELYSZIN = HelyszinEnum.HAZ_ELOTT;
   
   private final Jatekos jatekos;
@@ -33,11 +36,53 @@ class Jatek {
   
   String helyzet() {
     szoveg = new StringBuilder();
-    sortoro(helyszinLeiras());
+    szoveg.append(helyszinLeiras());
     // sortoro(targySorolas());
     // sortoro(ellensegSorolas());
-    szoveg = szoveg.append(UzenetEnum.PROMPT);
+    //szoveg = szoveg.append(UzenetEnum.PROMPT);
     return szoveg.toString();
+  }
+  
+  Object vegrehajt(Set<SzotarInterface> parancsszavak) {
+    IranyEnum irany = (IranyEnum) mozgasiSzandek(parancsszavak);
+    Method parancs = cselekvesiSzandek(parancsszavak);
+    if (irany != null) {
+          return jatekos.megy(irany);
+        } else if (parancs != null) {
+          try {
+            System.out.println("parancsvégrehajtás");
+            return parancs.invoke(jatekos, parancsszavak);
+          } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+            return null;
+          }
+        } else {
+          return UzenetEnum.NEM_ERTEM.toString();
+        }
+  }
+  
+  private SzotarInterface mozgasiSzandek(Set<SzotarInterface> parancsszavak) {
+    for (IranyEnum parancsszo : IranyEnum.values()) {
+      if (parancsszavak.contains(parancsszo)) {
+        return parancsszo;
+      }
+    }
+    return null;
+  }
+  
+  private Method cselekvesiSzandek(Set<SzotarInterface> parancsszavak) {
+    for (ParancsEnum parancsszo : ParancsEnum.values()) {
+      if (parancsszavak.remove(parancsszo)) {
+        try {
+          String kezelo = parancsszo.toString().toLowerCase();
+          Class parameter = Set.class;
+          return jatekos.getClass().getDeclaredMethod(kezelo, parameter);
+        } catch (NoSuchMethodException | IllegalArgumentException e) {
+          System.out.println(e.toString()); // debug
+          return null;
+        }
+      }
+    }
+    return null;
   }
   
   private String helyszinLeiras() {
@@ -53,10 +98,6 @@ class Jatek {
         jatekos.getHelyszin().setBejart(true);
         return leiras;
     }
-  }
-  
-  private void sortoro(String sor) {
-    szoveg.append(WordUtils.wrap(sor + "\n", WRAP));
   }
   
 }
