@@ -29,6 +29,7 @@ final class Konzol {
         Set<SzotarInterface> parancs = Ertelmezo.szetbont(bevitel.nextLine());
         System.out.println(jatek.vegrehajt(parancs).toString());
       }
+      break;
     }
   }
 

@@ -76,15 +76,17 @@ class Jatekos {
   }
   
   String kilep(Set<SzotarInterface> parancsszavak) {
-    /*if (Kaland.jatekVege()) {
-      System.exit(0);
-    }
-    Kaland.ujJatek();*/
-    return "Játékos kilép.";
+    vesztett = true;
+    return UzenetEnum.VISZLAT.toString();
   }
   
   String leltar(Set<SzotarInterface> parancsszavak) {
     return "Játékos leltározik.";
+  }
+  
+  String vizsgal(Set<SzotarInterface> parancsszavak) {
+    return "Játékos vizsgál.";
+    // parancsszavak.forEach(System.out::println);
   }
   
   String aktival(Set<SzotarInterface> parancsszavak) {
@@ -113,11 +115,6 @@ class Jatekos {
   
   String tesz(Set<SzotarInterface> parancsszavak) {
     return "Játékos letesz.";
-  }
-  
-  String vizsgal(Set<SzotarInterface> parancsszavak) {
-    return "Játékos vizsgál.";
-    // parancsszavak.forEach(System.out::println);
   }
   
   String tamad(Set<SzotarInterface> parancsszavak) {
