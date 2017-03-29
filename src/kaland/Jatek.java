@@ -3,7 +3,6 @@ package kaland;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Set;
-import static kaland.Kaland.jatekos;
 
 /**
  * A játék logikáját tartalmazó osztály
@@ -31,7 +30,7 @@ class Jatek {
   }
   
   boolean fut() {
-    return !(jatekos.isMeghalt() && jatekos.isNyert() && jatekos.isVesztett());
+    return !(jatekos.isMeghalt() || jatekos.isNyert() || jatekos.isVesztett());
   }
   
   String helyzet() {
@@ -50,7 +49,6 @@ class Jatek {
           return jatekos.megy(irany);
         } else if (parancs != null) {
           try {
-            System.out.println("parancsvégrehajtás");
             return parancs.invoke(jatekos, parancsszavak);
           } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
             return null;
