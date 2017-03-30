@@ -11,7 +11,9 @@ import java.util.Set;
  */
 enum TargySzotarEnum implements SzotarInterface {
   LABTORLO("lábtörlő", "lábtörlőt", "lábtörlővel"),
-  KULCS("kulcs", "kulcsot", "kulccsal");
+  KULCS("kulcs", "kulcsot", "kulccsal"),
+  BICSKA("bicska", "bicskát", "bicskával", "kés", "kést", "késsel", "kiskés", "kiskést", "kiskéssel"),
+  ZSEBLAMPA("lámpa", "lámpát", "lámpával", "zseblámpa", "zseblámpát", "zseblámpával");
   
   private final Set<String> szinonimak;
   
