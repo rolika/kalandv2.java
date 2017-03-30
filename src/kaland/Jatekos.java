@@ -1,13 +1,15 @@
 package kaland;
 
+import java.util.Arrays;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A játékost megvalósító osztály kalandjátékhoz
  *
  * @author rolika
  */
-class Jatekos {
+final class Jatekos {
 
   private boolean meghalt, nyert, vesztett;
   private HelyszinEnum helyszin;
@@ -54,7 +56,7 @@ class Jatekos {
     this.vesztett = vesztett;
   }
 
-  private void setHelyszin(HelyszinEnum helyszin) {
+  void setHelyszin(HelyszinEnum helyszin) {
     this.helyszin = helyszin;
     helyszin.setKijaratok(KijaratEnum.valueOf(helyszin.toString())); // ugyanaz a konstans nevük
   }
@@ -90,7 +92,25 @@ class Jatekos {
   }
   
   String leltar(Set<SzotarInterface> parancsszavak) {
-    return "Játékos leltározik.";
+    if (helyiTargyak(HelyszinEnum.LELTAR).isEmpty()) {
+      return UzenetEnum.NINCS_LELTAR.toString();
+    } else {
+      StringBuilder leltar = new StringBuilder();
+      leltar.append(UzenetEnum.LELTAR.toString());
+      helyiTargyak(HelyszinEnum.LELTAR)
+        .forEach(targy -> {
+          leltar.append(UzenetEnum.EGY);
+          leltar.append(targy.getNev());
+          leltar.append(",");
+        });
+      return leltar.replace(leltar.lastIndexOf(","), leltar.length(), ".").toString();
+    }
+  }
+  
+  private Set<TargyEnum> helyiTargyak(HelyszinEnum hely) {
+    return Arrays.stream(TargyEnum.values())
+      .filter(targy -> targy.getHely() == hely && targy.isLathato() && targy.isFelveheto())
+      .collect(Collectors.toSet());
   }
   
   String vizsgal(Set<SzotarInterface> parancsszavak) {

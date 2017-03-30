@@ -14,9 +14,67 @@ enum TargyEnum {
   BICSKA("bicska", "A nemesacél pengéjű, szarvasagancs-nyelű zsebkésedet még a nagyapádtól kaptad. Borotvaéles, mint mindig.", HelyszinEnum.LELTAR, true, true, true, false),
   ZSEBLAMPA("zseblámpa", "Bivalyerős, mégis takarékos ledlámpa.", HelyszinEnum.LELTAR, true, true, true, false);
   
-  private TargyEnum(String nev, String leiras, HelyszinEnum helyszin, boolean lathato,
+  private final String nev, leiras;
+  private HelyszinEnum hely;
+  private boolean lathato, felveheto, aktivalhato, aktiv;
+  
+  private TargyEnum(String nev, String leiras, HelyszinEnum hely, boolean lathato,
     boolean felveheto, boolean aktivalhato, boolean aktiv) {
-    
+    this.nev = nev;
+    this.leiras = leiras;
+    this.hely = hely;
+    this.lathato = lathato;
+    this.felveheto = felveheto;
+    this.aktivalhato = aktivalhato;
+    this.aktiv = aktiv;
+  }
+
+  String getNev() {
+    return nev;
+  }
+
+  String getLeiras() {
+    return leiras;
+  }
+
+  HelyszinEnum getHely() {
+    return hely;
+  }
+
+  boolean isLathato() {
+    return lathato;
+  }
+
+  boolean isFelveheto() {
+    return felveheto;
+  }
+
+  boolean isAktivalhato() {
+    return aktivalhato;
+  }
+
+  boolean isAktiv() {
+    return aktiv;
+  }
+
+  public void setHely(HelyszinEnum hely) {
+    this.hely = hely;
+  }
+
+  public void setLathato(boolean lathato) {
+    this.lathato = lathato;
+  }
+
+  public void setFelveheto(boolean felveheto) {
+    this.felveheto = felveheto;
+  }
+
+  public void setAktivalhato(boolean aktivalhato) {
+    this.aktivalhato = aktivalhato;
+  }
+
+  public void setAktiv(boolean aktiv) {
+    this.aktiv = aktiv;
   }
   
 }

@@ -16,7 +16,10 @@ public enum UzenetEnum {
   UJ_JATEK("Játszol még egyet (igen/nem)?"),
   NEM_ERTEM("Nem értem, próbálkozz valami mással."),
   PROMPT("- "),
-  VISZLAT("Viszlát!");
+  VISZLAT("Viszlát!"),
+  LELTAR("Van nálad"),
+  NINCS_LELTAR("Nincs nálad semmi."),
+  EGY(" egy ");
   
   private final String uzenet;
   
