@@ -42,45 +42,8 @@ class Jatek {
     return szoveg.toString();
   }
   
-  Object vegrehajt(Set<SzotarInterface> parancsszavak) {
-    IranyEnum irany = (IranyEnum) mozgasiSzandek(parancsszavak);
-    Method parancs = cselekvesiSzandek(parancsszavak);
-    if (irany != null) {
-          return jatekos.megy(irany);
-        } else if (parancs != null) {
-          try {
-            return parancs.invoke(jatekos, parancsszavak);
-          } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            return null;
-          }
-        } else {
-          return UzenetEnum.NEM_ERTEM.toString();
-        }
-  }
-  
-  private SzotarInterface mozgasiSzandek(Set<SzotarInterface> parancsszavak) {
-    for (IranyEnum parancsszo : IranyEnum.values()) {
-      if (parancsszavak.contains(parancsszo)) {
-        return parancsszo;
-      }
-    }
-    return null;
-  }
-  
-  private Method cselekvesiSzandek(Set<SzotarInterface> parancsszavak) {
-    for (ParancsEnum parancsszo : ParancsEnum.values()) {
-      if (parancsszavak.remove(parancsszo)) {
-        try {
-          String kezelo = parancsszo.toString().toLowerCase();
-          Class parameter = Set.class;
-          return jatekos.getClass().getDeclaredMethod(kezelo, parameter);
-        } catch (NoSuchMethodException | IllegalArgumentException e) {
-          System.out.println(e.toString()); // debug
-          return null;
-        }
-      }
-    }
-    return null;
+  Object vegrehajt() {
+    return Ertelmezo.vegrehajt(jatekos);
   }
   
   private String helyszinLeiras() {

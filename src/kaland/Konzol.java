@@ -26,8 +26,8 @@ final class Konzol {
       while (jatek.fut()) {
         System.out.println(szotoro(jatek.helyzet()));
         System.out.print(UzenetEnum.PROMPT);
-        Set<SzotarInterface> parancs = Ertelmezo.szetbont(bevitel.nextLine());
-        System.out.println(jatek.vegrehajt(parancs).toString());
+        Ertelmezo.szetbont(bevitel.nextLine());
+        System.out.println(jatek.vegrehajt().toString());
       }
       break;
     }
