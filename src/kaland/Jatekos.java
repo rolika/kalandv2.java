@@ -59,6 +59,21 @@ class Jatekos {
     this.helyszin = helyszin;
     helyszin.setKijaratok(KijaratEnum.valueOf(helyszin.toString())); // ugyanaz a konstans nevük
   }
+  
+  String helyszinLeiras() {
+    switch (getLeiroMod()) {
+      case HOSSZU:
+        getHelyszin().setBejart(false);
+        return getHelyszin().getLeiras();
+      case ROVID:
+        getHelyszin().setBejart(true);
+        return getHelyszin().getNev();
+      default:
+        String leiras = getHelyszin().getNormalLeiras();
+        getHelyszin().setBejart(true);
+        return leiras;
+    }
+  }
 
   /**
    * Játékos mozgásának kezelése

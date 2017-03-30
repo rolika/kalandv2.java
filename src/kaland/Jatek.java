@@ -35,7 +35,7 @@ class Jatek {
   
   String helyzet() {
     szoveg = new StringBuilder();
-    szoveg.append(helyszinLeiras());
+    szoveg.append(jatekos.helyszinLeiras());
     // sortoro(targySorolas());
     // sortoro(ellensegSorolas());
     //szoveg = szoveg.append(UzenetEnum.PROMPT);
@@ -44,21 +44,6 @@ class Jatek {
   
   Object vegrehajt() {
     return Ertelmezo.vegrehajt(jatekos);
-  }
-  
-  private String helyszinLeiras() {
-    switch (jatekos.getLeiroMod()) {
-      case HOSSZU:
-        jatekos.getHelyszin().setBejart(false);
-        return jatekos.getHelyszin().getLeiras();
-      case ROVID:
-        jatekos.getHelyszin().setBejart(true);
-        return jatekos.getHelyszin().getNev();
-      default:
-        String leiras = jatekos.getHelyszin().getNormalLeiras();
-        jatekos.getHelyszin().setBejart(true);
-        return leiras;
-    }
   }
   
 }
