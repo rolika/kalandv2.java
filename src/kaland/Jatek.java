@@ -1,9 +1,5 @@
 package kaland;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Set;
-
 /**
  * A játék logikáját tartalmazó osztály
  * Alapvetően stringeket ad vissza, a játékos helyzetének, akcióinak függvényében

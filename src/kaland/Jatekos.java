@@ -1,6 +1,5 @@
 package kaland;
 
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -75,11 +74,6 @@ class Jatekos {
     }
   }
 
-  /**
-   * Játékos mozgásának kezelése
-   * @param irany
-   * @return szöveges reakció a mozgási szándékra
-   */
   String megy(IranyEnum irany) {
     HelyszinEnum ujHelyszin = helyszin.getKijarat(irany);
     if (ujHelyszin == null) {
