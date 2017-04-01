@@ -1,5 +1,9 @@
 package kaland;
 
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 /**
  * Kalandjáték helyszínei
  *
@@ -50,7 +54,7 @@ enum HelyszinEnum {
     return bejart;
   }
 
-  public HelyszinEnum getKijarat(IranyEnum irany) {
+  HelyszinEnum getKijarat(IranyEnum irany) {
     return kijaratok.getKijarat(irany);
   }
 
@@ -62,8 +66,14 @@ enum HelyszinEnum {
     this.bejart = bejart;
   }
 
-  public void setKijaratok(KijaratEnum kijaratok) {
+  void setKijaratok(KijaratEnum kijaratok) {
     this.kijaratok = kijaratok;
+  }
+  
+  Set<TargyEnum> targyak() {
+    return Arrays.stream(TargyEnum.values())
+      .filter(targy -> targy.getHely() == this)
+      .collect(Collectors.toSet());
   }
 
 }

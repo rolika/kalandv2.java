@@ -76,13 +76,13 @@ final class Jatekos {
     }
   }
   
-  String lathatoFelvehetoTargyak() {
-    if (helyiTargyak(helyszin).isEmpty()) {
+  String targySorolo() {
+    if (helyszin.targyak().isEmpty()) {
       return "";
     } else {
       StringBuilder leltar = new StringBuilder();
       leltar.append(UzenetEnum.VAN_ITT.toString());
-      helyiTargyak(helyszin).stream()
+      helyszin.targyak().stream()
         .filter(targy -> targy.isLathato() && targy.isFelveheto())
         .forEach(targy -> {
           leltar.append(UzenetEnum.EGY);
@@ -109,12 +109,12 @@ final class Jatekos {
   }
   
   String leltar(Set<SzotarInterface> parancsszavak) {
-    if (helyiTargyak(HelyszinEnum.LELTAR).isEmpty()) {
+    if (HelyszinEnum.LELTAR.targyak().isEmpty()) {
       return UzenetEnum.NINCS_LELTAR.toString();
     } else {
       StringBuilder leltar = new StringBuilder();
       leltar.append(UzenetEnum.LELTAR.toString());
-      helyiTargyak(HelyszinEnum.LELTAR)
+      HelyszinEnum.LELTAR.targyak()
         .forEach(targy -> {
           leltar.append(UzenetEnum.EGY);
           leltar.append(targy.getNev());
@@ -122,12 +122,6 @@ final class Jatekos {
         });
       return leltar.replace(leltar.lastIndexOf(","), leltar.length(), ".").toString();
     }
-  }
-  
-  private Set<TargyEnum> helyiTargyak(HelyszinEnum hely) {
-    return Arrays.stream(TargyEnum.values())
-      .filter(targy -> targy.getHely() == hely)// && targy.isLathato() && targy.isFelveheto())
-      .collect(Collectors.toSet());
   }
   
   String vizsgal(Set<SzotarInterface> parancsszavak) {
