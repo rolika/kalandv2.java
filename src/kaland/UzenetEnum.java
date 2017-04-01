@@ -19,7 +19,8 @@ public enum UzenetEnum {
   VISZLAT("Viszlát!"),
   LELTAR("Van nálad"),
   NINCS_LELTAR("Nincs nálad semmi."),
-  EGY(" egy ");
+  EGY(" egy "),
+  VAN_ITT("Van itt");
   
   private final String uzenet;
   

@@ -75,6 +75,23 @@ final class Jatekos {
         return leiras;
     }
   }
+  
+  String lathatoFelvehetoTargyak() {
+    if (helyiTargyak(helyszin).isEmpty()) {
+      return "";
+    } else {
+      StringBuilder leltar = new StringBuilder();
+      leltar.append(UzenetEnum.VAN_ITT.toString());
+      helyiTargyak(helyszin).stream()
+        .filter(targy -> targy.isLathato() && targy.isFelveheto())
+        .forEach(targy -> {
+          leltar.append(UzenetEnum.EGY);
+          leltar.append(targy.getNev());
+          leltar.append(",");
+        });
+      return leltar.replace(leltar.lastIndexOf(","), leltar.length(), ".").toString();
+    }
+  }
 
   String megy(IranyEnum irany) {
     HelyszinEnum ujHelyszin = helyszin.getKijarat(irany);
@@ -109,7 +126,7 @@ final class Jatekos {
   
   private Set<TargyEnum> helyiTargyak(HelyszinEnum hely) {
     return Arrays.stream(TargyEnum.values())
-      .filter(targy -> targy.getHely() == hely && targy.isLathato() && targy.isFelveheto())
+      .filter(targy -> targy.getHely() == hely)// && targy.isLathato() && targy.isFelveheto())
       .collect(Collectors.toSet());
   }
   

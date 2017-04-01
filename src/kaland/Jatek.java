@@ -32,9 +32,13 @@ class Jatek {
   String helyzet() {
     szoveg = new StringBuilder();
     szoveg.append(jatekos.helyszinLeiras());
+    String targyak = jatekos.lathatoFelvehetoTargyak();
+    if (!targyak.isEmpty()) {
+      szoveg.append('\n');
+      szoveg.append(targyak);
+    }
     // sortoro(targySorolas());
     // sortoro(ellensegSorolas());
-    //szoveg = szoveg.append(UzenetEnum.PROMPT);
     return szoveg.toString();
   }
   
