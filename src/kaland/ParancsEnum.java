@@ -35,7 +35,7 @@ enum ParancsEnum implements SzotarInterface {
   }
 
   @Override
-  public SzotarInterface getParancs(String szo) {
+  public SzotarInterface getSzoEnum(String szo) {
     return szinonimak.contains(szo) ? this : null;
   }
 }

@@ -125,8 +125,8 @@ final class Jatekos {
   }
   
   String vizsgal(Set<SzotarInterface> parancsszavak) {
+    parancsszavak.forEach(System.out::println);
     return "Játékos vizsgál.";
-    // parancsszavak.forEach(System.out::println);
   }
   
   String aktival(Set<SzotarInterface> parancsszavak) {

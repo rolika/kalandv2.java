@@ -20,19 +20,25 @@ class Ertelmezo {
       // minden egyes szóra
       // először megnézi az irányokat
       for (SzotarInterface parancsszo : IranyEnum.values()) {
-        SzotarInterface szoEnum = parancsszo.getParancs(szo);
+        SzotarInterface szoEnum = parancsszo.getSzoEnum(szo);
         if (szoEnum != null) {
           parancsszavak.add(szoEnum);
         }
       }
       // aztán a parancsokat
       for (SzotarInterface parancsszo : ParancsEnum.values()) {
-        SzotarInterface szoEnum = parancsszo.getParancs(szo);
+        SzotarInterface szoEnum = parancsszo.getSzoEnum(szo);
         if (szoEnum != null) {
           parancsszavak.add(szoEnum);
         }
       }
       // majd a tárgyakat,
+      for (SzotarInterface targy : TargySzotarEnum.values()) {
+        SzotarInterface szoEnum = targy.getSzoEnum(szo);
+        if (szoEnum != null) {
+          parancsszavak.add(szoEnum);
+        }
+      }
       // ajtókat,
       // csapdákat
       // végül az ellenségeket

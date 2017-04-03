@@ -6,6 +6,6 @@ package kaland;
  */
 interface SzotarInterface {
   
-  SzotarInterface getParancs(String szo);
+  SzotarInterface getSzoEnum(String szo);
   
 }
