@@ -100,8 +100,13 @@ final class Jatekos {
   }
   
   String vizsgal(Set<SzotarInterface> parancsszavak) {
-    helyszin.targyak(TargyEnum::isLathato);
-    return "Játékos vizsgál.";
+    if (parancsszavak.size() == 1) {
+      TargyEnum targy = TargyEnum.valueOf(parancsszavak.iterator().next().toString());
+      Set<TargyEnum> lathatoTargyak = helyszin.targyak(TargyEnum::isLathato);
+      lathatoTargyak.addAll(HelyszinEnum.LELTAR.targyak(leltar -> true));
+      return lathatoTargyak.contains(targy) ? targy.getLeiras() : UzenetEnum.NINCS_ILYEN.toString();
+    }
+    return UzenetEnum.NEM_ERTEM.toString();
   }
   
   String aktival(Set<SzotarInterface> parancsszavak) {
@@ -173,6 +178,7 @@ final class Jatekos {
           uzenet.append(targy.getNev());
           uzenet.append(",");
         });
+      uzenet.replace(uzenet.length()-1, uzenet.length(), ".");
       return uzenet.toString();
     }
   }

@@ -20,7 +20,8 @@ public enum UzenetEnum {
   LELTAR("Van nálad"),
   NINCS_LELTAR("Nincs nálad semmi."),
   EGY(" egy "),
-  VAN_ITT("Van itt");
+  VAN_ITT("Van itt"),
+  NINCS_ILYEN("Nincs itt ilyesmi.");
   
   private final String uzenet;
   
