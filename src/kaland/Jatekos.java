@@ -77,20 +77,7 @@ final class Jatekos {
   }
   
   String targySorolo() {
-    if (helyszin.targyak().isEmpty()) {
-      return "";
-    } else {
-      StringBuilder leltar = new StringBuilder();
-      leltar.append(UzenetEnum.VAN_ITT.toString());
-      helyszin.targyak().stream()
-        .filter(targy -> targy.isLathato() && targy.isFelveheto())
-        .forEach(targy -> {
-          leltar.append(UzenetEnum.EGY);
-          leltar.append(targy.getNev());
-          leltar.append(",");
-        });
-      return leltar.replace(leltar.lastIndexOf(","), leltar.length(), ".").toString();
-    }
+    return targyak(helyszin);
   }
 
   String megy(IranyEnum irany) {
@@ -109,23 +96,11 @@ final class Jatekos {
   }
   
   String leltar(Set<SzotarInterface> parancsszavak) {
-    if (HelyszinEnum.LELTAR.targyak().isEmpty()) {
-      return UzenetEnum.NINCS_LELTAR.toString();
-    } else {
-      StringBuilder leltar = new StringBuilder();
-      leltar.append(UzenetEnum.LELTAR.toString());
-      HelyszinEnum.LELTAR.targyak()
-        .forEach(targy -> {
-          leltar.append(UzenetEnum.EGY);
-          leltar.append(targy.getNev());
-          leltar.append(",");
-        });
-      return leltar.replace(leltar.lastIndexOf(","), leltar.length(), ".").toString();
-    }
+    return targyak(HelyszinEnum.LELTAR);
   }
   
   String vizsgal(Set<SzotarInterface> parancsszavak) {
-    parancsszavak.forEach(System.out::println);
+    helyszin.targyak(TargyEnum::isLathato);
     return "Játékos vizsgál.";
   }
   
@@ -182,6 +157,24 @@ final class Jatekos {
   
   String megerosit(Set<SzotarInterface> parancsszavak) {
     return "Játékos megerősít.";
+  }
+  
+  private String targyak(HelyszinEnum aktualisHelyszin) {
+    Set<TargyEnum> leltar =
+      aktualisHelyszin.targyak(targy -> targy.isLathato() && targy.isFelveheto());
+    if (leltar.isEmpty()) {
+      return aktualisHelyszin == HelyszinEnum.LELTAR ? UzenetEnum.NINCS_LELTAR.toString() : "";
+    } else {
+      StringBuilder uzenet = new StringBuilder(aktualisHelyszin == HelyszinEnum.LELTAR ? 
+        UzenetEnum.LELTAR.toString() : UzenetEnum.VAN_ITT.toString());
+      leltar
+        .forEach(targy -> {
+          uzenet.append(UzenetEnum.EGY);
+          uzenet.append(targy.getNev());
+          uzenet.append(",");
+        });
+      return uzenet.toString();
+    }
   }
 
 }

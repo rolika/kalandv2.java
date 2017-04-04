@@ -2,6 +2,7 @@ package kaland;
 
 import java.util.Arrays;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -70,9 +71,16 @@ enum HelyszinEnum {
     this.kijaratok = kijaratok;
   }
   
-  Set<TargyEnum> targyak() {
+  /*Set<TargyEnum> targyak() {
     return Arrays.stream(TargyEnum.values())
       .filter(targy -> targy.getHely() == this)
+      .collect(Collectors.toSet());
+  }*/
+  
+  Set<TargyEnum> targyak(Predicate<TargyEnum> szuro) {
+    return Arrays.stream(TargyEnum.values())
+      .filter(targy -> targy.getHely() == this)
+      .filter(szuro)
       .collect(Collectors.toSet());
   }
 
