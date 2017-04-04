@@ -71,12 +71,6 @@ enum HelyszinEnum {
     this.kijaratok = kijaratok;
   }
   
-  /*Set<TargyEnum> targyak() {
-    return Arrays.stream(TargyEnum.values())
-      .filter(targy -> targy.getHely() == this)
-      .collect(Collectors.toSet());
-  }*/
-  
   Set<TargyEnum> targyak(Predicate<TargyEnum> szuro) {
     return Arrays.stream(TargyEnum.values())
       .filter(targy -> targy.getHely() == this)
