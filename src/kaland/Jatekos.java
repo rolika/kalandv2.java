@@ -62,14 +62,14 @@ final class Jatekos {
   String helyszinLeiras() {
     switch (getLeiroMod()) {
       case HOSSZU:
-        getHelyszin().setBejart(false);
-        return getHelyszin().getLeiras();
+        helyszin.setBejart(false);
+        return helyszin.getLeiras();
       case ROVID:
-        getHelyszin().setBejart(true);
-        return getHelyszin().getNev();
+        helyszin.setBejart(true);
+        return helyszin.getNev();
       default:
-        String leiras = getHelyszin().getNormalLeiras();
-        getHelyszin().setBejart(true);
+        String leiras = helyszin.getNormalLeiras();
+        helyszin.setBejart(true);
         return leiras;
     }
   }
@@ -184,7 +184,7 @@ final class Jatekos {
   }
   
   String info(Set<SzotarInterface> parancsszavak) {
-    return helyszinLeiras();
+    return helyszin.getLeiras();
   }
   
   String megerosit(Set<SzotarInterface> parancsszavak) {
