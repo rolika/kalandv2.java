@@ -104,13 +104,44 @@ final class Jatekos {
       lathatoTargyak.addAll(HelyszinEnum.LELTAR.targyak(leltar -> true));
       if (lathatoTargyak.contains(targy)) {
         targy.setVizsgalt(true);
-        reakcio();
+        szkript();
         return targy.getLeiras();
       } else {
-        return UzenetEnum.NINCS_ILYEN.toString();
+        return UzenetEnum.NINCS_ITT_ILYEN.toString();
       }
+    } else {
+      return UzenetEnum.NEM_ERTEM.toString();
     }
-    return UzenetEnum.NEM_ERTEM.toString();
+  }
+  
+  String vesz(Set<SzotarInterface> parancsszavak) {
+    if (parancsszavak.size() == 1) {
+      TargyEnum targy = TargyEnum.valueOf(parancsszavak.iterator().next().toString());
+      Set<TargyEnum> lathatoTargyak = helyszin.targyak(TargyEnum::isLathato);
+      Set<TargyEnum> felvehetoTargyak = helyszin.targyak(TargyEnum::isFelveheto);
+      Set<TargyEnum> leltar = HelyszinEnum.LELTAR.targyak(t -> true);
+      if (leltar.contains(targy)) {
+        return UzenetEnum.MAR_NALAD_VAN.toString();
+      } else if (!felvehetoTargyak.contains(targy)) {
+        return UzenetEnum.NEM_FELVEHETO.toString();
+      } else if (!lathatoTargyak.contains(targy)) {
+       return UzenetEnum.NINCS_ITT_ILYEN.toString();
+      } else {
+        targy.setHely(HelyszinEnum.LELTAR);
+        targy.setVizsgalt(true);
+        szkript();
+        StringBuilder felvesz = new StringBuilder(UzenetEnum.RENDBEN.toString());
+        felvesz.append(' ');
+        felvesz.append(targy.getLeiras());        
+        return felvesz.toString();
+      }
+    } else {
+      return UzenetEnum.NEM_ERTEM.toString();
+    }
+  }
+  
+  String tesz(Set<SzotarInterface> parancsszavak) {
+    return "Játékos letesz.";
   }
   
   String aktival(Set<SzotarInterface> parancsszavak) {
@@ -133,14 +164,6 @@ final class Jatekos {
     return "Játékos bezár.";
   }
   
-  String vesz(Set<SzotarInterface> parancsszavak) {
-    return "Játékos felvesz.";
-  }
-  
-  String tesz(Set<SzotarInterface> parancsszavak) {
-    return "Játékos letesz.";
-  }
-  
   String tamad(Set<SzotarInterface> parancsszavak) {
     return "Játékos leltározik.";
   }
@@ -161,7 +184,7 @@ final class Jatekos {
   }
   
   String info(Set<SzotarInterface> parancsszavak) {
-    return "Játékos információt kér.";
+    return helyszinLeiras();
   }
   
   String megerosit(Set<SzotarInterface> parancsszavak) {
@@ -190,7 +213,7 @@ final class Jatekos {
   /**
    * A játékos tevékenysége következtében beálló, előre meghatározott változások.
    */
-  private void reakcio() {
+  private void szkript() {
     if (TargyEnum.LABTORLO.isVizsgalt()) { // kulcs a lábtörlő alatt
       TargyEnum.KULCS.setLathato(true);
     }
