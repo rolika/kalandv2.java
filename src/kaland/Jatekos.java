@@ -1,8 +1,6 @@
 package kaland;
 
-import java.util.Arrays;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * A játékost megvalósító osztály kalandjátékhoz
@@ -104,7 +102,13 @@ final class Jatekos {
       TargyEnum targy = TargyEnum.valueOf(parancsszavak.iterator().next().toString());
       Set<TargyEnum> lathatoTargyak = helyszin.targyak(TargyEnum::isLathato);
       lathatoTargyak.addAll(HelyszinEnum.LELTAR.targyak(leltar -> true));
-      return lathatoTargyak.contains(targy) ? targy.getLeiras() : UzenetEnum.NINCS_ILYEN.toString();
+      if (lathatoTargyak.contains(targy)) {
+        targy.setVizsgalt(true);
+        reakcio();
+        return targy.getLeiras();
+      } else {
+        return UzenetEnum.NINCS_ILYEN.toString();
+      }
     }
     return UzenetEnum.NEM_ERTEM.toString();
   }
@@ -180,6 +184,15 @@ final class Jatekos {
         });
       uzenet.replace(uzenet.length()-1, uzenet.length(), ".");
       return uzenet.toString();
+    }
+  }
+  
+  /**
+   * A játékos tevékenysége következtében beálló, előre meghatározott változások.
+   */
+  private void reakcio() {
+    if (TargyEnum.LABTORLO.isVizsgalt()) { // kulcs a lábtörlő alatt
+      TargyEnum.KULCS.setLathato(true);
     }
   }
 
