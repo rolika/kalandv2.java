@@ -141,7 +141,18 @@ final class Jatekos {
   }
   
   String tesz(Set<SzotarInterface> parancsszavak) {
-    return "Játékos letesz.";
+    if (parancsszavak.size() == 1) {
+      TargyEnum targy = TargyEnum.valueOf(parancsszavak.iterator().next().toString());
+      Set<TargyEnum> leltar = HelyszinEnum.LELTAR.targyak(t -> true);
+      if (leltar.contains(targy)) {
+        targy.setHely(helyszin);
+        return UzenetEnum.RENDBEN.toString();
+      } else {
+        return UzenetEnum.NINCS_NALAD.toString();
+      }
+    } else {
+      return UzenetEnum.NEM_ERTEM.toString();
+    }
   }
   
   String aktival(Set<SzotarInterface> parancsszavak) {

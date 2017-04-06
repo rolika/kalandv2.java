@@ -23,7 +23,8 @@ public enum UzenetEnum {
   VAN_ITT("Van itt"),
   NINCS_ITT_ILYEN("Nincs itt ilyesmi."),
   NEM_FELVEHETO("Ezt nem tudod felvenni."),
-  MAR_NALAD_VAN("Már nálad van.");
+  MAR_NALAD_VAN("Már nálad van."),
+  NINCS_NALAD("Nincs nálad ilyesmi.");
   
   private final String uzenet;
   
