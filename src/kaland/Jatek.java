@@ -1,15 +1,15 @@
 package kaland;
 
 /**
- * A játék logikáját tartalmazó osztály
- * Alapvetően stringeket ad vissza, a játékos helyzetének, akcióinak függvényében
- * 
+ * A játék logikáját tartalmazó osztály Alapvetően stringeket ad vissza, a játékos helyzetének,
+ * akcióinak függvényében
+ *
  * @author rolika
  */
 class Jatek {
-  
+
   private static final HelyszinEnum KEZDO_HELYSZIN = HelyszinEnum.HAZ_ELOTT;
-  
+
   private final Jatekos jatekos;
   private StringBuilder szoveg;
 
@@ -24,11 +24,11 @@ class Jatek {
   Jatekos getJatekos() {
     return jatekos;
   }
-  
+
   boolean fut() {
     return !(jatekos.isMeghalt() || jatekos.isNyert() || jatekos.isVesztett());
   }
-  
+
   String helyzet() {
     szkript();
     szoveg = new StringBuilder();
@@ -41,11 +41,11 @@ class Jatek {
     // sortoro(ellensegSorolas());
     return szoveg.toString();
   }
-  
+
   Object vegrehajt() {
     return Ertelmezo.vegrehajt(jatekos);
   }
-  
+
   /**
    * A játékos tevékenysége következtében beálló, előre meghatározott változások.
    */
@@ -54,5 +54,5 @@ class Jatek {
       TargyEnum.KULCS.setLathato(true);
     }
   }
-  
+
 }

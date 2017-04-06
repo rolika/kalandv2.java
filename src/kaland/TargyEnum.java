@@ -1,11 +1,10 @@
 package kaland;
 
 /**
- * A játékban előforduló tárgyak felsorolása
- * Egy tárgy akkor szerepel a helyszín leírásában, ha látható ÉS felvehető.
- * Felépítése:
- * név, leírás, helyszín (enum), látható, felvehető, aktiválható (használható), aktív, vizsgalt.
- * 
+ * A játékban előforduló tárgyak felsorolása Egy tárgy akkor szerepel a helyszín leírásában, ha
+ * látható ÉS felvehető. Felépítése: név, leírás, helyszín (enum), látható, felvehető, aktiválható
+ * (használható), aktív, vizsgalt.
+ *
  * @author rolika
  */
 enum TargyEnum {
@@ -14,11 +13,11 @@ enum TargyEnum {
   TAPETA("tapéta", "A tapéta valaha kellemes pasztellzöld színe valami undorító árnyalatú nyálkává változott és felpúposodott az alatta lévő vizes faltól.", HelyszinEnum.ELOTER, true, false, false, false, false),
   BICSKA("bicska", "A nemesacél pengéjű, szarvasagancs-nyelű zsebkésedet még a nagyapádtól kaptad. Borotvaéles, mint mindig.", HelyszinEnum.LELTAR, true, true, true, false, false),
   ZSEBLAMPA("zseblámpa", "Bivalyerős, mégis takarékos ledlámpa.", HelyszinEnum.LELTAR, true, true, true, false, false);
-  
+
   private final String nev, leiras;
   private HelyszinEnum hely;
   private boolean lathato, felveheto, aktivalhato, aktiv, vizsgalt;
-  
+
   private TargyEnum(String nev, String leiras, HelyszinEnum hely, boolean lathato,
     boolean felveheto, boolean aktivalhato, boolean aktiv, boolean vizsgalt) {
     this.nev = nev;
@@ -62,7 +61,7 @@ enum TargyEnum {
   public boolean isVizsgalt() {
     return vizsgalt;
   }
-  
+
   public void setHely(HelyszinEnum hely) {
     this.hely = hely;
   }
@@ -86,5 +85,5 @@ enum TargyEnum {
   public void setVizsgalt(boolean vizsgalt) {
     this.vizsgalt = vizsgalt;
   }
-  
+
 }

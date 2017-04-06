@@ -6,7 +6,7 @@ import java.util.Set;
 
 /**
  * A játékban előforduló tárgyak szótára.
- * 
+ *
  * @author rolika
  */
 enum TargySzotarEnum implements SzotarInterface {
@@ -15,9 +15,9 @@ enum TargySzotarEnum implements SzotarInterface {
   TAPETA("tapéta", "tapétát", "tapétával", "fal", "falat", "fallal"),
   BICSKA("bicska", "bicskát", "bicskával", "kés", "kést", "késsel", "kiskés", "kiskést", "kiskéssel"),
   ZSEBLAMPA("lámpa", "lámpát", "lámpával", "zseblámpa", "zseblámpát", "zseblámpával");
-  
+
   private final Set<String> szinonimak;
-  
+
   private TargySzotarEnum(String... szinonimak) {
     this.szinonimak = new HashSet<>(Arrays.asList(szinonimak));
   }

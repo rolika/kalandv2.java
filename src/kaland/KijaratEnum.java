@@ -4,11 +4,11 @@ import java.util.EnumMap;
 
 /**
  * Kijáratok az egyes helyszínekhez
- * 
+ *
  * @author rolika
  */
 enum KijaratEnum {
-  
+
   // észak, kelet, dél, nyugat, le, fel, indirekt
   HAZ_ELOTT(HelyszinEnum.ELOTER, null, null, null, null, null, HelyszinEnum.ELOTER),
   ELOTER(HelyszinEnum.FOLYOSO, null, HelyszinEnum.HAZ_ELOTT, null, null, null, HelyszinEnum.FOLYOSO),
@@ -24,7 +24,7 @@ enum KijaratEnum {
   REJTETT_PINCE(null, HelyszinEnum.ODAAT, null, null, null, HelyszinEnum.PADLAS_VEGE,
     HelyszinEnum.PADLAS_VEGE),
   ODAAT(null, null, null, HelyszinEnum.REJTETT_PINCE, null, null, HelyszinEnum.REJTETT_PINCE);
-  
+
   private final EnumMap<IranyEnum, HelyszinEnum> kijaratok;
 
   private KijaratEnum(HelyszinEnum... celHelyszinek) {
@@ -38,5 +38,5 @@ enum KijaratEnum {
   HelyszinEnum getKijarat(IranyEnum irany) {
     return kijaratok.get(irany);
   }
-  
+
 }

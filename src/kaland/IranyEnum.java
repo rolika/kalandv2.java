@@ -6,11 +6,11 @@ import java.util.Set;
 
 /**
  * Enum a lehetséges irányoknak. Külön van rájuk szükség, hogy lehessen iterálni.
- * 
+ *
  * @author rolika
  */
 enum IranyEnum implements SzotarInterface {
-  
+
   ESZAK("é", "észak", "északra", "északnak"),
   KELET("k", "kelet", "keletre", "keletnek"),
   DEL("d", "dél", "délre", "délnek"),
@@ -18,7 +18,7 @@ enum IranyEnum implements SzotarInterface {
   LE("l", "le", "lefelé", "lefele"),
   FEL("f", "fel", "felfelé", "felfele"),
   INDIREKT("ki", "be", "kimegyek", "bemegyek", "átmegyek");
-  
+
   private final Set<String> szinonimak;
 
   private IranyEnum(String... szinonimak) {

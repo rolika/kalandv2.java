@@ -2,11 +2,11 @@ package kaland;
 
 /**
  * Kalandozás közben előforduló üzenetek
- * 
+ *
  * @author rolika
  */
 public enum UzenetEnum {
-  
+
   ARRA_NEM("Arra nem mehetsz."),
   RENDBEN("Rendben."),
   SOTET("Túl sötét van, nem látsz semmit."),
@@ -25,9 +25,9 @@ public enum UzenetEnum {
   NEM_FELVEHETO("Ezt nem tudod felvenni."),
   MAR_NALAD_VAN("Már nálad van."),
   NINCS_NALAD("Nincs nálad ilyesmi.");
-  
+
   private final String uzenet;
-  
+
   private UzenetEnum(String uzenet) {
     this.uzenet = uzenet;
   }
@@ -36,7 +36,5 @@ public enum UzenetEnum {
   public String toString() {
     return uzenet;
   }
-  
-  
-  
+
 }

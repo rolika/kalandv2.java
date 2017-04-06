@@ -6,11 +6,11 @@ import java.util.Set;
 
 /**
  * Enum kalandjáték parancsainak
- * 
+ *
  * @author rolika
  */
 enum ParancsEnum implements SzotarInterface {
-  
+
   KILEP("kilépek", "abbahagyom", "feladom"),
   LELTAR("leltár", "leltárt", "leltárba"),
   AKTIVAL("bekapcsolom", "felkapcsolom", "használom", "mozgatom", "forgatom"),

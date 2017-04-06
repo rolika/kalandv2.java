@@ -42,7 +42,7 @@ enum HelyszinEnum {
   String getLeiras() {
     return leiras;
   }
-  
+
   String getNormalLeiras() {
     return bejart ? nev : leiras;
   }
@@ -70,7 +70,7 @@ enum HelyszinEnum {
   void setKijaratok(KijaratEnum kijaratok) {
     this.kijaratok = kijaratok;
   }
-  
+
   Set<TargyEnum> targyak(Predicate<TargyEnum> szuro) {
     return Arrays.stream(TargyEnum.values())
       .filter(targy -> targy.getHely() == this)

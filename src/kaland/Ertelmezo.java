@@ -45,23 +45,23 @@ class Ertelmezo {
     }
     return parancsszavak;
   }
-  
+
   static Object vegrehajt(Jatekos jatekos) {
     IranyEnum irany = (IranyEnum) mozgasiSzandek();
     Method parancs = cselekvesiSzandek(jatekos);
     if (irany != null) {
-          return jatekos.megy(irany);
-        } else if (parancs != null) {
-          try {
-            return parancs.invoke(jatekos, parancsszavak);
-          } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            return null;
-          }
-        } else {
-          return UzenetEnum.NEM_ERTEM.toString();
-        }
+      return jatekos.megy(irany);
+    } else if (parancs != null) {
+      try {
+        return parancs.invoke(jatekos, parancsszavak);
+      } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+        return null;
+      }
+    } else {
+      return UzenetEnum.NEM_ERTEM.toString();
+    }
   }
-  
+
   static SzotarInterface mozgasiSzandek() {
     for (IranyEnum parancsszo : IranyEnum.values()) {
       if (parancsszavak.contains(parancsszo)) {
@@ -70,7 +70,7 @@ class Ertelmezo {
     }
     return null;
   }
-  
+
   static Method cselekvesiSzandek(Jatekos jatekos) {
     for (ParancsEnum parancsszo : ParancsEnum.values()) {
       if (parancsszavak.remove(parancsszo)) {
