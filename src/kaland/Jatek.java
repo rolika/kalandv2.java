@@ -30,6 +30,7 @@ class Jatek {
   }
   
   String helyzet() {
+    szkript();
     szoveg = new StringBuilder();
     szoveg.append(jatekos.helyszinLeiras());
     String targyak = jatekos.targySorolo();
@@ -43,6 +44,15 @@ class Jatek {
   
   Object vegrehajt() {
     return Ertelmezo.vegrehajt(jatekos);
+  }
+  
+  /**
+   * A játékos tevékenysége következtében beálló, előre meghatározott változások.
+   */
+  private void szkript() {
+    if (TargyEnum.LABTORLO.isVizsgalt()) { // kulcs a lábtörlő alatt
+      TargyEnum.KULCS.setLathato(true);
+    }
   }
   
 }

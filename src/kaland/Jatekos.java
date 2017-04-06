@@ -104,7 +104,6 @@ final class Jatekos {
       lathatoTargyak.addAll(HelyszinEnum.LELTAR.targyak(leltar -> true));
       if (lathatoTargyak.contains(targy)) {
         targy.setVizsgalt(true);
-        szkript();
         return targy.getLeiras();
       } else {
         return UzenetEnum.NINCS_ITT_ILYEN.toString();
@@ -129,7 +128,6 @@ final class Jatekos {
       } else {
         targy.setHely(HelyszinEnum.LELTAR);
         targy.setVizsgalt(true);
-        szkript();
         StringBuilder felvesz = new StringBuilder(UzenetEnum.RENDBEN.toString());
         felvesz.append(' ');
         felvesz.append(targy.getLeiras());        
@@ -218,15 +216,6 @@ final class Jatekos {
         });
       uzenet.replace(uzenet.length()-1, uzenet.length(), ".");
       return uzenet.toString();
-    }
-  }
-  
-  /**
-   * A játékos tevékenysége következtében beálló, előre meghatározott változások.
-   */
-  private void szkript() {
-    if (TargyEnum.LABTORLO.isVizsgalt()) { // kulcs a lábtörlő alatt
-      TargyEnum.KULCS.setLathato(true);
     }
   }
 
