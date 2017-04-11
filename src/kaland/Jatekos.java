@@ -8,7 +8,7 @@ import java.util.Set;
  * @author rolika
  */
 final class Jatekos {
-  
+
   private boolean meghalt, nyert, vesztett;
   private HelyszinEnum helyszin;
 
@@ -52,10 +52,6 @@ final class Jatekos {
     helyszin.setKijaratok(KijaratEnum.valueOf(helyszin.toString())); // ugyanaz a konstans nevük
   }
 
-  String targySorolo() {
-    return targyak(helyszin);
-  }
-
   String megy(IranyEnum irany) {
     HelyszinEnum ujHelyszin = helyszin.getKijarat(irany);
     if (ujHelyszin == null) {
@@ -72,14 +68,14 @@ final class Jatekos {
   }
 
   String leltar(Set<SzotarInterface> parancsszavak) {
-    return targyak(HelyszinEnum.LELTAR);
+    return HelyszinEnum.LELTAR.targyak();
   }
 
   String vizsgal(Set<SzotarInterface> parancsszavak) {
     if (parancsszavak.size() == 1) {
       TargyEnum targy = TargyEnum.valueOf(parancsszavak.iterator().next().toString());
-      Set<TargyEnum> lathatoTargyak = helyszin.targyak(TargyEnum::isLathato);
-      lathatoTargyak.addAll(HelyszinEnum.LELTAR.targyak(leltar -> true));
+      Set<TargyEnum> lathatoTargyak = helyszin.targySzuro(TargyEnum::isLathato);
+      lathatoTargyak.addAll(HelyszinEnum.LELTAR.targySzuro(leltar -> true));
       if (lathatoTargyak.contains(targy)) {
         targy.setVizsgalt(true);
         return targy.getLeiras();
@@ -94,9 +90,9 @@ final class Jatekos {
   String vesz(Set<SzotarInterface> parancsszavak) {
     if (parancsszavak.size() == 1) {
       TargyEnum targy = TargyEnum.valueOf(parancsszavak.iterator().next().toString());
-      Set<TargyEnum> lathatoTargyak = helyszin.targyak(TargyEnum::isLathato);
-      Set<TargyEnum> felvehetoTargyak = helyszin.targyak(TargyEnum::isFelveheto);
-      Set<TargyEnum> leltar = HelyszinEnum.LELTAR.targyak(t -> true);
+      Set<TargyEnum> lathatoTargyak = helyszin.targySzuro(TargyEnum::isLathato);
+      Set<TargyEnum> felvehetoTargyak = helyszin.targySzuro(TargyEnum::isFelveheto);
+      Set<TargyEnum> leltar = HelyszinEnum.LELTAR.targySzuro(t -> true);
       if (leltar.contains(targy)) {
         return UzenetEnum.MAR_NALAD_VAN.toString();
       } else if (!felvehetoTargyak.contains(targy)) {
@@ -119,7 +115,7 @@ final class Jatekos {
   String tesz(Set<SzotarInterface> parancsszavak) {
     if (parancsszavak.size() == 1) {
       TargyEnum targy = TargyEnum.valueOf(parancsszavak.iterator().next().toString());
-      Set<TargyEnum> leltar = HelyszinEnum.LELTAR.targyak(t -> true);
+      Set<TargyEnum> leltar = HelyszinEnum.LELTAR.targySzuro(t -> true);
       if (leltar.contains(targy)) {
         targy.setHely(helyszin);
         return UzenetEnum.RENDBEN.toString();
@@ -172,25 +168,6 @@ final class Jatekos {
 
   String megerosit(Set<SzotarInterface> parancsszavak) {
     return "Játékos megerősít.";
-  }
-
-  private String targyak(HelyszinEnum aktualisHelyszin) {
-    Set<TargyEnum> leltar
-      = aktualisHelyszin.targyak(targy -> targy.isLathato() && targy.isFelveheto());
-    if (leltar.isEmpty()) {
-      return aktualisHelyszin == HelyszinEnum.LELTAR ? UzenetEnum.NINCS_LELTAR.toString() : "";
-    } else {
-      StringBuilder uzenet = new StringBuilder(aktualisHelyszin == HelyszinEnum.LELTAR
-        ? UzenetEnum.LELTAR.toString() : UzenetEnum.VAN_ITT.toString());
-      leltar
-        .forEach(targy -> {
-          uzenet.append(UzenetEnum.EGY);
-          uzenet.append(targy.getNev());
-          uzenet.append(",");
-        });
-      uzenet.replace(uzenet.length() - 1, uzenet.length(), ".");
-      return uzenet.toString();
-    }
   }
 
 }

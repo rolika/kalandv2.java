@@ -10,8 +10,9 @@ import java.util.stream.Collectors;
  *
  * @author rolika
  */
-
-enum LeiroEnum { HOSSZU, ROVID, NORMAL; };
+enum LeiroEnum {
+  HOSSZU, ROVID, NORMAL;
+};
 
 enum HelyszinEnum {
 
@@ -38,7 +39,7 @@ enum HelyszinEnum {
     this.sotet = sotet;
     bejart = false;
     leiroMod = LeiroEnum.NORMAL;
-  }  
+  }
 
   String getLeiras() {
     switch (leiroMod) {
@@ -70,7 +71,7 @@ enum HelyszinEnum {
   public LeiroEnum getLeiroMod() {
     return leiroMod;
   }
-  
+
   void setSotet(boolean sotet) {
     this.sotet = sotet;
   }
@@ -88,12 +89,31 @@ enum HelyszinEnum {
       helyszin.leiroMod = leiroMod;
     }
   }
-  
-  Set<TargyEnum> targyak(Predicate<TargyEnum> szuro) {
+
+  Set<TargyEnum> targySzuro(Predicate<TargyEnum> szuro) {
     return Arrays.stream(TargyEnum.values())
       .filter(targy -> targy.getHely() == this)
       .filter(szuro)
       .collect(Collectors.toSet());
+  }
+
+  String targyak() {
+    Set<TargyEnum> leltar
+      = this.targySzuro(targy -> targy.isLathato() && targy.isFelveheto());
+    if (leltar.isEmpty()) {
+      return this == HelyszinEnum.LELTAR ? UzenetEnum.NINCS_LELTAR.toString() : "";
+    } else {
+      StringBuilder uzenet = new StringBuilder(this == HelyszinEnum.LELTAR
+        ? UzenetEnum.LELTAR.toString() : UzenetEnum.VAN_ITT.toString());
+      leltar
+        .forEach(targy -> {
+          uzenet.append(UzenetEnum.EGY);
+          uzenet.append(targy.getNev());
+          uzenet.append(",");
+        });
+      uzenet.replace(uzenet.length() - 1, uzenet.length(), ".");
+      return uzenet.toString();
+    }
   }
 
 }
