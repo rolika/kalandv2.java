@@ -8,18 +8,15 @@ import java.util.Set;
  * @author rolika
  */
 final class Jatekos {
-
+  
   private boolean meghalt, nyert, vesztett;
   private HelyszinEnum helyszin;
-  private LeiroEnum leiroMod;
-  //private EnumSet<HelyszinEnum, TargyEnum> leltar;
 
   Jatekos(HelyszinEnum helyszin) {
     meghalt = false;
     nyert = false;
     vesztett = false;
     setHelyszin(helyszin);
-    leiroMod = LeiroEnum.NORMAL;
   }
 
   boolean isMeghalt() {
@@ -34,12 +31,8 @@ final class Jatekos {
     return vesztett;
   }
 
-  public HelyszinEnum getHelyszin() {
+  HelyszinEnum getHelyszin() {
     return helyszin;
-  }
-
-  public LeiroEnum getLeiroMod() {
-    return leiroMod;
   }
 
   void setMeghalt(boolean meghalt) {
@@ -57,21 +50,6 @@ final class Jatekos {
   void setHelyszin(HelyszinEnum helyszin) {
     this.helyszin = helyszin;
     helyszin.setKijaratok(KijaratEnum.valueOf(helyszin.toString())); // ugyanaz a konstans nevük
-  }
-
-  String helyszinLeiras() {
-    switch (getLeiroMod()) {
-      case HOSSZU:
-        helyszin.setBejart(false);
-        return helyszin.getLeiras();
-      case ROVID:
-        helyszin.setBejart(true);
-        return helyszin.getNev();
-      default:
-        String leiras = helyszin.getNormalLeiras();
-        helyszin.setBejart(true);
-        return leiras;
-    }
   }
 
   String targySorolo() {
@@ -178,22 +156,18 @@ final class Jatekos {
   }
 
   String hosszu(Set<SzotarInterface> parancsszavak) {
-    leiroMod = LeiroEnum.HOSSZU;
+    helyszin.setLeiroMod(LeiroEnum.HOSSZU);
     return UzenetEnum.RENDBEN.toString();
   }
 
   String rovid(Set<SzotarInterface> parancsszavak) {
-    leiroMod = LeiroEnum.ROVID;
+    helyszin.setLeiroMod(LeiroEnum.ROVID);
     return UzenetEnum.RENDBEN.toString();
   }
 
   String normal(Set<SzotarInterface> parancsszavak) {
-    leiroMod = LeiroEnum.NORMAL;
+    helyszin.setLeiroMod(LeiroEnum.NORMAL);
     return UzenetEnum.RENDBEN.toString();
-  }
-
-  String info(Set<SzotarInterface> parancsszavak) {
-    return helyszin.getLeiras();
   }
 
   String megerosit(Set<SzotarInterface> parancsszavak) {

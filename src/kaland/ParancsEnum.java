@@ -22,10 +22,9 @@ enum ParancsEnum implements SzotarInterface {
   TESZ("leteszem", "lerakom", "eldobom"),
   VIZSGAL("megvizsgálom", "megnézem", "ellenőrzöm", "elolvasom"),
   TAMAD("megtámadom", "megölöm", "agyoncsapom"),
-  HOSSZU("hosszú", "bő"),
+  HOSSZU("hosszú", "bő", "info", "infó", "mutasd", "leírás"),
   ROVID("rövid", "kevés"),
   NORMAL("normál", "rendes"),
-  INFO("info", "infó", "mutasd", "leírás"),
   MEGEROSIT("igen", "i");
 
   private final Set<String> szinonimak;

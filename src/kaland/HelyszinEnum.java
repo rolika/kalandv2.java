@@ -10,6 +10,9 @@ import java.util.stream.Collectors;
  *
  * @author rolika
  */
+
+enum LeiroEnum { HOSSZU, ROVID, NORMAL; };
+
 enum HelyszinEnum {
 
   HAZ_ELOTT("Ház előtt", "Egy rémisztően régi ház teraszán állsz, mely sejtésed szerint olyan ősi titkot rejt, melyet igazán még magadnak sem mersz bevallani. A civilizációtól érintetlen erdő tisztását a napfény csak nehéz párákkal terhesen tudja megvilágítani, pedig kora délután érkeztél. A fura félhomályban ódon falak tornyosulnak fenyegetően föléd, korhadó favázukat kizárólag istenkáromló imádság tarthatja össze, a málló vakolat alól nedvesen csillogó téglák látszanak. A tető fazsindelyei viharvertek, nagy részük mohával borított. Az opálos ablaküvegek mögül rossz emlékek sötétje ásít, néhányuk bedeszkázva várja az elmúlást. Előtted, észak felé a bejárati ajtó vár rád.", false),
@@ -27,24 +30,29 @@ enum HelyszinEnum {
   private final String nev, leiras;
   private boolean sotet, bejart;
   private KijaratEnum kijaratok;
+  private LeiroEnum leiroMod;
 
   private HelyszinEnum(String nev, String leiras, boolean sotet) {
     this.nev = nev;
     this.leiras = leiras;
     this.sotet = sotet;
     bejart = false;
-  }
-
-  String getNev() {
-    return nev;
-  }
+    leiroMod = LeiroEnum.NORMAL;
+  }  
 
   String getLeiras() {
-    return leiras;
-  }
-
-  String getNormalLeiras() {
-    return bejart ? nev : leiras;
+    switch (leiroMod) {
+      case HOSSZU:
+        setBejart(false);
+        return leiras;
+      case ROVID:
+        setBejart(true);
+        return nev;
+      default:
+        String normal = bejart ? nev : leiras;
+        setBejart(true);
+        return normal;
+    }
   }
 
   boolean isSotet() {
@@ -59,6 +67,10 @@ enum HelyszinEnum {
     return kijaratok.getKijarat(irany);
   }
 
+  public LeiroEnum getLeiroMod() {
+    return leiroMod;
+  }
+  
   void setSotet(boolean sotet) {
     this.sotet = sotet;
   }
@@ -71,6 +83,12 @@ enum HelyszinEnum {
     this.kijaratok = kijaratok;
   }
 
+  void setLeiroMod(LeiroEnum leiroMod) {
+    for (HelyszinEnum helyszin : HelyszinEnum.values()) {
+      helyszin.leiroMod = leiroMod;
+    }
+  }
+  
   Set<TargyEnum> targyak(Predicate<TargyEnum> szuro) {
     return Arrays.stream(TargyEnum.values())
       .filter(targy -> targy.getHely() == this)

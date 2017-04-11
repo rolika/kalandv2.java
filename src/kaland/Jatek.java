@@ -32,7 +32,7 @@ class Jatek {
   String helyzet() {
     szkript();
     szoveg = new StringBuilder();
-    szoveg.append(jatekos.helyszinLeiras());
+    szoveg.append(jatekos.getHelyszin().getLeiras());
     String targyak = jatekos.targySorolo();
     if (!targyak.isEmpty()) {
       szoveg.append('\n');
