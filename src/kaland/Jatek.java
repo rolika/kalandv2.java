@@ -29,13 +29,17 @@ class Jatek {
   String helyzet() {
     szkript();
     szoveg = new StringBuilder();
-    szoveg.append(jatekos.getHelyszin().getLeiras());
-    String targyak = jatekos.getHelyszin().targyak();
-    if (!targyak.isEmpty()) {
-      szoveg.append('\n');
-      szoveg.append(targyak);
+    if (jatekos.getHelyszin().isSotet()) {
+      szoveg.append(UzenetEnum.SOTET);
+    } else {
+      szoveg.append(jatekos.getHelyszin().getLeiras());
+      String targyak = jatekos.getHelyszin().targyak();
+      if (!targyak.isEmpty()) {
+        szoveg.append('\n');
+        szoveg.append(targyak);
+      }
+      // sortoro(ellensegSorolas());
     }
-    // sortoro(ellensegSorolas());
     return szoveg.toString();
   }
 
