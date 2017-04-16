@@ -14,9 +14,6 @@ class Jatek {
   private StringBuilder szoveg;
 
   Jatek() {
-    for (HelyszinEnum helyszin : HelyszinEnum.values()) {
-      helyszin.setBejart(false);
-    }
     jatekos = new Jatekos(KEZDO_HELYSZIN);
     szoveg = new StringBuilder();
   }
