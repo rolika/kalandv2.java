@@ -26,7 +26,7 @@ class Jatek {
   }
 
   boolean fut() {
-    return !(jatekos.isMeghalt() || jatekos.isNyert() || jatekos.isVesztett());
+    return jatekos.jatekbanVan();
   }
 
   String helyzet() {

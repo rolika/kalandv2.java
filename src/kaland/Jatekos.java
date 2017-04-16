@@ -1,5 +1,6 @@
 package kaland;
 
+import java.util.EnumSet;
 import java.util.Set;
 
 /**
@@ -9,42 +10,33 @@ import java.util.Set;
  */
 final class Jatekos {
 
-  private boolean meghalt, nyert, vesztett;
+  private final EnumSet<AllapotEnum> allapot;
   private HelyszinEnum helyszin;
 
   Jatekos(HelyszinEnum helyszin) {
-    meghalt = false;
-    nyert = false;
-    vesztett = false;
+    allapot = EnumSet.of(AllapotEnum.EL, AllapotEnum.NEM_NYERT, AllapotEnum.NEM_VESZTETT);
     setHelyszin(helyszin);
   }
-
-  boolean isMeghalt() {
-    return meghalt;
+  
+  boolean jatekbanVan() {
+    return allapot.contains(AllapotEnum.EL) && allapot.contains(AllapotEnum.NEM_NYERT) &&
+      allapot.contains(AllapotEnum.NEM_VESZTETT);
   }
-
-  boolean isNyert() {
-    return nyert;
-  }
-
-  boolean isVesztett() {
-    return vesztett;
-  }
-
+  
   HelyszinEnum getHelyszin() {
     return helyszin;
   }
 
-  void setMeghalt(boolean meghalt) {
-    this.meghalt = meghalt;
+  void setMeghalt() {
+    allapot.remove(AllapotEnum.EL);
   }
 
-  void setNyert(boolean nyert) {
-    this.nyert = nyert;
+  void setNyert() {
+    allapot.remove(AllapotEnum.NEM_NYERT);
   }
 
-  void setVesztett(boolean vesztett) {
-    this.vesztett = vesztett;
+  void setVesztett() {
+    allapot.remove(AllapotEnum.NEM_VESZTETT);
   }
 
   void setHelyszin(HelyszinEnum helyszin) {
@@ -73,7 +65,7 @@ final class Jatekos {
   }
 
   String kilep(Set<SzotarInterface> parancsszavak) {
-    vesztett = true;
+    setVesztett();
     return UzenetEnum.VISZLAT.toString();
   }
 
