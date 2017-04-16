@@ -10,10 +10,6 @@ import java.util.stream.Collectors;
  *
  * @author rolika
  */
-enum LeiroEnum {
-  HOSSZU, ROVID, NORMAL;
-};
-
 enum HelyszinEnum {
 
   HAZ_ELOTT("Ház előtt", "Egy rémisztően régi ház teraszán állsz, mely sejtésed szerint olyan ősi titkot rejt, melyet igazán még magadnak sem mersz bevallani. A civilizációtól érintetlen erdő tisztását a napfény csak nehéz párákkal terhesen tudja megvilágítani, pedig kora délután érkeztél. A fura félhomályban ódon falak tornyosulnak fenyegetően föléd, korhadó favázukat kizárólag istenkáromló imádság tarthatja össze, a málló vakolat alól nedvesen csillogó téglák látszanak. A tető fazsindelyei viharvertek, nagy részük mohával borított. Az opálos ablaküvegek mögül rossz emlékek sötétje ásít, néhányuk bedeszkázva várja az elmúlást. Előtted, észak felé a bejárati ajtó vár rád.", false),
@@ -31,14 +27,14 @@ enum HelyszinEnum {
   private final String nev, leiras;
   private boolean sotet, bejart;
   private KijaratEnum kijaratok;
-  private LeiroEnum leiroMod;
+  private AllapotEnum leiroMod;
 
   private HelyszinEnum(String nev, String leiras, boolean sotet) {
     this.nev = nev;
     this.leiras = leiras;
     this.sotet = sotet;
     bejart = false;
-    leiroMod = LeiroEnum.NORMAL;
+    leiroMod = AllapotEnum.NORMAL;
   }
 
   String getLeiras() {
@@ -68,7 +64,7 @@ enum HelyszinEnum {
     return kijaratok.getKijarat(irany);
   }
 
-  public LeiroEnum getLeiroMod() {
+  public AllapotEnum getLeiroMod() {
     return leiroMod;
   }
 
@@ -84,7 +80,7 @@ enum HelyszinEnum {
     this.kijaratok = kijaratok;
   }
 
-  void setLeiroMod(LeiroEnum leiroMod) {
+  void setLeiroMod(AllapotEnum leiroMod) {
     for (HelyszinEnum helyszin : HelyszinEnum.values()) {
       helyszin.leiroMod = leiroMod;
     }

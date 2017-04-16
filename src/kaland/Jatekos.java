@@ -154,17 +154,17 @@ final class Jatekos {
   }
 
   String hosszu(Set<SzotarInterface> parancsszavak) {
-    helyszin.setLeiroMod(LeiroEnum.HOSSZU);
+    helyszin.setLeiroMod(AllapotEnum.HOSSZU);
     return UzenetEnum.RENDBEN.toString();
   }
 
   String rovid(Set<SzotarInterface> parancsszavak) {
-    helyszin.setLeiroMod(LeiroEnum.ROVID);
+    helyszin.setLeiroMod(AllapotEnum.ROVID);
     return UzenetEnum.RENDBEN.toString();
   }
 
   String normal(Set<SzotarInterface> parancsszavak) {
-    helyszin.setLeiroMod(LeiroEnum.NORMAL);
+    helyszin.setLeiroMod(AllapotEnum.NORMAL);
     return UzenetEnum.RENDBEN.toString();
   }
 
