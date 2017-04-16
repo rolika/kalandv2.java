@@ -52,7 +52,7 @@ class Jatek {
    */
   private void szkript() {
     if (TargyEnum.LABTORLO.isVizsgalt()) { // kulcs a lábtörlő alatt
-      TargyEnum.KULCS.setLathato(true);
+      TargyEnum.KULCS.setLathato();
     }
   }
 
