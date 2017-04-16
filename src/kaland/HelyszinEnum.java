@@ -114,6 +114,15 @@ enum HelyszinEnum {
       uzenet.replace(uzenet.length() - 1, uzenet.length(), ".");
       return uzenet.toString();
     }
+  }  
+  
+  Allapot ajto(HelyszinEnum cel) {
+    for (AjtoEnum ajto : AjtoEnum.values()) {
+      if (ajto.getViszonylat().contains(cel)) {
+        return ajto.getAllapot();
+      }
+    }
+    return Allapot.NINCS;
   }
 
 }

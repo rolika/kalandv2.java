@@ -57,8 +57,18 @@ final class Jatekos {
     if (ujHelyszin == null) {
       return UzenetEnum.ARRA_NEM.toString();
     } else {
-      setHelyszin(ujHelyszin);
-      return UzenetEnum.RENDBEN.toString();
+      switch (helyszin.ajto(ujHelyszin)) {
+        case CSUKVA:
+          return UzenetEnum.CSUKVA.toString();
+        case ZARVA:
+          return UzenetEnum.ZARVA.toString();
+        case NYITVA: // fall through
+          setHelyszin(ujHelyszin);
+          return UzenetEnum.NYITVA.toString();
+        default:
+          setHelyszin(ujHelyszin);
+          return UzenetEnum.RENDBEN.toString();
+      }
     }
   }
 

@@ -24,7 +24,10 @@ public enum UzenetEnum {
   NINCS_ITT_ILYEN("Nincs itt ilyesmi."),
   NEM_FELVEHETO("Ezt nem tudod felvenni."),
   MAR_NALAD_VAN("Már nálad van."),
-  NINCS_NALAD("Nincs nálad ilyesmi.");
+  NINCS_NALAD("Nincs nálad ilyesmi."),  
+  NYITVA("Már nyitva van."),
+  CSUKVA("Be van csukva."),
+  ZARVA("Be van zárva.");
 
   private final String uzenet;
 
