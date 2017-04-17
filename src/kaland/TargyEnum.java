@@ -41,44 +41,20 @@ enum TargyEnum {
     return hely;
   }
 
-  boolean isLathato() {
-    return allapot.contains(AllapotEnum.LATHATO);
+  EnumSet<AllapotEnum> getAllapot() {
+    return allapot;
   }
-
-  boolean isFelveheto() {
-    return allapot.contains(AllapotEnum.FELVEHETO);
+  
+  void addAllapot(AllapotEnum allapot) {
+    this.allapot.add(allapot);
   }
-
-  boolean isAktivalhato() {
-    return allapot.contains(AllapotEnum.AKTIVALHATO);
-  }
-
-  boolean isAktiv() {
-    return allapot.contains(AllapotEnum.AKTIV);
-  }
-
-  boolean isVizsgalt() {
-    return allapot.contains(AllapotEnum.VIZSGALT);
+  
+  void delAllapot(AllapotEnum allapot) {
+    this.allapot.remove(allapot);
   }
 
   void setHely(HelyszinEnum hely) {
     this.hely = hely;
-  }
-
-  void setLathato() {
-    allapot.add(AllapotEnum.LATHATO);
-  }
-
-  void setFelveheto(boolean felveheto) {
-    allapot.add(AllapotEnum.FELVEHETO);
-  }
-
-  void setVizsgalt(boolean vizsgalt) {
-    allapot.add(AllapotEnum.VIZSGALT);
-  }
-
-  void torolAllapot(AllapotEnum allapot) {
-    this.allapot.remove(allapot);
   }
 
 }

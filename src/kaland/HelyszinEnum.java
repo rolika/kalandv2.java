@@ -53,8 +53,8 @@ enum HelyszinEnum {
     return kijaratok.getKijarat(irany);
   }
 
-  boolean isSotet() {
-    return allapot.contains(AllapotEnum.SOTET);
+  EnumSet<AllapotEnum> getAllapot() {
+    return allapot;
   }
 
   void setKijaratok(KijaratEnum kijaratok) {
@@ -78,7 +78,9 @@ enum HelyszinEnum {
 
   String targyak() {
     Set<TargyEnum> leltar
-      = this.targySzuro(targy -> targy.isLathato() && targy.isFelveheto());
+      = this.targySzuro(targy -> 
+        targy.getAllapot().contains(AllapotEnum.LATHATO) &&
+        targy.getAllapot().contains(AllapotEnum.FELVEHETO));
     if (leltar.isEmpty()) {
       return this == HelyszinEnum.LELTAR ? UzenetEnum.NINCS_LELTAR.toString() : "";
     } else {

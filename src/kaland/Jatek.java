@@ -29,7 +29,7 @@ class Jatek {
   String helyzet() {
     szkript();
     szoveg = new StringBuilder();
-    if (jatekos.getHelyszin().isSotet()) {
+    if (jatekos.getHelyszin().getAllapot().contains(AllapotEnum.SOTET)) {
       szoveg.append(UzenetEnum.SOTET);
     } else {
       szoveg.append(jatekos.getHelyszin().getLeiras());
@@ -51,8 +51,8 @@ class Jatek {
    * A játékos tevékenysége következtében beálló, előre meghatározott változások.
    */
   private void szkript() {
-    if (TargyEnum.LABTORLO.isVizsgalt()) { // kulcs a lábtörlő alatt
-      TargyEnum.KULCS.setLathato();
+    if (TargyEnum.LABTORLO.getAllapot().contains(AllapotEnum.VIZSGALT)) { // kulcs a lábtörlő alatt
+      TargyEnum.KULCS.addAllapot(AllapotEnum.LATHATO);
     }
   }
 

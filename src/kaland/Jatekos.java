@@ -76,10 +76,11 @@ final class Jatekos {
   String vizsgal(Set<SzotarInterface> parancsszavak) {
     if (parancsszavak.size() == 1) {
       TargyEnum targy = TargyEnum.valueOf(parancsszavak.iterator().next().toString());
-      Set<TargyEnum> lathatoTargyak = helyszin.targySzuro(TargyEnum::isLathato);
-      lathatoTargyak.addAll(HelyszinEnum.LELTAR.targySzuro(leltar -> true));
+      Set<TargyEnum> lathatoTargyak = helyszin.targySzuro(lathatoTargy -> 
+        lathatoTargy.getAllapot().contains(AllapotEnum.LATHATO));
+      lathatoTargyak.addAll(HelyszinEnum.LELTAR.targySzuro(t -> true));
       if (lathatoTargyak.contains(targy)) {
-        targy.setVizsgalt(true);
+        targy.addAllapot(AllapotEnum.VIZSGALT);
         return targy.getLeiras();
       } else {
         return UzenetEnum.NINCS_ITT_ILYEN.toString();
@@ -92,8 +93,10 @@ final class Jatekos {
   String vesz(Set<SzotarInterface> parancsszavak) {
     if (parancsszavak.size() == 1) {
       TargyEnum targy = TargyEnum.valueOf(parancsszavak.iterator().next().toString());
-      Set<TargyEnum> lathatoTargyak = helyszin.targySzuro(TargyEnum::isLathato);
-      Set<TargyEnum> felvehetoTargyak = helyszin.targySzuro(TargyEnum::isFelveheto);
+      Set<TargyEnum> lathatoTargyak = helyszin.targySzuro(lathatoTargy -> 
+        lathatoTargy.getAllapot().contains(AllapotEnum.LATHATO));
+      Set<TargyEnum> felvehetoTargyak = helyszin.targySzuro(felvehetoTargy -> 
+        felvehetoTargy.getAllapot().contains(AllapotEnum.FELVEHETO));
       Set<TargyEnum> leltar = HelyszinEnum.LELTAR.targySzuro(t -> true);
       if (leltar.contains(targy)) {
         return UzenetEnum.MAR_NALAD_VAN.toString();
@@ -103,7 +106,7 @@ final class Jatekos {
         return UzenetEnum.NINCS_ITT_ILYEN.toString();
       } else {
         targy.setHely(HelyszinEnum.LELTAR);
-        targy.setVizsgalt(true);
+        targy.addAllapot(AllapotEnum.VIZSGALT);
         StringBuilder felvesz = new StringBuilder(UzenetEnum.RENDBEN.toString());
         felvesz.append(' ');
         felvesz.append(targy.getLeiras());
