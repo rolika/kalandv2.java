@@ -68,16 +68,16 @@ enum HelyszinEnum {
       helyszin.allapot.add(leiroMod);
     }
   }
-
-  Set<TargyEnum> targySzuro(Predicate<TargyEnum> szuro) {
-    return Arrays.stream(TargyEnum.values())
+  
+  EnumSet<TargyEnum> targySzuro(Predicate<TargyEnum> szuro) {
+    return EnumSet.copyOf(Arrays.stream(TargyEnum.values())
       .filter(targy -> targy.getHely() == this)
       .filter(szuro)
-      .collect(Collectors.toSet());
+      .collect(Collectors.toSet()));
   }
 
   String targyak() {
-    Set<TargyEnum> leltar
+    EnumSet<TargyEnum> leltar
       = this.targySzuro(targy -> 
         targy.getAllapot().contains(AllapotEnum.LATHATO) &&
         targy.getAllapot().contains(AllapotEnum.FELVEHETO));
