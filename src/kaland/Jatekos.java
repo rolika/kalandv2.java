@@ -83,7 +83,7 @@ final class Jatekos {
         targy.addAllapot(AllapotEnum.VIZSGALT);
         return targy.getLeiras();
       } else {
-        return UzenetEnum.NINCS_ITT_ILYEN.toString();
+        return UzenetEnum.NEM_LATHATO.toString();
       }
     } else {
       return UzenetEnum.NEM_ERTEM.toString();
@@ -103,7 +103,7 @@ final class Jatekos {
       } else if (!felvehetoTargyak.contains(targy)) {
         return UzenetEnum.NEM_FELVEHETO.toString();
       } else if (!lathatoTargyak.contains(targy)) {
-        return UzenetEnum.NINCS_ITT_ILYEN.toString();
+        return UzenetEnum.NEM_LATHATO.toString();
       } else {
         targy.setHely(HelyszinEnum.LELTAR);
         targy.addAllapot(AllapotEnum.VIZSGALT);

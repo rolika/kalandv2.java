@@ -97,13 +97,13 @@ enum HelyszinEnum {
     }
   }  
   
-  Allapot ajto(HelyszinEnum cel) {
+  AllapotEnum ajto(HelyszinEnum cel) {
     for (AjtoEnum ajto : AjtoEnum.values()) {
       if (ajto.getViszonylat().contains(cel)) {
         return ajto.getAllapot();
       }
     }
-    return Allapot.NINCS;
+    return AllapotEnum.NINCS;
   }
 
 }
