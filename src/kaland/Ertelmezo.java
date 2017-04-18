@@ -16,7 +16,14 @@ class Ertelmezo {
 
   static Set<SzotarInterface> szetbont(String parancs) {
     parancsszavak = new HashSet<>();
-    for (String szo : parancs.toLowerCase().split(" a?z?\\b ?")) {
+    parancs = parancs.replaceAll(",", "");
+    parancs = parancs.replaceAll(" a ", " ");
+    parancs = parancs.replaceAll(" az ", " ");
+    parancs = parancs.replaceAll(" és ", " ");
+    parancs = parancs.replaceAll(" meg ", " ");
+    parancs = parancs.replaceAll(" plusz ", " ");
+    parancs = parancs.replaceAll("\\s+", " ");
+    for (String szo : parancs.toLowerCase().split("\\s")) {
       // minden egyes szóra
       // először megnézi az irányokat
       for (SzotarInterface parancsszo : IranyEnum.values()) {
