@@ -75,6 +75,14 @@ final class Jatekos {
     return HelyszinEnum.LELTAR.targyak();
   }
 
+  String vesz(Set<SzotarInterface> parancsszavak) {
+    return mozgat(parancsszavak, helyszin, HelyszinEnum.LELTAR);
+  }
+
+  String tesz(Set<SzotarInterface> parancsszavak) {
+    return mozgat(parancsszavak, HelyszinEnum.LELTAR, helyszin);
+  }
+
   String vizsgal(Set<SzotarInterface> parancsszavak) {
     if (parancsszavak.size() == 1) {
       TargyEnum targy = TargyEnum.valueOf(parancsszavak.iterator().next().toString());
@@ -89,14 +97,6 @@ final class Jatekos {
     } else {
       return UzenetEnum.NEM_ERTEM.toString();
     }
-  }
-
-  String vesz(Set<SzotarInterface> parancsszavak) {
-    return mozgat(parancsszavak, helyszin, HelyszinEnum.LELTAR);
-  }
-
-  String tesz(Set<SzotarInterface> parancsszavak) {
-    return mozgat(parancsszavak, HelyszinEnum.LELTAR, helyszin);
   }
 
   String aktival(Set<SzotarInterface> parancsszavak) {
