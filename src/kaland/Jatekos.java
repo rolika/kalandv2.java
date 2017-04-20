@@ -1,8 +1,9 @@
 package kaland;
 
-import java.util.Collections;
+import com.google.common.collect.Sets;
 import java.util.EnumSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * A játékost megvalósító osztály kalandjátékhoz
@@ -97,14 +98,10 @@ final class Jatekos {
     if (parancsszavak.contains(ParancsEnum.MINDEN)) {
       felveendoTargyak = felvehetoTargyak;
     } else {
-      felveendoTargyak = EnumSet.noneOf(TargyEnum.class);
-      parancsszavak.forEach(szo -> {
-        try {
-          felveendoTargyak.add(TargyEnum.valueOf(szo.toString()));
-        } catch (IllegalArgumentException e) {
-          // csak tárgyakat lehet felvenni
-        }
-      });
+      felveendoTargyak = Sets.newEnumSet(parancsszavak.stream()
+        .filter(szo -> szo.getClass().equals(TargySzotarEnum.class))
+        .map(targy -> TargyEnum.valueOf(targy.toString()))
+        .collect(Collectors.toSet()), TargyEnum.class);
     }
     if (felvehetoTargyak.containsAll(felveendoTargyak)) {
       felveendoTargyak.forEach(targy -> targy.setHely(HelyszinEnum.KEZ));
