@@ -24,7 +24,8 @@ enum HelyszinEnum {
   REJTETT_PINCE("Rejtett pince", "A ház elrejtett helyisége olyan régi benyomást kelt, hogy bele sem mersz gondolni. A falak, a kövek illesztési technikái furcsa, hátborzongató idegenséggel vesznek körül. A nyugati fal boltívének újabb keletű falazása, bár nem a kőműves mesterség csúcsa, mégis szinte otthonos barátsággal vonzza szemeidet. A keleti falra pillantva megáll benned az ütő: valami mintha átszivárgott volna a túloldalról egy alig kivehető, kolosszális kő ajtólap körvonalain át.", AllapotEnum.SOTET),
   ODAAT("Odaát", "Egy idegen világban vagy, éjszaka van. Az égbolton soha nem látott alakzatban ragyognak a csillagok, és egy vérszínű hold vonja kétségbeejtő árnyalatba a környezetet. A köves, sivatagos táj vigasztalan látványa alig elviselhető, amit nem enyhít a kifacsart, elszáradt, torz, tüskés bokrok és kaktuszok szívszorító magánya. Nyugatra egy kő ajtólap áll a levegőben, egy lépcsőfoknyi magasságban lebegve.", AllapotEnum.VILAGOS),
   LELTAR("Leltár", "Leltár", AllapotEnum.VILAGOS),
-  KEZ("Kéz", "Kéz", AllapotEnum.VILAGOS);
+  KEZ_FEL("Kéz", "Kéz", AllapotEnum.VILAGOS),
+  KEZ_LE("Kéz", "Kéz", AllapotEnum.VILAGOS);
 
   private final String nev, leiras;
   private KijaratEnum kijaratok;
@@ -99,9 +100,13 @@ enum HelyszinEnum {
         uzenet = leltar.isEmpty() ? new StringBuilder(UzenetEnum.NINCS_LELTAR.toString()) :
           new StringBuilder(UzenetEnum.LELTAR.toString());
         break;
-      case KEZ:
+      case KEZ_FEL:
         uzenet = leltar.isEmpty() ? new StringBuilder(UzenetEnum.NEM_ERTEM.toString()) :
           new StringBuilder(UzenetEnum.FELVEVE.toString());
+        break;
+      case KEZ_LE:
+        uzenet = leltar.isEmpty() ? new StringBuilder(UzenetEnum.NEM_ERTEM.toString()) :
+          new StringBuilder(UzenetEnum.LETEVE.toString());
         break;
       default:
         uzenet = leltar.isEmpty() ? new StringBuilder() :

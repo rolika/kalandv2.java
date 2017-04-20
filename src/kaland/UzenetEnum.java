@@ -28,7 +28,8 @@ public enum UzenetEnum {
   NYITVA("Már nyitva van."),
   CSUKVA("Be van csukva."),
   ZARVA("Be van zárva."),
-  FELVEVE("Felvéve");
+  FELVEVE("Felvéve"),
+  LETEVE("Letéve");
 
   private final String uzenet;
 

@@ -92,40 +92,11 @@ final class Jatekos {
   }
 
   String vesz(Set<SzotarInterface> parancsszavak) {
-    EnumSet<TargyEnum> felvehetoTargyak
-      = helyszin.targySzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);
-    EnumSet<TargyEnum> felveendoTargyak;
-    if (parancsszavak.contains(ParancsEnum.MINDEN)) {
-      felveendoTargyak = felvehetoTargyak;
-    } else {
-      felveendoTargyak = Sets.newEnumSet(parancsszavak.stream()
-        .filter(szo -> szo.getClass().equals(TargySzotarEnum.class))
-        .map(targy -> TargyEnum.valueOf(targy.toString()))
-        .collect(Collectors.toSet()), TargyEnum.class);
-    }
-    if (felvehetoTargyak.containsAll(felveendoTargyak)) {
-      felveendoTargyak.forEach(targy -> targy.setHely(HelyszinEnum.KEZ));
-      String uzenet = HelyszinEnum.KEZ.targyak();
-      felveendoTargyak.forEach(targy -> targy.setHely(HelyszinEnum.LELTAR));
-      return uzenet;
-    } else {
-      return UzenetEnum.NEM_ERTEM.toString();
-    }
+    return mozgat(parancsszavak, helyszin, HelyszinEnum.LELTAR);
   }
 
   String tesz(Set<SzotarInterface> parancsszavak) {
-    if (parancsszavak.size() == 1) {
-      TargyEnum targy = TargyEnum.valueOf(parancsszavak.iterator().next().toString());
-      EnumSet<TargyEnum> leltar = HelyszinEnum.LELTAR.targySzuro();
-      if (leltar.contains(targy)) {
-        targy.setHely(helyszin);
-        return UzenetEnum.RENDBEN.toString();
-      } else {
-        return UzenetEnum.NINCS_NALAD.toString();
-      }
-    } else {
-      return UzenetEnum.NEM_ERTEM.toString();
-    }
+    return mozgat(parancsszavak, HelyszinEnum.LELTAR, helyszin);
   }
 
   String aktival(Set<SzotarInterface> parancsszavak) {
@@ -173,6 +144,30 @@ final class Jatekos {
 
   String minden(Set<SzotarInterface> parancsszavak) {
     return UzenetEnum.NEM_ERTEM.toString();
+  }
+
+  private String mozgat(Set<SzotarInterface> parancsszavak, HelyszinEnum forras, HelyszinEnum cel) {
+    EnumSet<TargyEnum> mozgathatoTargyak
+      = forras.targySzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);
+    EnumSet<TargyEnum> mozgatandoTargyak;
+    if (parancsszavak.contains(ParancsEnum.MINDEN)) {
+      mozgatandoTargyak = mozgathatoTargyak;
+    } else {
+      mozgatandoTargyak = Sets.newEnumSet(parancsszavak.stream()
+        .filter(szo -> szo.getClass().equals(TargySzotarEnum.class))
+        .map(targy -> TargyEnum.valueOf(targy.toString()))
+        .collect(Collectors.toSet()), TargyEnum.class);
+    }
+    if (mozgathatoTargyak.containsAll(mozgatandoTargyak)) {
+      HelyszinEnum tmp = forras == HelyszinEnum.LELTAR ? HelyszinEnum.KEZ_LE : HelyszinEnum.KEZ_FEL;
+      mozgatandoTargyak.forEach(targy -> targy.setHely(tmp));
+      String uzenet = tmp.targyak();
+      mozgatandoTargyak.forEach(targy -> targy.setHely(cel));
+      mozgatandoTargyak.forEach(targy -> targy.addAllapot(AllapotEnum.VIZSGALT));
+      return uzenet;
+    } else {
+      return UzenetEnum.NEM_ERTEM.toString();
+    }
   }
 
 }
