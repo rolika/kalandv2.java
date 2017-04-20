@@ -27,7 +27,8 @@ public enum UzenetEnum {
   NINCS_NALAD("Nincs nálad ilyesmi."),  
   NYITVA("Már nyitva van."),
   CSUKVA("Be van csukva."),
-  ZARVA("Be van zárva.");
+  ZARVA("Be van zárva."),
+  FELVEVE("Felvéve");
 
   private final String uzenet;
 

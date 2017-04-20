@@ -23,7 +23,8 @@ enum HelyszinEnum {
   PADLAS_VEGE("Padlás vége", "A mestergerendáról vaskos, poros pókháló lógnak le. A padlás végébe, a gerenda alá, óriási, vasalt faládát építettek; olyan nagy, hogy egyben nem fért volna fel a padláslépcsőn. Nyugat felé a padlás eleje játszik halvány kísértetfényben.", AllapotEnum.SOTET),
   REJTETT_PINCE("Rejtett pince", "A ház elrejtett helyisége olyan régi benyomást kelt, hogy bele sem mersz gondolni. A falak, a kövek illesztési technikái furcsa, hátborzongató idegenséggel vesznek körül. A nyugati fal boltívének újabb keletű falazása, bár nem a kőműves mesterség csúcsa, mégis szinte otthonos barátsággal vonzza szemeidet. A keleti falra pillantva megáll benned az ütő: valami mintha átszivárgott volna a túloldalról egy alig kivehető, kolosszális kő ajtólap körvonalain át.", AllapotEnum.SOTET),
   ODAAT("Odaát", "Egy idegen világban vagy, éjszaka van. Az égbolton soha nem látott alakzatban ragyognak a csillagok, és egy vérszínű hold vonja kétségbeejtő árnyalatba a környezetet. A köves, sivatagos táj vigasztalan látványa alig elviselhető, amit nem enyhít a kifacsart, elszáradt, torz, tüskés bokrok és kaktuszok szívszorító magánya. Nyugatra egy kő ajtólap áll a levegőben, egy lépcsőfoknyi magasságban lebegve.", AllapotEnum.VILAGOS),
-  LELTAR("Leltár", "Leltár", AllapotEnum.VILAGOS);
+  LELTAR("Leltár", "Leltár", AllapotEnum.VILAGOS),
+  KEZ("Kéz", "Kéz", AllapotEnum.VILAGOS);
 
   private final String nev, leiras;
   private KijaratEnum kijaratok;
@@ -92,11 +93,21 @@ enum HelyszinEnum {
 
   String targyak() {
     EnumSet<TargyEnum> leltar = targySzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);
-    if (leltar.isEmpty()) {
-      return this == HelyszinEnum.LELTAR ? UzenetEnum.NINCS_LELTAR.toString() : "";
-    } else {
-      StringBuilder uzenet = new StringBuilder(this == HelyszinEnum.LELTAR
-        ? UzenetEnum.LELTAR.toString() : UzenetEnum.VAN_ITT.toString());
+    StringBuilder uzenet;
+    switch (this) {
+      case LELTAR:
+        uzenet = leltar.isEmpty() ? new StringBuilder(UzenetEnum.NINCS_LELTAR.toString()) :
+          new StringBuilder(UzenetEnum.LELTAR.toString());
+        break;
+      case KEZ:
+        uzenet = leltar.isEmpty() ? new StringBuilder(UzenetEnum.NEM_ERTEM.toString()) :
+          new StringBuilder(UzenetEnum.FELVEVE.toString());
+        break;
+      default:
+        uzenet = leltar.isEmpty() ? new StringBuilder() :
+          new StringBuilder(UzenetEnum.VAN_ITT.toString());
+    }
+    if (!leltar.isEmpty()) {
       leltar
         .forEach(targy -> {
           uzenet.append(UzenetEnum.EGY);
@@ -104,8 +115,8 @@ enum HelyszinEnum {
           uzenet.append(",");
         });
       uzenet.replace(uzenet.length() - 1, uzenet.length(), ".");
-      return uzenet.toString();
     }
+    return uzenet.toString();
   }  
   
   AllapotEnum ajto(HelyszinEnum cel) {

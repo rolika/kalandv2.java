@@ -89,24 +89,25 @@ final class Jatekos {
     }
   }
 
-  String vesz(Set<SzotarInterface> parancsszavak) {
-    boolean rendben = false;
-    EnumSet<TargyEnum> alkalmasTargyak =
-      helyszin.targySzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);
-    TargyEnum targy;
-    for (SzotarInterface szo : parancsszavak) {
+  String vesz(Set<SzotarInterface> parancsszavak) {    
+    EnumSet<TargyEnum> felvehetoTargyak =
+      helyszin.targySzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);    
+    EnumSet<TargyEnum> felveendoTargyak = EnumSet.noneOf(TargyEnum.class);
+    parancsszavak.forEach(szo -> {
       try {
-        targy = TargyEnum.valueOf(szo.toString()); // csak tárgyakat lehet felvenni
+        felveendoTargyak.add(TargyEnum.valueOf(szo.toString()));
       } catch (IllegalArgumentException e) {
-        targy = null;
+        // csak tárgyakat lehet felvenni
       }
-      if (targy != null && alkalmasTargyak.contains(targy)) {
-        targy.setHely(HelyszinEnum.LELTAR);
-        targy.addAllapot(AllapotEnum.VIZSGALT); // ha felvesz valamit, az vizsgált is lesz
-        rendben = true;
-      }
-    }
-    return rendben ? UzenetEnum.RENDBEN.toString() : UzenetEnum.NEM_ERTEM.toString();
+    });    
+    if (felvehetoTargyak.containsAll(felveendoTargyak)) {
+      felveendoTargyak.forEach(targy -> targy.setHely(HelyszinEnum.KEZ));
+      String uzenet = HelyszinEnum.KEZ.targyak();
+      felveendoTargyak.forEach(targy -> targy.setHely(HelyszinEnum.LELTAR));
+      return uzenet;
+    } else {
+      return UzenetEnum.NEM_ERTEM.toString();
+    }    
   }
 
   String tesz(Set<SzotarInterface> parancsszavak) {
@@ -145,7 +146,7 @@ final class Jatekos {
   }
 
   String tamad(Set<SzotarInterface> parancsszavak) {
-    return "Játékos leltározik.";
+    return "Játékos támad.";
   }
 
   String hosszu(Set<SzotarInterface> parancsszavak) {
