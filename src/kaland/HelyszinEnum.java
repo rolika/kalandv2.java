@@ -3,7 +3,6 @@ package kaland;
 import com.google.common.collect.Sets;
 import java.util.Arrays;
 import java.util.EnumSet;
-import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -72,15 +71,12 @@ enum HelyszinEnum {
   
   EnumSet<TargyEnum> targySzuro(AllapotEnum ... allapotok) {
     EnumSet<AllapotEnum> szuro = Sets.newEnumSet(Arrays.asList(allapotok), AllapotEnum.class);
-    try {
-      return EnumSet.copyOf(
-        Arrays.stream(TargyEnum.values())
-        .filter(targy -> targy.getHely() == this)
-        .filter(targy -> targy.getAllapot().containsAll(szuro))
-        .collect(Collectors.toSet()));
-    } catch (IllegalArgumentException e) { // nincs tárgy (enumset nem lehet üres)
-      return null;
-    }
+    return Sets.newEnumSet(Arrays
+      .stream(TargyEnum.values())
+      .filter(targy -> targy.getHely() == this)
+      .filter(targy -> targy.getAllapot().containsAll(szuro))
+      .collect(Collectors.toSet()),
+      TargyEnum.class);
   }
   
   EnumSet<TargyEnum> targySzuro(Predicate<TargyEnum> szuro) {
@@ -95,9 +91,8 @@ enum HelyszinEnum {
   }
 
   String targyak() {
-    EnumSet<TargyEnum> leltar
-      = targySzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);
-    if (leltar == null) {
+    EnumSet<TargyEnum> leltar = targySzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);
+    if (leltar.isEmpty()) {
       return this == HelyszinEnum.LELTAR ? UzenetEnum.NINCS_LELTAR.toString() : "";
     } else {
       StringBuilder uzenet = new StringBuilder(this == HelyszinEnum.LELTAR

@@ -91,7 +91,8 @@ final class Jatekos {
 
   String vesz(Set<SzotarInterface> parancsszavak) {
     boolean rendben = false;
-    EnumSet<TargyEnum> alkalmasTargyak = helyszin.targySzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);
+    EnumSet<TargyEnum> alkalmasTargyak =
+      helyszin.targySzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);
     TargyEnum targy;
     for (SzotarInterface szo : parancsszavak) {
       try {
