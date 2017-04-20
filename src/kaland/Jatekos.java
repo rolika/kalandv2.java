@@ -104,6 +104,7 @@ final class Jatekos {
       }
       if (targy != null && alkalmasTargyak.contains(targy)) {
         targy.setHely(HelyszinEnum.LELTAR);
+        targy.addAllapot(AllapotEnum.VIZSGALT); // ha felvesz valamit, az vizsgált is lesz
         rendben = true;
       }
     }
