@@ -91,30 +91,23 @@ final class Jatekos {
   }
 
   String vesz(Set<SzotarInterface> parancsszavak) {
-    if (parancsszavak.size() == 1) {
-      TargyEnum targy = TargyEnum.valueOf(parancsszavak.iterator().next().toString());
-      EnumSet<TargyEnum> lathatoTargyak = helyszin.targySzuro(lathatoTargy -> 
-        lathatoTargy.getAllapot().contains(AllapotEnum.LATHATO));
-      EnumSet<TargyEnum> felvehetoTargyak = helyszin.targySzuro(felvehetoTargy -> 
-        felvehetoTargy.getAllapot().contains(AllapotEnum.FELVEHETO));
-      EnumSet<TargyEnum> leltar = HelyszinEnum.LELTAR.targySzuro(t -> true);
-      if (leltar.contains(targy)) {
-        return UzenetEnum.MAR_NALAD_VAN.toString();
-      } else if (!felvehetoTargyak.contains(targy)) {
-        return UzenetEnum.NEM_FELVEHETO.toString();
-      } else if (!lathatoTargyak.contains(targy)) {
-        return UzenetEnum.NEM_LATHATO.toString();
-      } else {
-        targy.setHely(HelyszinEnum.LELTAR);
-        targy.addAllapot(AllapotEnum.VIZSGALT);
-        StringBuilder felvesz = new StringBuilder(UzenetEnum.RENDBEN.toString());
-        felvesz.append(' ');
-        felvesz.append(targy.getLeiras());
-        return felvesz.toString();
+    boolean rendben = false;
+    EnumSet<TargyEnum> alkalmasTargyak = helyszin.targySzuro(targy ->
+      targy.getAllapot().contains(AllapotEnum.LATHATO) &&
+      targy.getAllapot().contains(AllapotEnum.FELVEHETO));
+    TargyEnum targy;
+    for (SzotarInterface szo : parancsszavak) {
+      try {
+        targy = TargyEnum.valueOf(szo.toString()); // csak tárgyakat lehet felvenni
+      } catch (IllegalArgumentException e) {
+        targy = null;
       }
-    } else {
-      return UzenetEnum.NEM_ERTEM.toString();
+      if (targy != null && alkalmasTargyak.contains(targy)) {
+        targy.setHely(HelyszinEnum.LELTAR);
+        rendben = true;
+      }
     }
+    return rendben ? UzenetEnum.RENDBEN.toString() : UzenetEnum.NEM_ERTEM.toString();
   }
 
   String tesz(Set<SzotarInterface> parancsszavak) {
