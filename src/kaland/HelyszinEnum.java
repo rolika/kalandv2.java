@@ -70,10 +70,14 @@ enum HelyszinEnum {
   }
   
   EnumSet<TargyEnum> targySzuro(Predicate<TargyEnum> szuro) {
-    return EnumSet.copyOf(Arrays.stream(TargyEnum.values())
-      .filter(targy -> targy.getHely() == this)
-      .filter(szuro)
-      .collect(Collectors.toSet()));
+    try {
+      return EnumSet.copyOf(Arrays.stream(TargyEnum.values())
+        .filter(targy -> targy.getHely() == this)
+        .filter(szuro)
+        .collect(Collectors.toSet()));
+    } catch (IllegalArgumentException e) { // nincs tárgy (enumset nem lehet üres)
+      return null;
+    }
   }
 
   String targyak() {
@@ -81,7 +85,7 @@ enum HelyszinEnum {
       = this.targySzuro(targy -> 
         targy.getAllapot().contains(AllapotEnum.LATHATO) &&
         targy.getAllapot().contains(AllapotEnum.FELVEHETO));
-    if (leltar.isEmpty()) {
+    if (leltar == null) {
       return this == HelyszinEnum.LELTAR ? UzenetEnum.NINCS_LELTAR.toString() : "";
     } else {
       StringBuilder uzenet = new StringBuilder(this == HelyszinEnum.LELTAR
