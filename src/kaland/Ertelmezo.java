@@ -17,11 +17,6 @@ class Ertelmezo {
   static Set<SzotarInterface> szetbont(String parancs) {
     parancsszavak = new HashSet<>();
     parancs = parancs.replaceAll(",", "");
-    parancs = parancs.replaceAll(" a ", " ");
-    parancs = parancs.replaceAll(" az ", " ");
-    parancs = parancs.replaceAll(" és ", " ");
-    parancs = parancs.replaceAll(" meg ", " ");
-    parancs = parancs.replaceAll(" plusz ", " ");
     parancs = parancs.replaceAll("\\s+", " ");
     for (String szo : parancs.toLowerCase().split("\\s")) {
       // minden egyes szóra
