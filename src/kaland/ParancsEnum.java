@@ -18,14 +18,15 @@ enum ParancsEnum implements SzotarInterface {
   NYIT("kinyitom", "kitárom"),
   CSUK("becsukom", "behajtom"),
   ZAR("bezárom"),
-  VESZ("felveszem", "elteszem", "elrakom"),
-  TESZ("leteszem", "lerakom", "eldobom"),
+  VESZ("felveszem", "elteszem", "elrakom", "felveszek", "elteszek", "elrakok"),
+  TESZ("leteszem", "lerakom", "eldobom", "leteszek", "lerakok", "eldobok"),
   VIZSGAL("megvizsgálom", "megnézem", "ellenőrzöm", "elolvasom"),
   TAMAD("megtámadom", "megölöm", "agyoncsapom"),
   HOSSZU("hosszú", "bő", "info", "infó", "mutasd", "leírás"),
   ROVID("rövid", "kevés"),
   NORMAL("normál", "rendes"),
-  MEGEROSIT("igen", "i");
+  MEGEROSIT("igen", "i"),
+  MINDEN("minden", "mindent", "összeset");
 
   private final Set<String> szinonimak;
 

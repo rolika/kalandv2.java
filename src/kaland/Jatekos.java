@@ -1,5 +1,6 @@
 package kaland;
 
+import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
 
@@ -17,12 +18,12 @@ final class Jatekos {
     allapot = EnumSet.of(AllapotEnum.EL, AllapotEnum.NEM_NYERT, AllapotEnum.NEM_VESZTETT);
     setHelyszin(helyszin);
   }
-  
+
   boolean jatekbanVan() {
-    return allapot.contains(AllapotEnum.EL) && allapot.contains(AllapotEnum.NEM_NYERT) &&
-      allapot.contains(AllapotEnum.NEM_VESZTETT);
+    return allapot.contains(AllapotEnum.EL) && allapot.contains(AllapotEnum.NEM_NYERT)
+      && allapot.contains(AllapotEnum.NEM_VESZTETT);
   }
-  
+
   HelyszinEnum getHelyszin() {
     return helyszin;
   }
@@ -89,17 +90,22 @@ final class Jatekos {
     }
   }
 
-  String vesz(Set<SzotarInterface> parancsszavak) {    
-    EnumSet<TargyEnum> felvehetoTargyak =
-      helyszin.targySzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);    
-    EnumSet<TargyEnum> felveendoTargyak = EnumSet.noneOf(TargyEnum.class);
-    parancsszavak.forEach(szo -> {
-      try {
-        felveendoTargyak.add(TargyEnum.valueOf(szo.toString()));
-      } catch (IllegalArgumentException e) {
-        // csak tárgyakat lehet felvenni
-      }
-    });    
+  String vesz(Set<SzotarInterface> parancsszavak) {
+    EnumSet<TargyEnum> felvehetoTargyak
+      = helyszin.targySzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);
+    EnumSet<TargyEnum> felveendoTargyak;
+    if (parancsszavak.contains(ParancsEnum.MINDEN)) {
+      felveendoTargyak = felvehetoTargyak;
+    } else {
+      felveendoTargyak = EnumSet.noneOf(TargyEnum.class);
+      parancsszavak.forEach(szo -> {
+        try {
+          felveendoTargyak.add(TargyEnum.valueOf(szo.toString()));
+        } catch (IllegalArgumentException e) {
+          // csak tárgyakat lehet felvenni
+        }
+      });
+    }
     if (felvehetoTargyak.containsAll(felveendoTargyak)) {
       felveendoTargyak.forEach(targy -> targy.setHely(HelyszinEnum.KEZ));
       String uzenet = HelyszinEnum.KEZ.targyak();
@@ -107,7 +113,7 @@ final class Jatekos {
       return uzenet;
     } else {
       return UzenetEnum.NEM_ERTEM.toString();
-    }    
+    }
   }
 
   String tesz(Set<SzotarInterface> parancsszavak) {
@@ -166,6 +172,10 @@ final class Jatekos {
 
   String megerosit(Set<SzotarInterface> parancsszavak) {
     return "Játékos megerősít.";
+  }
+
+  String minden(Set<SzotarInterface> parancsszavak) {
+    return UzenetEnum.NEM_ERTEM.toString();
   }
 
 }
