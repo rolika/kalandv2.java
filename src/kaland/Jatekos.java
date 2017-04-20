@@ -76,9 +76,8 @@ final class Jatekos {
   String vizsgal(Set<SzotarInterface> parancsszavak) {
     if (parancsszavak.size() == 1) {
       TargyEnum targy = TargyEnum.valueOf(parancsszavak.iterator().next().toString());
-      EnumSet<TargyEnum> lathatoTargyak = helyszin.targySzuro(lathatoTargy -> 
-        lathatoTargy.getAllapot().contains(AllapotEnum.LATHATO));
-      lathatoTargyak.addAll(HelyszinEnum.LELTAR.targySzuro(t -> true));
+      EnumSet<TargyEnum> lathatoTargyak = helyszin.targySzuro(AllapotEnum.LATHATO);
+      lathatoTargyak.addAll(HelyszinEnum.LELTAR.targySzuro());
       if (lathatoTargyak.contains(targy)) {
         targy.addAllapot(AllapotEnum.VIZSGALT);
         return targy.getLeiras();
@@ -92,9 +91,7 @@ final class Jatekos {
 
   String vesz(Set<SzotarInterface> parancsszavak) {
     boolean rendben = false;
-    EnumSet<TargyEnum> alkalmasTargyak = helyszin.targySzuro(targy ->
-      targy.getAllapot().contains(AllapotEnum.LATHATO) &&
-      targy.getAllapot().contains(AllapotEnum.FELVEHETO));
+    EnumSet<TargyEnum> alkalmasTargyak = helyszin.targySzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);
     TargyEnum targy;
     for (SzotarInterface szo : parancsszavak) {
       try {
@@ -114,7 +111,7 @@ final class Jatekos {
   String tesz(Set<SzotarInterface> parancsszavak) {
     if (parancsszavak.size() == 1) {
       TargyEnum targy = TargyEnum.valueOf(parancsszavak.iterator().next().toString());
-      EnumSet<TargyEnum> leltar = HelyszinEnum.LELTAR.targySzuro(t -> true);
+      EnumSet<TargyEnum> leltar = HelyszinEnum.LELTAR.targySzuro();
       if (leltar.contains(targy)) {
         targy.setHely(helyszin);
         return UzenetEnum.RENDBEN.toString();

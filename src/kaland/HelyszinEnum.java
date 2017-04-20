@@ -1,5 +1,6 @@
 package kaland;
 
+import com.google.common.collect.Sets;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Set;
@@ -69,6 +70,19 @@ enum HelyszinEnum {
     }
   }
   
+  EnumSet<TargyEnum> targySzuro(AllapotEnum ... allapotok) {
+    EnumSet<AllapotEnum> szuro = Sets.newEnumSet(Arrays.asList(allapotok), AllapotEnum.class);
+    try {
+      return EnumSet.copyOf(
+        Arrays.stream(TargyEnum.values())
+        .filter(targy -> targy.getHely() == this)
+        .filter(targy -> targy.getAllapot().containsAll(szuro))
+        .collect(Collectors.toSet()));
+    } catch (IllegalArgumentException e) { // nincs tárgy (enumset nem lehet üres)
+      return null;
+    }
+  }
+  
   EnumSet<TargyEnum> targySzuro(Predicate<TargyEnum> szuro) {
     try {
       return EnumSet.copyOf(Arrays.stream(TargyEnum.values())
@@ -82,9 +96,7 @@ enum HelyszinEnum {
 
   String targyak() {
     EnumSet<TargyEnum> leltar
-      = this.targySzuro(targy -> 
-        targy.getAllapot().contains(AllapotEnum.LATHATO) &&
-        targy.getAllapot().contains(AllapotEnum.FELVEHETO));
+      = targySzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);
     if (leltar == null) {
       return this == HelyszinEnum.LELTAR ? UzenetEnum.NINCS_LELTAR.toString() : "";
     } else {
