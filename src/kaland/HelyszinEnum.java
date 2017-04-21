@@ -75,21 +75,10 @@ enum HelyszinEnum {
     EnumSet<AllapotEnum> szuro = Sets.newEnumSet(Arrays.asList(allapotok), AllapotEnum.class);
     return Sets.newEnumSet(Arrays
       .stream(TargyEnum.values())
-      .filter(targy -> targy.getHely() == this)
+      .filter(targy -> targy.getHely().contains(this))
       .filter(targy -> targy.getAllapot().containsAll(szuro))
       .collect(Collectors.toSet()),
       TargyEnum.class);
-  }
-  
-  EnumSet<TargyEnum> targySzuro(Predicate<TargyEnum> szuro) {
-    try {
-      return EnumSet.copyOf(Arrays.stream(TargyEnum.values())
-        .filter(targy -> targy.getHely() == this)
-        .filter(szuro)
-        .collect(Collectors.toSet()));
-    } catch (IllegalArgumentException e) { // nincs tárgy (enumset nem lehet üres)
-      return null;
-    }
   }
 
   String targyak() {

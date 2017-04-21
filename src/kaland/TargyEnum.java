@@ -11,7 +11,7 @@ import java.util.EnumSet;
  *
  * @author rolika
  */
-enum TargyEnum {
+enum TargyEnum implements ElemInterface {
   LABTORLO("lábtörlő", "Ilyen elnyűtt és koszos lábtörlőt még soha nem láttál. Valamilyen növényi rostból fonták, de az nagyon régen lehetett.", HelyszinEnum.HAZ_ELOTT, AllapotEnum.LATHATO, AllapotEnum.FELVEHETO),
   KULCS("kis kulcs", "Egy meglehetősen kicsiny, ám annál jobban kidolgozott kulcs, mely a méretéhez képest meglepően nehéznek tűnik.", HelyszinEnum.HAZ_ELOTT, AllapotEnum.FELVEHETO),
   TAPETA("tapéta", "A tapéta valaha kellemes pasztellzöld színe valami undorító árnyalatú nyálkává változott és felpúposodott az alatta lévő vizes faltól.", HelyszinEnum.ELOTER, AllapotEnum.LATHATO),
@@ -29,27 +29,33 @@ enum TargyEnum {
     this.allapot = Sets.newEnumSet(Arrays.asList(allapot), AllapotEnum.class);
   }
 
-  String getNev() {
+  @Override
+  public String getNev() {
     return nev;
   }
 
-  String getLeiras() {
+  @Override
+  public String getLeiras() {
     return leiras;
   }
 
-  HelyszinEnum getHely() {
-    return hely;
+  @Override
+  public EnumSet<HelyszinEnum> getHely() {
+    return EnumSet.of(hely);
   }
 
-  EnumSet<AllapotEnum> getAllapot() {
+  @Override
+  public EnumSet<AllapotEnum> getAllapot() {
     return allapot;
   }
   
-  void addAllapot(AllapotEnum allapot) {
+  @Override
+  public void addAllapot(AllapotEnum allapot) {
     this.allapot.add(allapot);
   }
   
-  void delAllapot(AllapotEnum allapot) {
+  @Override
+  public void delAllapot(AllapotEnum allapot) {
     this.allapot.remove(allapot);
   }
 
