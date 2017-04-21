@@ -6,8 +6,7 @@ import java.util.EnumSet;
 
 /**
  * A játékban előforduló tárgyak felsorolása Egy tárgy akkor szerepel a helyszín leírásában, ha
- * látható ÉS felvehető. Felépítése: név, leírás, helyszín (enum), látható, felvehető, aktiválható
- * (használható), aktív, vizsgalt.
+ * látható ÉS felvehető. Felépítése: név, leírás, helyszín (enum), állapotok (enumok)
  *
  * @author rolika
  */
