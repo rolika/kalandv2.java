@@ -1,5 +1,6 @@
 package kaland;
 
+import com.google.common.collect.Sets;
 import java.util.Arrays;
 import java.util.EnumSet;
 
@@ -25,8 +26,7 @@ enum TargyEnum {
     this.nev = nev;
     this.leiras = leiras;
     this.hely = hely;
-    this.allapot = EnumSet.noneOf(AllapotEnum.class);
-    this.allapot.addAll(Arrays.asList(allapot));
+    this.allapot = Sets.newEnumSet(Arrays.asList(allapot), AllapotEnum.class);
   }
 
   String getNev() {
