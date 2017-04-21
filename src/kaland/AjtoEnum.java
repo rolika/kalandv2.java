@@ -3,48 +3,74 @@ package kaland;
 import java.util.EnumSet;
 
 /**
- * Játékban előforduló ajtók nyilvántartása és kezelése
+ * Játékban előforduló ajtók nyilvántartása és kezelése.
+ * Felépítése: név, leírás, állapot (enum), kulcs (tárgyenum), egyik-másik hely (helyszin-enumok) 
  *
  * @author rolika
  */
 
-enum AjtoEnum {
+enum AjtoEnum implements ElemInterface {
 
-  BEJARATI_AJTO("bejárati ajtó", "Ez egy bejárati ajtó.", AllapotEnum.NYITVA, TargyEnum.KULCS,
-    HelyszinEnum.HAZ_ELOTT, HelyszinEnum.ELOTER, -1),
-  SZOBAAJTO("szobaajtó", "Ez egy szobaajtó.", AllapotEnum.NYITVA, null,
-    HelyszinEnum.FOLYOSO, HelyszinEnum.SZOBA, -1),
-  KONYHAAJTO("konyhaajtó", "Ez egy konyhaajtó.", AllapotEnum.NYITVA, null,
-    HelyszinEnum.FOLYOSO, HelyszinEnum.KONYHA, -1),
-  VAKAJTO("vakajtó", "Ez egy vakajtó", AllapotEnum.NYITVA, null,
-    HelyszinEnum.PINCE, HelyszinEnum.REJTETT_PINCE, -1),
-  LADA("láda", "Ez egy láda.", AllapotEnum.NYITVA, TargyEnum.BICSKA,
-    HelyszinEnum.PADLAS_VEGE, HelyszinEnum.REJTETT_PINCE, -1),
-  PORTAL("portál", "Ez egy portál.", AllapotEnum.NYITVA, TargyEnum.BICSKA,
-    HelyszinEnum.REJTETT_PINCE, HelyszinEnum.ODAAT, 3);
+  BEJARATI_AJTO("bejárati ajtó", "Ez egy bejárati ajtó.", AllapotEnum.CSUKVA, TargyEnum.KULCS,
+    HelyszinEnum.HAZ_ELOTT, HelyszinEnum.ELOTER),
+  SZOBAAJTO("szobaajtó", "Ez egy szobaajtó.", AllapotEnum.CSUKVA, null,
+    HelyszinEnum.FOLYOSO, HelyszinEnum.SZOBA),
+  KONYHAAJTO("konyhaajtó", "Ez egy konyhaajtó.", AllapotEnum.CSUKVA, null,
+    HelyszinEnum.FOLYOSO, HelyszinEnum.KONYHA),
+  VAKAJTO("vakajtó", "Ez egy vakajtó", AllapotEnum.ZARVA, null,
+    HelyszinEnum.PINCE, HelyszinEnum.REJTETT_PINCE),
+  LADA("láda", "Ez egy láda.", AllapotEnum.ZARVA, TargyEnum.BICSKA,
+    HelyszinEnum.PADLAS_VEGE, HelyszinEnum.REJTETT_PINCE),
+  PORTAL("portál", "Ez egy portál.", AllapotEnum.ZARVA, TargyEnum.BICSKA,
+    HelyszinEnum.REJTETT_PINCE, HelyszinEnum.ODAAT);
 
   private final String nev, leiras;
-  private AllapotEnum allapot;
-  private TargyEnum kulcs;
-  private final EnumSet<HelyszinEnum> viszonylat;
-  // private int becsukodik; // hány lépés után csukódik be (-1 - nem csukódik be, 0 - becsukódott)
+  private final EnumSet<AllapotEnum> allapot;
+  private final TargyEnum kulcs;
+  private final EnumSet<HelyszinEnum> hely;
 
   private AjtoEnum(String nev, String leiras, AllapotEnum allapot, TargyEnum kulcs,
-    HelyszinEnum egyik, HelyszinEnum masik, int becsukodik) {
+    HelyszinEnum egyik, HelyszinEnum masik) {
     this.nev = nev;
     this.leiras = leiras;
-    this.allapot = allapot;
+    this.allapot = EnumSet.of(allapot);
     this.kulcs = kulcs;
-    this.viszonylat = EnumSet.of(egyik, masik);
-    // this.becsukodik = becsukodik;
+    this.hely = EnumSet.of(egyik, masik);
   }
 
-  public AllapotEnum getAllapot() {
+  @Override
+  public String getNev() {
+    return nev;
+  }
+
+  @Override
+  public String getLeiras() {
+    return leiras;
+  }
+
+  @Override
+  public EnumSet<AllapotEnum> getAllapot() {
     return allapot;
   }
+  
+  TargyEnum getKulcs() {
+    return kulcs;
+  }
 
-  public EnumSet<HelyszinEnum> getViszonylat() {
-    return viszonylat;
+  @Override
+  public EnumSet<HelyszinEnum> getHely() {
+    return hely;
+  }
+
+  @Override
+  public void addAllapot(AllapotEnum allapot) {
+    this.allapot.clear(); // csak egyféle állapota lehet
+    this.allapot.add(allapot);
+  }
+
+  @Override
+  public void delAllapot(AllapotEnum allapot) {
+    throw new UnsupportedOperationException("Nincs szükség rá.");
   }
 
 }

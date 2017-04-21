@@ -3,7 +3,6 @@ package kaland;
 import com.google.common.collect.Sets;
 import java.util.Arrays;
 import java.util.EnumSet;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -113,13 +112,13 @@ enum HelyszinEnum {
     return uzenet.toString();
   }  
   
-  AllapotEnum ajto(HelyszinEnum cel) {
+  EnumSet<AllapotEnum> ajto(HelyszinEnum cel) {
     for (AjtoEnum ajto : AjtoEnum.values()) {
-      if (ajto.getViszonylat().contains(cel)) {
+      if (ajto.getHely().contains(cel)) {
         return ajto.getAllapot();
       }
     }
-    return AllapotEnum.NINCS;
+    return EnumSet.of(AllapotEnum.NINCS);
   }
 
 }

@@ -51,17 +51,16 @@ final class Jatekos {
     if (ujHelyszin == null) {
       return UzenetEnum.ARRA_NEM.toString();
     } else {
-      switch (helyszin.ajto(ujHelyszin)) {
-        case CSUKVA:
+      EnumSet<AllapotEnum> ajtoAllapot = helyszin.ajto(ujHelyszin);
+      if (ajtoAllapot.contains(AllapotEnum.NINCS) || ajtoAllapot.contains(AllapotEnum.NYITVA)) {
+        setHelyszin(ujHelyszin);
+        return UzenetEnum.RENDBEN.toString();
+      } else {
+        if (ajtoAllapot.contains(AllapotEnum.CSUKVA)) {
           return UzenetEnum.CSUKVA.toString();
-        case ZARVA:
+        } else { // különben be van zárva
           return UzenetEnum.ZARVA.toString();
-        case NYITVA: // fall through
-          setHelyszin(ujHelyszin);
-          return UzenetEnum.NYITVA.toString();
-        default:
-          setHelyszin(ujHelyszin);
-          return UzenetEnum.RENDBEN.toString();
+        }
       }
     }
   }
