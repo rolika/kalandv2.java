@@ -74,14 +74,18 @@ enum HelyszinEnum {
   
   Set<ElemInterface> elemSzuro(AllapotEnum ... allapotok) {
     EnumSet<AllapotEnum> szuro = Sets.newEnumSet(Arrays.asList(allapotok), AllapotEnum.class);
-    Set<ElemInterface> elemek = Sets.newHashSet(TargyEnum.values());
-    elemek.addAll(Sets.newHashSet(AjtoEnum.values()));
-    // elemek.addAll(Sets.newHashSet(CsapdaEnum.values()));
-    // elemek.addAll(Sets.newHashSet(EllensegEnum.values()));
-    return elemek.stream()
-      .filter(elem -> elem.getHely().contains(this))
+    return mindenElem().stream()
       .filter(elem -> elem.getAllapot().containsAll(szuro))
       .collect(Collectors.toSet());
+  }
+  
+  Set<ElemInterface> mindenElem() {
+    Set<ElemInterface> minden = Sets.newHashSet(TargyEnum.values());
+    minden.addAll(Arrays.asList(AjtoEnum.values()));
+    //minden.addAll(Arrays.asList(CsapdaEnum.values()));
+    //minden.addAll(Arrays.asList(EllensegEnum.values()));
+    minden.removeIf(elem -> !elem.getHely().contains(this));
+    return minden;
   }
 
   String targyak() {

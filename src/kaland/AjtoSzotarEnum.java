@@ -11,8 +11,8 @@ import java.util.Set;
 enum AjtoSzotarEnum implements SzotarInterface {
 
   BEJARATI_AJTO("ajtó", "ajtót", "ajtóval"),
-  SZOBAAJTO("ajtó", "ajtót", "ajtóval", "szobaajtó", "szobaajtót", "szobaajtóval", "faajtó", "faajtót", "faajtóval"),
-  KONYHAAJTO("ajtó", "ajtót", "ajtóval", "konyhaajtó", "konyhaajtót", "konyhaajtóval", "üvegajtó", "üvegajtót", "üvegajtóval"),
+  SZOBAAJTO("szobaajtó", "szobaajtót", "szobaajtóval", "faajtó", "faajtót", "faajtóval"),
+  KONYHAAJTO("konyhaajtó", "konyhaajtót", "konyhaajtóval", "üvegajtó", "üvegajtót", "üvegajtóval"),
   VAKAJTO("boltív", "boltívet", "boltívvel", "fal", "falat", "fallal", "vakajtó", "vakajtót", "vakajtóval"),
   LADA("láda", "ládát", "ládával", "faláda", "faládát", "faládával"),
   PORTAL("portál", "portált", "portállal", "kőlap", "kőlapot", "kőlappal");

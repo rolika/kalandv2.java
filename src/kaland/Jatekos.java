@@ -83,18 +83,15 @@ final class Jatekos {
 
   String vizsgal(Set<SzotarInterface> parancsszavak) {
     if (parancsszavak.size() == 1) {
-      TargyEnum targy = TargyEnum.valueOf(parancsszavak.iterator().next().toString());
+      ElemInterface elem = getElemEnum(parancsszavak.iterator().next());
       Set<ElemInterface> lathatoTargyak = helyszin.elemSzuro(AllapotEnum.LATHATO);
       lathatoTargyak.addAll(HelyszinEnum.LELTAR.elemSzuro());
-      if (lathatoTargyak.contains(targy)) {
-        targy.addAllapot(AllapotEnum.VIZSGALT);
-        return targy.getLeiras();
-      } else {
-        return UzenetEnum.NEM_LATHATO.toString();
+      if (lathatoTargyak.contains(elem)) {
+        elem.addAllapot(AllapotEnum.VIZSGALT);
+        return elem.getLeiras();
       }
-    } else {
-      return UzenetEnum.NEM_ERTEM.toString();
     }
+    return UzenetEnum.NEM_ERTEM.toString();
   }
 
   String aktival(Set<SzotarInterface> parancsszavak) {
@@ -142,6 +139,15 @@ final class Jatekos {
 
   String minden(Set<SzotarInterface> parancsszavak) {
     return UzenetEnum.NEM_ERTEM.toString();
+  }
+  
+  private ElemInterface getElemEnum(SzotarInterface szo) {
+    if (szo.getClass().equals(TargySzotarEnum.class)) {
+      return TargyEnum.valueOf(szo.toString());
+    } else if (szo.getClass().equals(AjtoSzotarEnum.class)) {
+      return AjtoEnum.valueOf(szo.toString());
+    }
+    return null; // elvileg nem fordulhat elő
   }
 
   private String mozgat(Set<SzotarInterface> parancsszavak, HelyszinEnum forras, HelyszinEnum cel) {
