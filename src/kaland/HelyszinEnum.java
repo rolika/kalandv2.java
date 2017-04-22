@@ -3,6 +3,8 @@ package kaland;
 import com.google.common.collect.Sets;
 import java.util.Arrays;
 import java.util.EnumSet;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -70,18 +72,20 @@ enum HelyszinEnum {
     }
   }
   
-  EnumSet<TargyEnum> targySzuro(AllapotEnum ... allapotok) {
+  Set<ElemInterface> elemSzuro(AllapotEnum ... allapotok) {
     EnumSet<AllapotEnum> szuro = Sets.newEnumSet(Arrays.asList(allapotok), AllapotEnum.class);
-    return Sets.newEnumSet(Arrays
-      .stream(TargyEnum.values())
-      .filter(targy -> targy.getHely().contains(this))
-      .filter(targy -> targy.getAllapot().containsAll(szuro))
-      .collect(Collectors.toSet()),
-      TargyEnum.class);
+    Set<ElemInterface> elemek = Sets.newHashSet(TargyEnum.values());
+    elemek.addAll(Sets.newHashSet(AjtoEnum.values()));
+    // elemek.addAll(Sets.newHashSet(CsapdaEnum.values()));
+    // elemek.addAll(Sets.newHashSet(EllensegEnum.values()));
+    return elemek.stream()
+      .filter(elem -> elem.getHely().contains(this))
+      .filter(elem -> elem.getAllapot().containsAll(szuro))
+      .collect(Collectors.toSet());
   }
 
   String targyak() {
-    EnumSet<TargyEnum> leltar = targySzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);
+    Set<ElemInterface> leltar = elemSzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);
     StringBuilder uzenet;
     switch (this) {
       case LELTAR:

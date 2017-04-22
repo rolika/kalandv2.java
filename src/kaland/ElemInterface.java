@@ -15,5 +15,6 @@ interface ElemInterface {
   EnumSet<AllapotEnum> getAllapot();
   void addAllapot(AllapotEnum allapot);
   void delAllapot(AllapotEnum allapot);
+  void setHely(HelyszinEnum hely);
   
 }

@@ -73,4 +73,9 @@ enum AjtoEnum implements ElemInterface {
     throw new UnsupportedOperationException("Nincs szükség rá.");
   }
 
+  @Override
+  public void setHely(HelyszinEnum hely) {
+    throw new UnsupportedOperationException("Nincs szükség rá.");
+  }
+
 }

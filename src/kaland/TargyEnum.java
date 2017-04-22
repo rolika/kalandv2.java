@@ -58,7 +58,8 @@ enum TargyEnum implements ElemInterface {
     this.allapot.remove(allapot);
   }
 
-  void setHely(HelyszinEnum hely) {
+  @Override
+  public void setHely(HelyszinEnum hely) {
     this.hely = hely;
   }
 

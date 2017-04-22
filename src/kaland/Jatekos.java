@@ -1,6 +1,5 @@
 package kaland;
 
-import com.google.common.collect.Sets;
 import java.util.EnumSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -85,8 +84,8 @@ final class Jatekos {
   String vizsgal(Set<SzotarInterface> parancsszavak) {
     if (parancsszavak.size() == 1) {
       TargyEnum targy = TargyEnum.valueOf(parancsszavak.iterator().next().toString());
-      EnumSet<TargyEnum> lathatoTargyak = helyszin.targySzuro(AllapotEnum.LATHATO);
-      lathatoTargyak.addAll(HelyszinEnum.LELTAR.targySzuro());
+      Set<ElemInterface> lathatoTargyak = helyszin.elemSzuro(AllapotEnum.LATHATO);
+      lathatoTargyak.addAll(HelyszinEnum.LELTAR.elemSzuro());
       if (lathatoTargyak.contains(targy)) {
         targy.addAllapot(AllapotEnum.VIZSGALT);
         return targy.getLeiras();
@@ -146,16 +145,16 @@ final class Jatekos {
   }
 
   private String mozgat(Set<SzotarInterface> parancsszavak, HelyszinEnum forras, HelyszinEnum cel) {
-    EnumSet<TargyEnum> mozgathatoTargyak
-      = forras.targySzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);
-    EnumSet<TargyEnum> mozgatandoTargyak;
+    Set<ElemInterface> mozgathatoTargyak
+      = forras.elemSzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);
+    Set<ElemInterface> mozgatandoTargyak;
     if (parancsszavak.contains(ParancsEnum.MINDEN)) {
       mozgatandoTargyak = mozgathatoTargyak;
     } else {
-      mozgatandoTargyak = Sets.newEnumSet(parancsszavak.stream()
+      mozgatandoTargyak = parancsszavak.stream()
         .filter(szo -> szo.getClass().equals(TargySzotarEnum.class))
         .map(targy -> TargyEnum.valueOf(targy.toString()))
-        .collect(Collectors.toSet()), TargyEnum.class);
+        .collect(Collectors.toSet());
     }
     if (mozgathatoTargyak.containsAll(mozgatandoTargyak)) {
       HelyszinEnum tmp = forras == HelyszinEnum.LELTAR ? HelyszinEnum.KEZ_LE : HelyszinEnum.KEZ_FEL;
