@@ -79,7 +79,7 @@ enum HelyszinEnum {
       .collect(Collectors.toSet());
   }
   
-  Set<ElemInterface> mindenElem() {
+  private Set<ElemInterface> mindenElem() {
     Set<ElemInterface> minden = Sets.newHashSet(TargyEnum.values());
     minden.addAll(Arrays.asList(AjtoEnum.values()));
     //minden.addAll(Arrays.asList(CsapdaEnum.values()));
