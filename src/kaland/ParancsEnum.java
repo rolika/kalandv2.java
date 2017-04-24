@@ -12,7 +12,7 @@ import java.util.Set;
 enum ParancsEnum implements SzotarInterface {
 
   KILEP("kilépek", "abbahagyom", "feladom"),
-  LELTAR("leltár", "leltárt", "leltárba"),
+  LELTAR("leltár", "leltárt"),
   AKTIVAL("bekapcsolom", "felkapcsolom", "használom", "mozgatom", "forgatom"),
   DEAKTIVAL("kikapcsolom", "lekapcsolom"),
   NYIT("kinyitom", "kitárom"),
@@ -26,7 +26,7 @@ enum ParancsEnum implements SzotarInterface {
   ROVID("rövid", "kevés"),
   NORMAL("normál", "rendes"),
   MEGEROSIT("igen", "i"),
-  MINDEN("minden", "mindent", "összeset");
+  MINDEN("minden", "mindent", "mindet", "összeset");
 
   private final Set<String> szinonimak;
 
