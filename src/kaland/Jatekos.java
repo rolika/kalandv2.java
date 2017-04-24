@@ -1,6 +1,7 @@
 package kaland;
 
 import java.util.EnumSet;
+import java.util.NoSuchElementException;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -104,8 +105,27 @@ final class Jatekos {
 
   String nyit(Set<SzotarInterface> parancsszavak) {
     Set<ElemInterface> parancsElemek = Ertelmezo.getElemek();
-    Set<ElemInterface> nyithatoTargyak = helyszin.elemSzuro(AllapotEnum.NYITHATO);
-    return "";
+    ElemInterface nyitandoTargy;
+    try {
+      nyitandoTargy = parancsElemek.stream()
+        .filter(elem -> elem.getAllapot().contains(AllapotEnum.NYITHATO))
+        .iterator().next();
+    } catch (NoSuchElementException e) {
+      nyitandoTargy = null;
+    }
+    if (nyitandoTargy == null) {
+      return UzenetEnum.NEM_ERTEM.toString();
+    } else {
+      Set<ElemInterface> nyithatoTargyak = helyszin.elemSzuro(AllapotEnum.NYITHATO);
+      if (!nyithatoTargyak.contains(nyitandoTargy)) {
+        return UzenetEnum.NEM_ERTEM.toString();
+      } else if (nyitandoTargy.getAllapot().contains(AllapotEnum.NYITVA)) {
+        return UzenetEnum.MAR_NYITVA.toString();
+      } else {
+        nyitandoTargy.addAllapot(AllapotEnum.NYITVA);
+        return UzenetEnum.RENDBEN.toString();
+      }
+    }
   }
 
   String csuk(Set<SzotarInterface> parancsszavak) {

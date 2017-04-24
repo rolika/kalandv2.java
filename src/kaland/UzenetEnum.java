@@ -25,7 +25,7 @@ public enum UzenetEnum {
   NEM_FELVEHETO("Ezt nem tudod felvenni."),
   MAR_NALAD_VAN("Már nálad van."),
   NINCS_NALAD("Nincs nálad ilyesmi."),  
-  NYITVA("Már nyitva van."),
+  MAR_NYITVA("Már nyitva van."),
   CSUKVA("Be van csukva."),
   ZARVA("Be van zárva."),
   FELVEVE("Felvéve"),
