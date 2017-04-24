@@ -4,6 +4,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Parancsértelmező osztály kalandjátékhoz
@@ -95,6 +96,21 @@ class Ertelmezo {
       }
     }
     return null;
+  }
+  
+  static ElemInterface getElem(SzotarInterface szo) {
+    if (szo.getClass().equals(TargySzotarEnum.class)) {
+      return TargyEnum.valueOf(szo.toString());
+    } else if (szo.getClass().equals(AjtoSzotarEnum.class)) {
+      return AjtoEnum.valueOf(szo.toString());
+    }
+    return null; // elvileg nem fordulhat elő
+  }
+  
+  static Set<ElemInterface> getElemek() {
+    return parancsszavak.stream()
+      .map(Ertelmezo::getElem)
+      .collect(Collectors.toSet());
   }
 
 }

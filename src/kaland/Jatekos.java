@@ -83,7 +83,7 @@ final class Jatekos {
 
   String vizsgal(Set<SzotarInterface> parancsszavak) {
     if (parancsszavak.size() == 1) {
-      ElemInterface elem = getElemEnum(parancsszavak.iterator().next());
+      ElemInterface elem = Ertelmezo.getElem(parancsszavak.iterator().next());
       Set<ElemInterface> lathatoTargyak = helyszin.elemSzuro(AllapotEnum.LATHATO);
       lathatoTargyak.addAll(HelyszinEnum.LELTAR.elemSzuro());
       if (lathatoTargyak.contains(elem)) {
@@ -103,7 +103,9 @@ final class Jatekos {
   }
 
   String nyit(Set<SzotarInterface> parancsszavak) {
-    return "Játékos kinyit.";
+    Set<ElemInterface> parancsElemek = Ertelmezo.getElemek();
+    Set<ElemInterface> nyithatoTargyak = helyszin.elemSzuro(AllapotEnum.NYITHATO);
+    return "";
   }
 
   String csuk(Set<SzotarInterface> parancsszavak) {
@@ -140,28 +142,13 @@ final class Jatekos {
   String minden(Set<SzotarInterface> parancsszavak) {
     return UzenetEnum.NEM_ERTEM.toString();
   }
-  
-  private ElemInterface getElemEnum(SzotarInterface szo) {
-    if (szo.getClass().equals(TargySzotarEnum.class)) {
-      return TargyEnum.valueOf(szo.toString());
-    } else if (szo.getClass().equals(AjtoSzotarEnum.class)) {
-      return AjtoEnum.valueOf(szo.toString());
-    }
-    return null; // elvileg nem fordulhat elő
-  }
 
   private String mozgat(Set<SzotarInterface> parancsszavak, HelyszinEnum forras, HelyszinEnum cel) {
     Set<ElemInterface> mozgathatoTargyak
       = forras.elemSzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);
     Set<ElemInterface> mozgatandoTargyak;
-    if (parancsszavak.contains(ParancsEnum.MINDEN)) {
-      mozgatandoTargyak = mozgathatoTargyak;
-    } else {
-      mozgatandoTargyak = parancsszavak.stream()
-        .filter(szo -> szo.getClass().equals(TargySzotarEnum.class))
-        .map(targy -> TargyEnum.valueOf(targy.toString()))
-        .collect(Collectors.toSet());
-    }
+    mozgatandoTargyak = parancsszavak.remove(ParancsEnum.MINDEN)
+      ? mozgathatoTargyak : Ertelmezo.getElemek();
     if (mozgathatoTargyak.containsAll(mozgatandoTargyak)) {
       HelyszinEnum tmp = forras == HelyszinEnum.LELTAR ? HelyszinEnum.KEZ_LE : HelyszinEnum.KEZ_FEL;
       mozgatandoTargyak.forEach(targy -> targy.setHely(tmp));
