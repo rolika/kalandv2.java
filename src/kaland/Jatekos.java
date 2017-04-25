@@ -3,7 +3,6 @@ package kaland;
 import java.util.EnumSet;
 import java.util.NoSuchElementException;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * A játékost megvalósító osztály kalandjátékhoz
@@ -105,26 +104,22 @@ final class Jatekos {
 
   String nyit(Set<SzotarInterface> parancsszavak) {
     Set<ElemInterface> parancsElemek = Ertelmezo.getElemek();
-    ElemInterface nyitandoTargy;
+    ElemInterface nyitandoElem;
     try {
-      nyitandoTargy = parancsElemek.stream()
+      nyitandoElem = parancsElemek.stream()
         .filter(elem -> elem.getAllapot().contains(AllapotEnum.NYITHATO))
         .iterator().next();
     } catch (NoSuchElementException e) {
-      nyitandoTargy = null;
+      return UzenetEnum.NEM_ERTEM.toString(); // nincs nyitható elem
     }
-    if (nyitandoTargy == null) {
+    Set<ElemInterface> nyithatoTargyak = helyszin.elemSzuro(AllapotEnum.NYITHATO);
+    if (!nyithatoTargyak.contains(nyitandoElem)) {
       return UzenetEnum.NEM_ERTEM.toString();
+    } else if (nyitandoElem.getAllapot().contains(AllapotEnum.NYITVA)) {
+      return UzenetEnum.MAR_NYITVA.toString();
     } else {
-      Set<ElemInterface> nyithatoTargyak = helyszin.elemSzuro(AllapotEnum.NYITHATO);
-      if (!nyithatoTargyak.contains(nyitandoTargy)) {
-        return UzenetEnum.NEM_ERTEM.toString();
-      } else if (nyitandoTargy.getAllapot().contains(AllapotEnum.NYITVA)) {
-        return UzenetEnum.MAR_NYITVA.toString();
-      } else {
-        nyitandoTargy.addAllapot(AllapotEnum.NYITVA);
-        return UzenetEnum.RENDBEN.toString();
-      }
+      nyitandoElem.addAllapot(AllapotEnum.NYITVA);
+      return UzenetEnum.RENDBEN.toString();
     }
   }
 
