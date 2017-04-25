@@ -49,13 +49,13 @@ enum TargyEnum implements ElemInterface {
   }
   
   @Override
-  public void addAllapot(AllapotEnum allapot) {
-    this.allapot.add(allapot);
+  public void addAllapot(AllapotEnum ... allapot) {
+    this.allapot.addAll(Arrays.asList(allapot));
   }
   
   @Override
-  public void delAllapot(AllapotEnum allapot) {
-    this.allapot.remove(allapot);
+  public void removeAllapot(AllapotEnum ... allapot) {
+    this.allapot.removeAll(Arrays.asList(allapot));
   }
 
   @Override

@@ -13,8 +13,8 @@ interface ElemInterface {
   String getLeiras();
   EnumSet<HelyszinEnum> getHely();
   EnumSet<AllapotEnum> getAllapot();
-  void addAllapot(AllapotEnum allapot);
-  void delAllapot(AllapotEnum allapot);
+  void addAllapot(AllapotEnum ... allapot);
+  void removeAllapot(AllapotEnum ... allapot);
   void setHely(HelyszinEnum hely);
   TargyEnum getKulcs();
   

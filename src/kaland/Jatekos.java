@@ -123,8 +123,7 @@ final class Jatekos {
     } else if (nyitandoElem.getAllapot().contains(AllapotEnum.NYITVA)) {
       return UzenetEnum.MAR_NYITVA.toString();
     } else {
-      nyitandoElem.delAllapot(AllapotEnum.ZARVA);
-      nyitandoElem.delAllapot(AllapotEnum.CSUKVA);
+      nyitandoElem.removeAllapot(AllapotEnum.ZARVA, AllapotEnum.CSUKVA);
       nyitandoElem.addAllapot(AllapotEnum.NYITVA);
       return UzenetEnum.RENDBEN.toString();
     }
