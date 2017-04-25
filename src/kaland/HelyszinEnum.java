@@ -122,7 +122,8 @@ enum HelyszinEnum {
   
   EnumSet<AllapotEnum> ajto(HelyszinEnum cel) {
     for (AjtoEnum ajto : AjtoEnum.values()) {
-      if (ajto.getHely().contains(cel)) {
+      EnumSet<HelyszinEnum> ajtoHely = ajto.getHely().clone();
+      if (ajtoHely.remove(this) && ajto.getHely().contains(cel)) {
         return ajto.getAllapot();
       }
     }
