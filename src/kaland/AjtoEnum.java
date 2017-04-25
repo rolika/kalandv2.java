@@ -15,7 +15,7 @@ enum AjtoEnum implements ElemInterface {
 
   BEJARATI_AJTO("bejárati ajtó", "Ez egy bejárati ajtó.", TargyEnum.KULCS,
     HelyszinEnum.HAZ_ELOTT, HelyszinEnum.ELOTER,
-    AllapotEnum.CSUKVA, AllapotEnum.LATHATO, AllapotEnum.NYITHATO),
+    AllapotEnum.ZARVA, AllapotEnum.LATHATO, AllapotEnum.NYITHATO),
   SZOBAAJTO("szobaajtó", "Ez egy szobaajtó.", null,
     HelyszinEnum.FOLYOSO, HelyszinEnum.SZOBA,
     AllapotEnum.CSUKVA, AllapotEnum.LATHATO, AllapotEnum.NYITHATO),
