@@ -61,7 +61,8 @@ enum AjtoEnum implements ElemInterface {
     return allapot;
   }
   
-  TargyEnum getKulcs() {
+  @Override
+  public TargyEnum getKulcs() {
     return kulcs;
   }
 

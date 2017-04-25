@@ -110,14 +110,21 @@ final class Jatekos {
         .filter(elem -> elem.getAllapot().contains(AllapotEnum.NYITHATO))
         .iterator().next();
     } catch (NoSuchElementException e) {
-      return UzenetEnum.NEM_ERTEM.toString(); // nincs nyitható elem
-    }
-    Set<ElemInterface> nyithatoTargyak = helyszin.elemSzuro(AllapotEnum.NYITHATO);
-    if (!nyithatoTargyak.contains(nyitandoElem)) {
       return UzenetEnum.NEM_ERTEM.toString();
+    }
+    Set<ElemInterface> nyithatoElemek = helyszin.elemSzuro(AllapotEnum.NYITHATO);
+    if (!nyithatoElemek.contains(nyitandoElem)) {
+      return UzenetEnum.NEM_ERTEM.toString();
+    } else if (nyitandoElem.getAllapot().contains(AllapotEnum.ZARVA) 
+      && !parancsElemek.contains(nyitandoElem.getKulcs())) {
+      return UzenetEnum.ZARVA.toString();
+    } else if (!HelyszinEnum.LELTAR.elemSzuro().contains(nyitandoElem.getKulcs())) {
+      return UzenetEnum.NINCS_NALAD.toString();
     } else if (nyitandoElem.getAllapot().contains(AllapotEnum.NYITVA)) {
       return UzenetEnum.MAR_NYITVA.toString();
     } else {
+      nyitandoElem.delAllapot(AllapotEnum.ZARVA);
+      nyitandoElem.delAllapot(AllapotEnum.CSUKVA);
       nyitandoElem.addAllapot(AllapotEnum.NYITVA);
       return UzenetEnum.RENDBEN.toString();
     }

@@ -63,4 +63,9 @@ enum TargyEnum implements ElemInterface {
     this.hely = hely;
   }
 
+  @Override
+  public TargyEnum getKulcs() {
+    throw new UnsupportedOperationException("Nincs szükség rá.");
+  }
+
 }

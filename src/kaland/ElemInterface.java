@@ -16,5 +16,6 @@ interface ElemInterface {
   void addAllapot(AllapotEnum allapot);
   void delAllapot(AllapotEnum allapot);
   void setHely(HelyszinEnum hely);
+  TargyEnum getKulcs();
   
 }

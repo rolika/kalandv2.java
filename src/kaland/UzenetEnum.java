@@ -26,8 +26,8 @@ public enum UzenetEnum {
   MAR_NALAD_VAN("Már nálad van."),
   NINCS_NALAD("Nincs nálad ilyesmi."),  
   MAR_NYITVA("Már nyitva van."),
-  CSUKVA("Be van csukva."),
-  ZARVA("Be van zárva."),
+  CSUKVA("Be van csukva, előbb nyisd ki."),
+  ZARVA("Be van zárva, kell valami, amivel kinyithatod."),
   FELVEVE("Felvéve"),
   LETEVE("Letéve");
 
