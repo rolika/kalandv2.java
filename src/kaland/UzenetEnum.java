@@ -1,5 +1,7 @@
 package kaland;
 
+import java.util.Arrays;
+
 /**
  * Kalandozás közben előforduló üzenetek
  *
@@ -25,11 +27,13 @@ public enum UzenetEnum {
   NEM_FELVEHETO("Ezt nem tudod felvenni."),
   MAR_NALAD_VAN("Már nálad van."),
   NINCS_NALAD("Nincs nálad ilyesmi."),  
-  MAR_NYITVA("Már nyitva van."),
-  CSUKVA("Be van csukva, előbb nyisd ki."),
-  ZARVA("Be van zárva, kell valami, amivel kinyithatod."),
+  NYITVA("%s nyitva van."),
+  CSUKVA("%s be van csukva."),
+  ZARVA("%s be van zárva."),
   FELVEVE("Felvéve"),
-  LETEVE("Letéve");
+  LETEVE("Letéve"),
+  A("A "),
+  AZ("Az");
 
   private final String uzenet;
 
@@ -40,6 +44,11 @@ public enum UzenetEnum {
   @Override
   public String toString() {
     return uzenet;
+  }
+  
+  String getNevelo(ElemInterface elem) {
+    UzenetEnum nevelo = elem.getNev().startsWith("aáeéiíoóöőuúüű") ? AZ : A;
+    return String.format(this.toString(), nevelo.toString() + elem.getNev());
   }
 
 }
