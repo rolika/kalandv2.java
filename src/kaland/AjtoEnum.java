@@ -16,13 +16,13 @@ enum AjtoEnum implements ElemInterface {
   BEJARATI_AJTO("bejárati ajtó", "Ez egy bejárati ajtó.", TargyEnum.KULCS,
     HelyszinEnum.HAZ_ELOTT, HelyszinEnum.ELOTER,
     AllapotEnum.ZARVA, AllapotEnum.LATHATO, AllapotEnum.NYITHATO),
-  SZOBAAJTO("szobaajtó", "Ez egy szobaajtó.", null,
+  SZOBAAJTO("faajtó", "Ez egy szobaajtó.", TargyEnum.NINCS,
     HelyszinEnum.FOLYOSO, HelyszinEnum.SZOBA,
     AllapotEnum.CSUKVA, AllapotEnum.LATHATO, AllapotEnum.NYITHATO),
-  KONYHAAJTO("konyhaajtó", "Ez egy konyhaajtó.", null,
+  KONYHAAJTO("üvegajtó", "Ez egy konyhaajtó.", TargyEnum.NINCS,
     HelyszinEnum.FOLYOSO, HelyszinEnum.KONYHA,
     AllapotEnum.CSUKVA, AllapotEnum.LATHATO, AllapotEnum.NYITHATO),
-  VAKAJTO("vakajtó", "Ez egy vakajtó", null,
+  VAKAJTO("vakajtó", "Ez egy vakajtó", TargyEnum.NINCS,
     HelyszinEnum.PINCE, HelyszinEnum.REJTETT_PINCE,
     AllapotEnum.ZARVA, AllapotEnum.LATHATO, AllapotEnum.NYITHATO),
   LADA("láda", "Ez egy láda.", TargyEnum.BICSKA,
@@ -30,7 +30,8 @@ enum AjtoEnum implements ElemInterface {
     AllapotEnum.ZARVA, AllapotEnum.LATHATO, AllapotEnum.NYITHATO),
   PORTAL("portál", "Ez egy portál.", TargyEnum.BICSKA,
     HelyszinEnum.REJTETT_PINCE, HelyszinEnum.ODAAT,
-    AllapotEnum.ZARVA, AllapotEnum.LATHATO, AllapotEnum.NYITHATO);
+    AllapotEnum.ZARVA, AllapotEnum.LATHATO, AllapotEnum.NYITHATO),
+  NINCS("semmi", "semmi", TargyEnum.NINCS, HelyszinEnum.NINCS, HelyszinEnum.NINCS);
 
   private final String nev, leiras;
   private final EnumSet<AllapotEnum> allapot;

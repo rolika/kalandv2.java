@@ -15,7 +15,8 @@ enum TargyEnum implements ElemInterface {
   KULCS("kis kulcs", "Egy meglehetősen kicsiny, ám annál jobban kidolgozott kulcs, mely a méretéhez képest meglepően nehéznek tűnik.", HelyszinEnum.HAZ_ELOTT, AllapotEnum.FELVEHETO),
   TAPETA("tapéta", "A tapéta valaha kellemes pasztellzöld színe valami undorító árnyalatú nyálkává változott és felpúposodott az alatta lévő vizes faltól.", HelyszinEnum.ELOTER, AllapotEnum.LATHATO),
   BICSKA("bicska", "A nemesacél pengéjű, szarvasagancs-nyelű zsebkésedet még a nagyapádtól kaptad. Borotvaéles, mint mindig.", HelyszinEnum.LELTAR, AllapotEnum.LATHATO, AllapotEnum.FELVEHETO),
-  ZSEBLAMPA("zseblámpa", "Bivalyerős, mégis takarékos ledlámpa.", HelyszinEnum.LELTAR, AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);
+  ZSEBLAMPA("zseblámpa", "Bivalyerős, mégis takarékos ledlámpa.", HelyszinEnum.LELTAR, AllapotEnum.LATHATO, AllapotEnum.FELVEHETO),
+  NINCS("semmi", "semmi", HelyszinEnum.NINCS);
 
   private final String nev, leiras;
   private HelyszinEnum hely;
