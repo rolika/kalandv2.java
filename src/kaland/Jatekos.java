@@ -50,17 +50,23 @@ final class Jatekos {
     if (ujHelyszin == null) {
       return UzenetEnum.ARRA_NEM.toString();
     } else {
-      EnumSet<AllapotEnum> ajtoAllapot = helyszin.ajto(ujHelyszin);
-      if (ajtoAllapot.contains(AllapotEnum.NINCS) || ajtoAllapot.contains(AllapotEnum.NYITVA)) {
+      AjtoEnum ajto = helyszin.ajto(ujHelyszin);
+      if (ajto == AjtoEnum.NINCS) {
         setHelyszin(ujHelyszin);
         return UzenetEnum.RENDBEN.toString();
       } else {
-        if (ajtoAllapot.contains(AllapotEnum.CSUKVA)) {
-          return UzenetEnum.CSUKVA.toString();
-        } else { // különben be van zárva
-          return UzenetEnum.ZARVA.toString();
+        EnumSet<AllapotEnum> ajtoAllapot = ajto.getAllapot();
+        if (ajtoAllapot.contains(AllapotEnum.NYITVA)) {
+          setHelyszin(ujHelyszin);
+          return UzenetEnum.RENDBEN.toString();
+        } else {
+          if (ajtoAllapot.contains(AllapotEnum.CSUKVA)) {
+            return UzenetEnum.CSUKVA.getNevelo(ajto);
+          } else { // különben be van zárva
+            return UzenetEnum.ZARVA.getNevelo(ajto);
+          }
         }
-      }
+      }      
     }
   }
 
@@ -88,7 +94,18 @@ final class Jatekos {
       lathatoTargyak.addAll(HelyszinEnum.LELTAR.elemSzuro());
       if (lathatoTargyak.contains(elem)) {
         elem.addAllapot(AllapotEnum.VIZSGALT);
-        return elem.getLeiras();
+        StringBuilder leiras = new StringBuilder(elem.getLeiras());
+        if (elem.getAllapot().contains(AllapotEnum.NYITHATO)) {
+          leiras.append('\n');
+        }
+        if (elem.getAllapot().contains(AllapotEnum.NYITVA)) {
+          leiras.append(UzenetEnum.NYITVA.getNevelo(elem));
+        } else if (elem.getAllapot().contains(AllapotEnum.CSUKVA)) {
+          leiras.append(UzenetEnum.CSUKVA.getNevelo(elem));
+        } else if (elem.getAllapot().contains(AllapotEnum.ZARVA)) {
+          leiras.append(UzenetEnum.ZARVA.getNevelo(elem));
+        }
+        return leiras.toString();
       }
     }
     return UzenetEnum.NEM_ERTEM.toString();
@@ -115,13 +132,17 @@ final class Jatekos {
     Set<ElemInterface> nyithatoElemek = helyszin.elemSzuro(AllapotEnum.NYITHATO);
     if (!nyithatoElemek.contains(nyitandoElem)) {
       return UzenetEnum.NEM_ERTEM.toString();
+    } else if (nyitandoElem.getAllapot().contains(AllapotEnum.CSUKVA) ) {      
+      nyitandoElem.removeAllapot(AllapotEnum.CSUKVA);
+      nyitandoElem.addAllapot(AllapotEnum.NYITVA);
+      return UzenetEnum.RENDBEN.toString();
     } else if (nyitandoElem.getAllapot().contains(AllapotEnum.ZARVA) 
       && !parancsElemek.contains(nyitandoElem.getKulcs())) {
-      return UzenetEnum.ZARVA.toString();
+      return UzenetEnum.ZARVA.getNevelo(nyitandoElem);
     } else if (!HelyszinEnum.LELTAR.elemSzuro().contains(nyitandoElem.getKulcs())) {
       return UzenetEnum.NINCS_NALAD.toString();
     } else if (nyitandoElem.getAllapot().contains(AllapotEnum.NYITVA)) {
-      return UzenetEnum.MAR_NYITVA.toString();
+      return UzenetEnum.NYITVA.getNevelo(nyitandoElem);
     } else {
       nyitandoElem.removeAllapot(AllapotEnum.ZARVA, AllapotEnum.CSUKVA);
       nyitandoElem.addAllapot(AllapotEnum.NYITVA);
