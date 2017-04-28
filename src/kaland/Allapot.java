@@ -2,10 +2,10 @@ package kaland;
 
 /**
  * Enum a különböző állapotokhoz - boolean helyett
- * 
+ *
  * @author rolika
  */
-enum AllapotEnum {
+enum Allapot {
   EL, NEM_NYERT, NEM_VESZTETT,
   HOSSZU, ROVID, NORMAL,
   SOTET, VILAGOS, BEJART,

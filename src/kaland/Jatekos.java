@@ -11,238 +11,238 @@ import java.util.Set;
  */
 final class Jatekos {
 
-  private final EnumSet<AllapotEnum> allapot;
-  private HelyszinEnum helyszin;
+  private final EnumSet<Allapot> allapot;
+  private Helyszin helyszin;
 
-  Jatekos(HelyszinEnum helyszin) {
-    allapot = EnumSet.of(AllapotEnum.EL, AllapotEnum.NEM_NYERT, AllapotEnum.NEM_VESZTETT);
+  Jatekos(Helyszin helyszin) {
+    allapot = EnumSet.of(Allapot.EL, Allapot.NEM_NYERT, Allapot.NEM_VESZTETT);
     setHelyszin(helyszin);
   }
 
   boolean jatekbanVan() {
-    return allapot.contains(AllapotEnum.EL) && allapot.contains(AllapotEnum.NEM_NYERT)
-      && allapot.contains(AllapotEnum.NEM_VESZTETT);
+    return allapot.contains(Allapot.EL) && allapot.contains(Allapot.NEM_NYERT)
+      && allapot.contains(Allapot.NEM_VESZTETT);
   }
 
-  HelyszinEnum getHelyszin() {
+  Helyszin getHelyszin() {
     return helyszin;
   }
 
   void setMeghalt() {
-    allapot.remove(AllapotEnum.EL);
+    allapot.remove(Allapot.EL);
   }
 
   void setNyert() {
-    allapot.remove(AllapotEnum.NEM_NYERT);
+    allapot.remove(Allapot.NEM_NYERT);
   }
 
   void setVesztett() {
-    allapot.remove(AllapotEnum.NEM_VESZTETT);
+    allapot.remove(Allapot.NEM_VESZTETT);
   }
 
-  void setHelyszin(HelyszinEnum helyszin) {
+  void setHelyszin(Helyszin helyszin) {
     this.helyszin = helyszin;
-    helyszin.setKijaratok(KijaratEnum.valueOf(helyszin.toString())); // ugyanaz a konstans nevük
+    helyszin.setKijaratok(Kijarat.valueOf(helyszin.toString())); // ugyanaz a konstans nevük
   }
 
-  String megy(IranyEnum irany) {
-    HelyszinEnum ujHelyszin = helyszin.getKijarat(irany);
+  String megy(Irany irany) {
+    Helyszin ujHelyszin = helyszin.getKijarat(irany);
     if (ujHelyszin == null) {
-      return UzenetEnum.ARRA_NEM.toString();
+      return Uzenet.ARRA_NEM.toString();
     } else {
-      AjtoEnum ajto = helyszin.ajto(ujHelyszin);
-      if (ajto == AjtoEnum.NINCS) {
+      Ajto ajto = helyszin.ajto(ujHelyszin);
+      if (ajto == Ajto.NINCS) {
         setHelyszin(ujHelyszin);
-        return UzenetEnum.RENDBEN.toString();
+        return Uzenet.RENDBEN.toString();
       } else {
-        EnumSet<AllapotEnum> ajtoAllapot = ajto.getAllapot();
-        if (ajtoAllapot.contains(AllapotEnum.NYITVA)) {
+        EnumSet<Allapot> ajtoAllapot = ajto.getAllapot();
+        if (ajtoAllapot.contains(Allapot.NYITVA)) {
           setHelyszin(ujHelyszin);
-          return UzenetEnum.RENDBEN.toString();
+          return Uzenet.RENDBEN.toString();
         } else {
-          if (ajtoAllapot.contains(AllapotEnum.CSUKVA)) {
-            return UzenetEnum.CSUKVA.getNevelo(ajto);
+          if (ajtoAllapot.contains(Allapot.CSUKVA)) {
+            return Uzenet.CSUKVA.getNevelo(ajto);
           } else { // különben be van zárva
-            return UzenetEnum.ZARVA.getNevelo(ajto);
+            return Uzenet.ZARVA.getNevelo(ajto);
           }
         }
       }
     }
   }
 
-  String kilep(Set<SzotarInterface> parancsszavak) {
+  String kilep(Set<Szotar> parancsszavak) {
     setVesztett();
-    return UzenetEnum.VISZLAT.toString();
+    return Uzenet.VISZLAT.toString();
   }
 
-  String leltar(Set<SzotarInterface> parancsszavak) {
-    return HelyszinEnum.LELTAR.targyak();
+  String leltar(Set<Szotar> parancsszavak) {
+    return Helyszin.LELTAR.targyak();
   }
 
-  String vesz(Set<SzotarInterface> parancsszavak) {
-    return mozgat(parancsszavak, helyszin, HelyszinEnum.LELTAR);
+  String vesz(Set<Szotar> parancsszavak) {
+    return mozgat(parancsszavak, helyszin, Helyszin.LELTAR);
   }
 
-  String tesz(Set<SzotarInterface> parancsszavak) {
-    return mozgat(parancsszavak, HelyszinEnum.LELTAR, helyszin);
+  String tesz(Set<Szotar> parancsszavak) {
+    return mozgat(parancsszavak, Helyszin.LELTAR, helyszin);
   }
 
-  String vizsgal(Set<SzotarInterface> parancsszavak) {
+  String vizsgal(Set<Szotar> parancsszavak) {
     if (parancsszavak.size() == 1) {
-      ElemInterface elem = Ertelmezo.getElem(parancsszavak.iterator().next());
-      Set<ElemInterface> lathatoTargyak = helyszin.elemSzuro(AllapotEnum.LATHATO);
-      lathatoTargyak.addAll(HelyszinEnum.LELTAR.elemSzuro());
+      Elem elem = Ertelmezo.getElem(parancsszavak.iterator().next());
+      Set<Elem> lathatoTargyak = helyszin.elemSzuro(Allapot.LATHATO);
+      lathatoTargyak.addAll(Helyszin.LELTAR.elemSzuro());
       if (lathatoTargyak.contains(elem)) {
-        elem.addAllapot(AllapotEnum.VIZSGALT);
+        elem.addAllapot(Allapot.VIZSGALT);
         StringBuilder leiras = new StringBuilder(elem.getLeiras());
-        if (elem.getAllapot().contains(AllapotEnum.NYITHATO)) {
+        if (elem.getAllapot().contains(Allapot.NYITHATO)) {
           leiras.append('\n');
         }
-        if (elem.getAllapot().contains(AllapotEnum.NYITVA)) {
-          leiras.append(UzenetEnum.NYITVA.getNevelo(elem));
-        } else if (elem.getAllapot().contains(AllapotEnum.CSUKVA)) {
-          leiras.append(UzenetEnum.CSUKVA.getNevelo(elem));
-        } else if (elem.getAllapot().contains(AllapotEnum.ZARVA)) {
-          leiras.append(UzenetEnum.ZARVA.getNevelo(elem));
+        if (elem.getAllapot().contains(Allapot.NYITVA)) {
+          leiras.append(Uzenet.NYITVA.getNevelo(elem));
+        } else if (elem.getAllapot().contains(Allapot.CSUKVA)) {
+          leiras.append(Uzenet.CSUKVA.getNevelo(elem));
+        } else if (elem.getAllapot().contains(Allapot.ZARVA)) {
+          leiras.append(Uzenet.ZARVA.getNevelo(elem));
         }
         return leiras.toString();
       }
     }
-    return UzenetEnum.NEM_ERTEM.toString();
+    return Uzenet.NEM_ERTEM.toString();
   }
 
-  String aktival(Set<SzotarInterface> parancsszavak) {
+  String aktival(Set<Szotar> parancsszavak) {
     return "Játékos aktivál.";
   }
 
-  String deaktival(Set<SzotarInterface> parancsszavak) {
+  String deaktival(Set<Szotar> parancsszavak) {
     return "Játékos deaktivál.";
   }
 
-  String nyit(Set<SzotarInterface> parancsszavak) {
-    Set<ElemInterface> parancsElemek = Ertelmezo.getElemek();
-    ElemInterface nyitandoElem;
+  String nyit(Set<Szotar> parancsszavak) {
+    Set<Elem> parancsElemek = Ertelmezo.getElemek();
+    Elem nyitandoElem;
     try {
       nyitandoElem = parancsElemek.stream()
-        .filter(elem -> elem.getAllapot().contains(AllapotEnum.NYITHATO))
+        .filter(elem -> elem.getAllapot().contains(Allapot.NYITHATO))
         .iterator().next();
     } catch (NoSuchElementException e) {
-      return UzenetEnum.NEM_ERTEM.toString();
+      return Uzenet.NEM_ERTEM.toString();
     }
-    Set<ElemInterface> nyithatoElemek = helyszin.elemSzuro(AllapotEnum.NYITHATO);
+    Set<Elem> nyithatoElemek = helyszin.elemSzuro(Allapot.NYITHATO);
     if (!nyithatoElemek.contains(nyitandoElem)) {
-      return UzenetEnum.NEM_ERTEM.toString();
-    } else if (nyitandoElem.getAllapot().contains(AllapotEnum.CSUKVA)) {
-      nyitandoElem.removeAllapot(AllapotEnum.CSUKVA);
-      nyitandoElem.addAllapot(AllapotEnum.NYITVA);
-      return UzenetEnum.RENDBEN.toString();
-    } else if (nyitandoElem.getAllapot().contains(AllapotEnum.ZARVA)
+      return Uzenet.NEM_ERTEM.toString();
+    } else if (nyitandoElem.getAllapot().contains(Allapot.CSUKVA)) {
+      nyitandoElem.removeAllapot(Allapot.CSUKVA);
+      nyitandoElem.addAllapot(Allapot.NYITVA);
+      return Uzenet.RENDBEN.toString();
+    } else if (nyitandoElem.getAllapot().contains(Allapot.ZARVA)
       && !parancsElemek.contains(nyitandoElem.getKulcs())) {
-      return UzenetEnum.MIVEL.toString();
-    } else if (!HelyszinEnum.LELTAR.elemSzuro().contains(nyitandoElem.getKulcs())) {
-      return UzenetEnum.NINCS_NALAD.toString();
-    } else if (nyitandoElem.getAllapot().contains(AllapotEnum.NYITVA)) {
-      return UzenetEnum.NYITVA.getNevelo(nyitandoElem);
+      return Uzenet.MIVEL.toString();
+    } else if (!Helyszin.LELTAR.elemSzuro().contains(nyitandoElem.getKulcs())) {
+      return Uzenet.NINCS_NALAD.toString();
+    } else if (nyitandoElem.getAllapot().contains(Allapot.NYITVA)) {
+      return Uzenet.NYITVA.getNevelo(nyitandoElem);
     } else {
-      nyitandoElem.removeAllapot(AllapotEnum.ZARVA, AllapotEnum.CSUKVA);
-      nyitandoElem.addAllapot(AllapotEnum.NYITVA);
-      return UzenetEnum.RENDBEN.toString();
+      nyitandoElem.removeAllapot(Allapot.ZARVA, Allapot.CSUKVA);
+      nyitandoElem.addAllapot(Allapot.NYITVA);
+      return Uzenet.RENDBEN.toString();
     }
   }
 
-  String csuk(Set<SzotarInterface> parancsszavak) {
-    Set<ElemInterface> parancsElemek = Ertelmezo.getElemek();
-    ElemInterface csukandoElem;
+  String csuk(Set<Szotar> parancsszavak) {
+    Set<Elem> parancsElemek = Ertelmezo.getElemek();
+    Elem csukandoElem;
     try {
       csukandoElem = parancsElemek.stream()
-        .filter(elem -> elem.getAllapot().contains(AllapotEnum.NYITHATO))
+        .filter(elem -> elem.getAllapot().contains(Allapot.NYITHATO))
         .iterator().next();
     } catch (NoSuchElementException e) {
-      return UzenetEnum.NEM_ERTEM.toString();
+      return Uzenet.NEM_ERTEM.toString();
     }
-    Set<ElemInterface> csukhatoElemek = helyszin.elemSzuro(AllapotEnum.NYITHATO);
+    Set<Elem> csukhatoElemek = helyszin.elemSzuro(Allapot.NYITHATO);
     if (!csukhatoElemek.contains(csukandoElem)) {
-      return UzenetEnum.NEM_ERTEM.toString();
-    } else if (csukandoElem.getAllapot().contains(AllapotEnum.NYITVA)) {
-      csukandoElem.removeAllapot(AllapotEnum.NYITVA);
-      csukandoElem.addAllapot(AllapotEnum.CSUKVA);
-      return UzenetEnum.RENDBEN.toString();
+      return Uzenet.NEM_ERTEM.toString();
+    } else if (csukandoElem.getAllapot().contains(Allapot.NYITVA)) {
+      csukandoElem.removeAllapot(Allapot.NYITVA);
+      csukandoElem.addAllapot(Allapot.CSUKVA);
+      return Uzenet.RENDBEN.toString();
     } else {
-      return UzenetEnum.CSUKVA.getNevelo(csukandoElem);
+      return Uzenet.CSUKVA.getNevelo(csukandoElem);
     }
   }
 
-  String zar(Set<SzotarInterface> parancsszavak) {
-    Set<ElemInterface> parancsElemek = Ertelmezo.getElemek();
-    ElemInterface zarandoElem;
+  String zar(Set<Szotar> parancsszavak) {
+    Set<Elem> parancsElemek = Ertelmezo.getElemek();
+    Elem zarandoElem;
     try {
       zarandoElem = parancsElemek.stream()
-        .filter(elem -> elem.getAllapot().contains(AllapotEnum.NYITHATO))
+        .filter(elem -> elem.getAllapot().contains(Allapot.NYITHATO))
         .iterator().next();
     } catch (NoSuchElementException e) {
-      return UzenetEnum.NEM_ERTEM.toString();
+      return Uzenet.NEM_ERTEM.toString();
     }
-    Set<ElemInterface> zarhatoElemek = helyszin.elemSzuro(AllapotEnum.NYITHATO);
+    Set<Elem> zarhatoElemek = helyszin.elemSzuro(Allapot.NYITHATO);
     if (!zarhatoElemek.contains(zarandoElem)) {
-      return UzenetEnum.NEM_ERTEM.toString();
-    } else if (zarandoElem.getKulcs() == TargyEnum.NINCS) {
-      return UzenetEnum.NEM_LEHET.toString();
+      return Uzenet.NEM_ERTEM.toString();
+    } else if (zarandoElem.getKulcs() == Targy.NINCS) {
+      return Uzenet.NEM_LEHET.toString();
     } else if (!parancsElemek.contains(zarandoElem.getKulcs())) {
-      return UzenetEnum.MIVEL.toString();
-    } else if (!HelyszinEnum.LELTAR.elemSzuro().contains(zarandoElem.getKulcs())) {
-      return UzenetEnum.NINCS_NALAD.toString();
-    } else if ((zarandoElem.getAllapot().contains(AllapotEnum.NYITVA)
-      || zarandoElem.getAllapot().contains(AllapotEnum.CSUKVA))) {
-      zarandoElem.removeAllapot(AllapotEnum.NYITVA, AllapotEnum.CSUKVA);
-      zarandoElem.addAllapot(AllapotEnum.ZARVA);
-      return UzenetEnum.RENDBEN.toString();
+      return Uzenet.MIVEL.toString();
+    } else if (!Helyszin.LELTAR.elemSzuro().contains(zarandoElem.getKulcs())) {
+      return Uzenet.NINCS_NALAD.toString();
+    } else if ((zarandoElem.getAllapot().contains(Allapot.NYITVA)
+      || zarandoElem.getAllapot().contains(Allapot.CSUKVA))) {
+      zarandoElem.removeAllapot(Allapot.NYITVA, Allapot.CSUKVA);
+      zarandoElem.addAllapot(Allapot.ZARVA);
+      return Uzenet.RENDBEN.toString();
     } else {
-      return UzenetEnum.ZARVA.getNevelo(zarandoElem);
+      return Uzenet.ZARVA.getNevelo(zarandoElem);
     }
   }
 
-  String tamad(Set<SzotarInterface> parancsszavak) {
+  String tamad(Set<Szotar> parancsszavak) {
     return "Játékos támad.";
   }
 
-  String hosszu(Set<SzotarInterface> parancsszavak) {
-    helyszin.setLeiroMod(AllapotEnum.HOSSZU);
-    return UzenetEnum.RENDBEN.toString();
+  String hosszu(Set<Szotar> parancsszavak) {
+    helyszin.setLeiroMod(Allapot.HOSSZU);
+    return Uzenet.RENDBEN.toString();
   }
 
-  String rovid(Set<SzotarInterface> parancsszavak) {
-    helyszin.setLeiroMod(AllapotEnum.ROVID);
-    return UzenetEnum.RENDBEN.toString();
+  String rovid(Set<Szotar> parancsszavak) {
+    helyszin.setLeiroMod(Allapot.ROVID);
+    return Uzenet.RENDBEN.toString();
   }
 
-  String normal(Set<SzotarInterface> parancsszavak) {
-    helyszin.setLeiroMod(AllapotEnum.NORMAL);
-    return UzenetEnum.RENDBEN.toString();
+  String normal(Set<Szotar> parancsszavak) {
+    helyszin.setLeiroMod(Allapot.NORMAL);
+    return Uzenet.RENDBEN.toString();
   }
 
-  String megerosit(Set<SzotarInterface> parancsszavak) {
+  String megerosit(Set<Szotar> parancsszavak) {
     return "Játékos megerősít.";
   }
 
-  String minden(Set<SzotarInterface> parancsszavak) {
-    return UzenetEnum.NEM_ERTEM.toString();
+  String minden(Set<Szotar> parancsszavak) {
+    return Uzenet.NEM_ERTEM.toString();
   }
 
-  private String mozgat(Set<SzotarInterface> parancsszavak, HelyszinEnum forras, HelyszinEnum cel) {
-    Set<ElemInterface> mozgathatoTargyak
-      = forras.elemSzuro(AllapotEnum.LATHATO, AllapotEnum.FELVEHETO);
-    Set<ElemInterface> mozgatandoTargyak;
-    mozgatandoTargyak = parancsszavak.remove(ParancsEnum.MINDEN)
+  private String mozgat(Set<Szotar> parancsszavak, Helyszin forras, Helyszin cel) {
+    Set<Elem> mozgathatoTargyak
+      = forras.elemSzuro(Allapot.LATHATO, Allapot.FELVEHETO);
+    Set<Elem> mozgatandoTargyak;
+    mozgatandoTargyak = parancsszavak.remove(Parancs.MINDEN)
       ? mozgathatoTargyak : Ertelmezo.getElemek();
     if (mozgathatoTargyak.containsAll(mozgatandoTargyak)) {
-      HelyszinEnum tmp = forras == HelyszinEnum.LELTAR ? HelyszinEnum.KEZ_LE : HelyszinEnum.KEZ_FEL;
+      Helyszin tmp = forras == Helyszin.LELTAR ? Helyszin.KEZ_LE : Helyszin.KEZ_FEL;
       mozgatandoTargyak.forEach(targy -> targy.setHely(tmp));
       String uzenet = tmp.targyak();
       mozgatandoTargyak.forEach(targy -> targy.setHely(cel));
-      mozgatandoTargyak.forEach(targy -> targy.addAllapot(AllapotEnum.VIZSGALT));
+      mozgatandoTargyak.forEach(targy -> targy.addAllapot(Allapot.VIZSGALT));
       return uzenet;
     } else {
-      return UzenetEnum.NEM_ERTEM.toString();
+      return Uzenet.NEM_ERTEM.toString();
     }
   }
 

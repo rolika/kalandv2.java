@@ -9,7 +9,7 @@ import java.util.Set;
  *
  * @author rolika
  */
-enum IranyEnum implements SzotarInterface {
+enum Irany implements Szotar {
 
   ESZAK("é", "észak", "északra", "északnak"),
   KELET("k", "kelet", "keletre", "keletnek"),
@@ -21,12 +21,12 @@ enum IranyEnum implements SzotarInterface {
 
   private final Set<String> szinonimak;
 
-  private IranyEnum(String... szinonimak) {
+  private Irany(String... szinonimak) {
     this.szinonimak = new HashSet<>(Arrays.asList(szinonimak));
   }
 
   @Override
-  public SzotarInterface getSzoEnum(String szo) {
+  public Szotar getSzoEnum(String szo) {
     return szinonimak.contains(szo) ? this : null;
   }
 }

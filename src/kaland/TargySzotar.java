@@ -9,7 +9,7 @@ import java.util.Set;
  *
  * @author rolika
  */
-enum TargySzotarEnum implements SzotarInterface {
+enum TargySzotar implements Szotar {
   LABTORLO("lábtörlő", "lábtörlőt", "lábtörlővel"),
   KULCS("kulcs", "kulcsot", "kulccsal"),
   TAPETA("tapéta", "tapétát", "tapétával", "fal", "falat", "fallal"),
@@ -18,12 +18,12 @@ enum TargySzotarEnum implements SzotarInterface {
 
   private final Set<String> szinonimak;
 
-  private TargySzotarEnum(String... szinonimak) {
+  private TargySzotar(String... szinonimak) {
     this.szinonimak = new HashSet<>(Arrays.asList(szinonimak));
   }
 
   @Override
-  public SzotarInterface getSzoEnum(String szo) {
+  public Szotar getSzoEnum(String szo) {
     return szinonimak.contains(szo) ? this : null;
   }
 }

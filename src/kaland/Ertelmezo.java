@@ -13,44 +13,44 @@ import java.util.stream.Collectors;
  */
 class Ertelmezo {
 
-  private static Set<SzotarInterface> parancsszavak;
+  private static Set<Szotar> parancsszavak;
 
-  static Set<SzotarInterface> szetbont(String parancs) {
+  static Set<Szotar> szetbont(String parancs) {
     parancsszavak = new HashSet<>();
     parancs = parancs.replaceAll(",", "");
     parancs = parancs.replaceAll("\\s+", " ");
     for (String szo : parancs.toLowerCase().split("\\s")) {
-      SzotarInterface szoEnum;
+      Szotar szoEnum;
       // minden egyes szóra
       // először megnézi az irányokat
-      for (SzotarInterface parancsszo : IranyEnum.values()) {
+      for (Szotar parancsszo : Irany.values()) {
         szoEnum = parancsszo.getSzoEnum(szo);
         if (szoEnum != null) {
           parancsszavak.add(szoEnum);
         }
       }
       // aztán a parancsokat
-      for (SzotarInterface parancsszo : ParancsEnum.values()) {
+      for (Szotar parancsszo : Parancs.values()) {
         szoEnum = parancsszo.getSzoEnum(szo);
         if (szoEnum != null) {
           parancsszavak.add(szoEnum);
         }
       }
       // majd a tárgyakat,
-      for (SzotarInterface targy : TargySzotarEnum.values()) {
+      for (Szotar targy : TargySzotar.values()) {
         szoEnum = targy.getSzoEnum(szo);
         if (szoEnum != null) {
           parancsszavak.add(szoEnum);
         }
-      }      
+      }
       // ajtókat,
-      for (SzotarInterface ajto : AjtoSzotarEnum.values()) {
+      for (Szotar ajto : AjtoSzotar.values()) {
         szoEnum = ajto.getSzoEnum(szo);
         if (szoEnum != null) {
           parancsszavak.add(szoEnum);
         }
       }
-      
+
       // csapdákat,
       // végül az ellenségeket
     }
@@ -58,7 +58,7 @@ class Ertelmezo {
   }
 
   static Object vegrehajt(Jatekos jatekos) {
-    IranyEnum irany = (IranyEnum) mozgasiSzandek();
+    Irany irany = (Irany) mozgasiSzandek();
     Method parancs = cselekvesiSzandek(jatekos);
     if (irany != null) {
       return jatekos.megy(irany);
@@ -69,12 +69,12 @@ class Ertelmezo {
         return null;
       }
     } else {
-      return UzenetEnum.NEM_ERTEM.toString();
+      return Uzenet.NEM_ERTEM.toString();
     }
   }
 
-  static SzotarInterface mozgasiSzandek() {
-    for (IranyEnum parancsszo : IranyEnum.values()) {
+  static Szotar mozgasiSzandek() {
+    for (Irany parancsszo : Irany.values()) {
       if (parancsszavak.contains(parancsszo)) {
         return parancsszo;
       }
@@ -83,7 +83,7 @@ class Ertelmezo {
   }
 
   static Method cselekvesiSzandek(Jatekos jatekos) {
-    for (ParancsEnum parancsszo : ParancsEnum.values()) {
+    for (Parancs parancsszo : Parancs.values()) {
       if (parancsszavak.remove(parancsszo)) {
         try {
           String kezelo = parancsszo.toString().toLowerCase();
@@ -97,17 +97,17 @@ class Ertelmezo {
     }
     return null;
   }
-  
-  static ElemInterface getElem(SzotarInterface szo) {
-    if (szo.getClass().equals(TargySzotarEnum.class)) {
-      return TargyEnum.valueOf(szo.toString());
-    } else if (szo.getClass().equals(AjtoSzotarEnum.class)) {
-      return AjtoEnum.valueOf(szo.toString());
+
+  static Elem getElem(Szotar szo) {
+    if (szo.getClass().equals(TargySzotar.class)) {
+      return Targy.valueOf(szo.toString());
+    } else if (szo.getClass().equals(AjtoSzotar.class)) {
+      return Ajto.valueOf(szo.toString());
     }
     return null; // elvileg nem fordulhat elő
   }
-  
-  static Set<ElemInterface> getElemek() {
+
+  static Set<Elem> getElemek() {
     return parancsszavak.stream()
       .map(Ertelmezo::getElem)
       .collect(Collectors.toSet());

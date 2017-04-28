@@ -9,7 +9,7 @@ import java.util.Set;
  *
  * @author rolika
  */
-enum ParancsEnum implements SzotarInterface {
+enum Parancs implements Szotar {
 
   KILEP("kilépek", "abbahagyom", "feladom"),
   LELTAR("leltár", "leltárt"),
@@ -30,12 +30,12 @@ enum ParancsEnum implements SzotarInterface {
 
   private final Set<String> szinonimak;
 
-  private ParancsEnum(String... szinonimak) {
+  private Parancs(String... szinonimak) {
     this.szinonimak = new HashSet<>(Arrays.asList(szinonimak));
   }
 
   @Override
-  public SzotarInterface getSzoEnum(String szo) {
+  public Szotar getSzoEnum(String szo) {
     return szinonimak.contains(szo) ? this : null;
   }
 }

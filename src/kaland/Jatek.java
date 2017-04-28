@@ -8,7 +8,7 @@ package kaland;
  */
 class Jatek {
 
-  private static final HelyszinEnum KEZDO_HELYSZIN = HelyszinEnum.HAZ_ELOTT;
+  private static final Helyszin KEZDO_HELYSZIN = Helyszin.HAZ_ELOTT;
 
   private final Jatekos jatekos;
   private StringBuilder szoveg;
@@ -29,8 +29,8 @@ class Jatek {
   String helyzet() {
     szkript();
     szoveg = new StringBuilder();
-    if (jatekos.getHelyszin().getAllapot().contains(AllapotEnum.SOTET)) {
-      szoveg.append(UzenetEnum.SOTET);
+    if (jatekos.getHelyszin().getAllapot().contains(Allapot.SOTET)) {
+      szoveg.append(Uzenet.SOTET);
     } else {
       szoveg.append(jatekos.getHelyszin().getLeiras());
       String targyak = jatekos.getHelyszin().targyak();
@@ -51,8 +51,8 @@ class Jatek {
    * A játékos tevékenysége következtében beálló, előre meghatározott változások.
    */
   private void szkript() {
-    if (TargyEnum.LABTORLO.getAllapot().contains(AllapotEnum.VIZSGALT)) { // kulcs a lábtörlő alatt
-      TargyEnum.KULCS.addAllapot(AllapotEnum.LATHATO);
+    if (Targy.LABTORLO.getAllapot().contains(Allapot.VIZSGALT)) { // kulcs a lábtörlő alatt
+      Targy.KULCS.addAllapot(Allapot.LATHATO);
     }
   }
 

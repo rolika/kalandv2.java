@@ -7,7 +7,7 @@ import java.util.Arrays;
  *
  * @author rolika
  */
-public enum UzenetEnum {
+public enum Uzenet {
 
   ARRA_NEM("Arra nem mehetsz."),
   RENDBEN("Rendben."),
@@ -26,7 +26,7 @@ public enum UzenetEnum {
   NEM_LATHATO("Nincs itt ilyesmi."),
   NEM_LEHET("Nem lehet."),
   MAR_NALAD_VAN("Már nálad van."),
-  NINCS_NALAD("Nincs nálad ilyesmi."),  
+  NINCS_NALAD("Nincs nálad ilyesmi."),
   NYITVA("%s nyitva van."),
   CSUKVA("%s be van csukva."),
   ZARVA("%s be van zárva."),
@@ -38,7 +38,7 @@ public enum UzenetEnum {
 
   private final String uzenet;
 
-  private UzenetEnum(String uzenet) {
+  private Uzenet(String uzenet) {
     this.uzenet = uzenet;
   }
 
@@ -46,9 +46,9 @@ public enum UzenetEnum {
   public String toString() {
     return uzenet;
   }
-  
-  String getNevelo(ElemInterface elem) {
-    UzenetEnum nevelo = elem.getNev().startsWith("aáeéiíoóöőuúüű") ? AZ : A;
+
+  String getNevelo(Elem elem) {
+    Uzenet nevelo = elem.getNev().startsWith("aáeéiíoóöőuúüű") ? AZ : A;
     return String.format(this.toString(), nevelo.toString() + elem.getNev());
   }
 

@@ -8,7 +8,7 @@ import java.util.Set;
  *
  * @author rolika
  */
-enum AjtoSzotarEnum implements SzotarInterface {
+enum AjtoSzotar implements Szotar {
 
   BEJARATI_AJTO("ajtó", "ajtót", "ajtóval"),
   SZOBAAJTO("szobaajtó", "szobaajtót", "szobaajtóval", "faajtó", "faajtót", "faajtóval"),
@@ -19,13 +19,13 @@ enum AjtoSzotarEnum implements SzotarInterface {
 
   private final Set<String> szinonimak;
 
-  private AjtoSzotarEnum(String... szinonimak) {
+  private AjtoSzotar(String... szinonimak) {
     this.szinonimak = new HashSet<>(Arrays.asList(szinonimak));
   }
-  
+
   @Override
-  public SzotarInterface getSzoEnum(String szo) {
+  public Szotar getSzoEnum(String szo) {
     return szinonimak.contains(szo) ? this : null;
   }
-  
+
 }
