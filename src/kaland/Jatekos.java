@@ -151,7 +151,25 @@ final class Jatekos {
   }
 
   String csuk(Set<SzotarInterface> parancsszavak) {
-    return "Játékos becsuk.";
+    Set<ElemInterface> parancsElemek = Ertelmezo.getElemek();
+    ElemInterface csukandoElem;
+    try {
+      csukandoElem = parancsElemek.stream()
+        .filter(elem -> elem.getAllapot().contains(AllapotEnum.NYITHATO))
+        .iterator().next();
+    } catch (NoSuchElementException e) {
+      return UzenetEnum.NEM_ERTEM.toString();
+    }
+    Set<ElemInterface> csukhatoElemek = helyszin.elemSzuro(AllapotEnum.NYITHATO);
+    if (!csukhatoElemek.contains(csukandoElem)) {
+      return UzenetEnum.NEM_ERTEM.toString();
+    } else if (csukandoElem.getAllapot().contains(AllapotEnum.NYITVA) ) {      
+      csukandoElem.removeAllapot(AllapotEnum.NYITVA);
+      csukandoElem.addAllapot(AllapotEnum.CSUKVA);
+      return UzenetEnum.RENDBEN.toString();
+    } else {
+      return UzenetEnum.CSUKVA.getNevelo(csukandoElem);
+    } 
   }
 
   String zar(Set<SzotarInterface> parancsszavak) {
