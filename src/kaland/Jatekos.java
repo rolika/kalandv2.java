@@ -66,7 +66,7 @@ final class Jatekos {
             return UzenetEnum.ZARVA.getNevelo(ajto);
           }
         }
-      }      
+      }
     }
   }
 
@@ -132,13 +132,13 @@ final class Jatekos {
     Set<ElemInterface> nyithatoElemek = helyszin.elemSzuro(AllapotEnum.NYITHATO);
     if (!nyithatoElemek.contains(nyitandoElem)) {
       return UzenetEnum.NEM_ERTEM.toString();
-    } else if (nyitandoElem.getAllapot().contains(AllapotEnum.CSUKVA) ) {      
+    } else if (nyitandoElem.getAllapot().contains(AllapotEnum.CSUKVA)) {
       nyitandoElem.removeAllapot(AllapotEnum.CSUKVA);
       nyitandoElem.addAllapot(AllapotEnum.NYITVA);
       return UzenetEnum.RENDBEN.toString();
-    } else if (nyitandoElem.getAllapot().contains(AllapotEnum.ZARVA) 
+    } else if (nyitandoElem.getAllapot().contains(AllapotEnum.ZARVA)
       && !parancsElemek.contains(nyitandoElem.getKulcs())) {
-      return UzenetEnum.ZARVA.getNevelo(nyitandoElem);
+      return UzenetEnum.MIVEL.toString();
     } else if (!HelyszinEnum.LELTAR.elemSzuro().contains(nyitandoElem.getKulcs())) {
       return UzenetEnum.NINCS_NALAD.toString();
     } else if (nyitandoElem.getAllapot().contains(AllapotEnum.NYITVA)) {
@@ -163,17 +163,42 @@ final class Jatekos {
     Set<ElemInterface> csukhatoElemek = helyszin.elemSzuro(AllapotEnum.NYITHATO);
     if (!csukhatoElemek.contains(csukandoElem)) {
       return UzenetEnum.NEM_ERTEM.toString();
-    } else if (csukandoElem.getAllapot().contains(AllapotEnum.NYITVA) ) {      
+    } else if (csukandoElem.getAllapot().contains(AllapotEnum.NYITVA)) {
       csukandoElem.removeAllapot(AllapotEnum.NYITVA);
       csukandoElem.addAllapot(AllapotEnum.CSUKVA);
       return UzenetEnum.RENDBEN.toString();
     } else {
       return UzenetEnum.CSUKVA.getNevelo(csukandoElem);
-    } 
+    }
   }
 
   String zar(Set<SzotarInterface> parancsszavak) {
-    return "Játékos bezár.";
+    Set<ElemInterface> parancsElemek = Ertelmezo.getElemek();
+    ElemInterface zarandoElem;
+    try {
+      zarandoElem = parancsElemek.stream()
+        .filter(elem -> elem.getAllapot().contains(AllapotEnum.NYITHATO))
+        .iterator().next();
+    } catch (NoSuchElementException e) {
+      return UzenetEnum.NEM_ERTEM.toString();
+    }
+    Set<ElemInterface> zarhatoElemek = helyszin.elemSzuro(AllapotEnum.NYITHATO);
+    if (!zarhatoElemek.contains(zarandoElem)) {
+      return UzenetEnum.NEM_ERTEM.toString();
+    } else if (zarandoElem.getKulcs() == TargyEnum.NINCS) {
+      return UzenetEnum.NEM_LEHET.toString();
+    } else if (!parancsElemek.contains(zarandoElem.getKulcs())) {
+      return UzenetEnum.MIVEL.toString();
+    } else if (!HelyszinEnum.LELTAR.elemSzuro().contains(zarandoElem.getKulcs())) {
+      return UzenetEnum.NINCS_NALAD.toString();
+    } else if ((zarandoElem.getAllapot().contains(AllapotEnum.NYITVA)
+      || zarandoElem.getAllapot().contains(AllapotEnum.CSUKVA))) {
+      zarandoElem.removeAllapot(AllapotEnum.NYITVA, AllapotEnum.CSUKVA);
+      zarandoElem.addAllapot(AllapotEnum.ZARVA);
+      return UzenetEnum.RENDBEN.toString();
+    } else {
+      return UzenetEnum.ZARVA.getNevelo(zarandoElem);
+    }
   }
 
   String tamad(Set<SzotarInterface> parancsszavak) {
