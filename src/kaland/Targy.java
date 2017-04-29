@@ -11,21 +11,23 @@ import java.util.EnumSet;
  * @author rolika
  */
 enum Targy implements Elem {
-  LABTORLO("lábtörlő", "Ilyen elnyűtt és koszos lábtörlőt még soha nem láttál. Valamilyen növényi rostból fonták, de az nagyon régen lehetett.", Helyszin.HAZ_ELOTT, Allapot.LATHATO, Allapot.FELVEHETO),
-  KULCS("kis kulcs", "Egy meglehetősen kicsiny, ám annál jobban kidolgozott kulcs, mely a méretéhez képest meglepően nehéznek tűnik.", Helyszin.HAZ_ELOTT, Allapot.FELVEHETO),
-  TAPETA("tapéta", "A tapéta valaha kellemes pasztellzöld színe valami undorító árnyalatú nyálkává változott és felpúposodott az alatta lévő vizes faltól.", Helyszin.ELOTER, Allapot.LATHATO),
-  BICSKA("bicska", "A nemesacél pengéjű, szarvasagancs-nyelű zsebkésedet még a nagyapádtól kaptad. Borotvaéles, mint mindig.", Helyszin.LELTAR, Allapot.LATHATO, Allapot.FELVEHETO),
-  ZSEBLAMPA("zseblámpa", "Bivalyerős, mégis takarékos ledlámpa.", Helyszin.LELTAR, Allapot.LATHATO, Allapot.FELVEHETO),
-  NINCS("semmi", "semmi", Helyszin.NINCS);
+  NINCS("semmi", "semmi", Helyszin.NINCS, null),
+  LABTORLO("lábtörlő", "Ilyen elnyűtt és koszos lábtörlőt még soha nem láttál. Valamilyen növényi rostból fonták, de az nagyon régen lehetett.", Helyszin.HAZ_ELOTT, NINCS, Allapot.LATHATO, Allapot.FELVEHETO),
+  KULCS("kis kulcs", "Egy meglehetősen kicsiny, ám annál jobban kidolgozott kulcs, mely a méretéhez képest meglepően nehéznek tűnik.", Helyszin.HAZ_ELOTT, NINCS, Allapot.FELVEHETO),
+  TAPETA("tapéta", "A tapéta valaha kellemes pasztellzöld színe valami undorító árnyalatú nyálkává változott és felpúposodott az alatta lévő vizes faltól.", Helyszin.ELOTER, NINCS, Allapot.LATHATO),
+  BICSKA("bicska", "A nemesacél pengéjű, szarvasagancs-nyelű zsebkésedet még a nagyapádtól kaptad. Borotvaéles, mint mindig.", Helyszin.LELTAR, NINCS, Allapot.LATHATO, Allapot.FELVEHETO),
+  ZSEBLAMPA("zseblámpa", "Bivalyerős, mégis takarékos ledlámpa.", Helyszin.LELTAR, NINCS, Allapot.LATHATO, Allapot.FELVEHETO);
 
   private final String nev, leiras;
   private Helyszin hely;
+  private final Targy kulcs;
   private final EnumSet<Allapot> allapot;
 
-  private Targy(String nev, String leiras, Helyszin hely, Allapot... allapot) {
+  private Targy(String nev, String leiras, Helyszin hely, Targy kulcs, Allapot... allapot) {
     this.nev = nev;
     this.leiras = leiras;
     this.hely = hely;
+    this.kulcs = kulcs;
     this.allapot = Sets.newEnumSet(Arrays.asList(allapot), Allapot.class);
   }
 
@@ -66,7 +68,7 @@ enum Targy implements Elem {
 
   @Override
   public Targy getKulcs() {
-    throw new UnsupportedOperationException("Nincs szükség rá.");
+    return kulcs;
   }
 
 }
