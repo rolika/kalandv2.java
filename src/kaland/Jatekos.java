@@ -50,6 +50,11 @@ final class Jatekos {
     if (ujHelyszin == null) {
       return Uzenet.ARRA_NEM.toString();
     } else {
+      Csapda csapda = helyszin.csapda(ujHelyszin);
+      if (csapda != Csapda.NINCS && !csapda.getAllapot().contains(Allapot.LATHATO)) {
+        setMeghalt();
+        return csapda.getAktiv();
+      }
       Ajto ajto = helyszin.ajto(ujHelyszin);
       if (ajto == Ajto.NINCS) {
         setHelyszin(ujHelyszin);

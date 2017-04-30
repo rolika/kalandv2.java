@@ -82,7 +82,7 @@ enum Helyszin {
   private Set<Elem> mindenElem() {
     Set<Elem> minden = Sets.newHashSet(Targy.values());
     minden.addAll(Arrays.asList(Ajto.values()));
-    //minden.addAll(Arrays.asList(CsapdaEnum.values()));
+    minden.addAll(Arrays.asList(Csapda.values()));
     //minden.addAll(Arrays.asList(EllensegEnum.values()));
     minden.removeIf(elem -> !elem.getHely().contains(this));
     return minden;
@@ -120,6 +120,11 @@ enum Helyszin {
     return uzenet.toString();
   }
 
+  String csapdak() {
+    Set<Elem> leltar = elemSzuro(Allapot.LATHATO);
+    return "";
+  }
+
   Ajto ajto(Helyszin cel) {
     for (Ajto ajto : Ajto.values()) {
       EnumSet<Helyszin> ajtoHely = ajto.getHely().clone();
@@ -128,6 +133,16 @@ enum Helyszin {
       }
     }
     return Ajto.NINCS;
+  }
+  
+  Csapda csapda(Helyszin cel) {
+    for (Csapda csapda : Csapda.values()) {
+      EnumSet<Helyszin> csapdaHely = csapda.getHely().clone();
+      if (csapdaHely.remove(this) && csapda.getHely().contains(cel)) {
+        return csapda;
+      }
+    }
+    return Csapda.NINCS;
   }
 
 }

@@ -38,6 +38,11 @@ class Jatek {
         szoveg.append('\n');
         szoveg.append(targyak);
       }
+      String csapdak = jatekos.getHelyszin().csapdak();
+      if (!csapdak.isEmpty()) {
+        szoveg.append('\n');
+        szoveg.append(targyak);
+      }
       // sortoro(ellensegSorolas());
     }
     return szoveg.toString();
@@ -53,6 +58,9 @@ class Jatek {
   private void szkript() {
     if (Targy.LABTORLO.getAllapot().contains(Allapot.VIZSGALT)) { // kulcs a lábtörlő alatt
       Targy.KULCS.addAllapot(Allapot.LATHATO);
+    }
+    if (Targy.ELOTER_PADLO.getAllapot().contains(Allapot.VIZSGALT)) { // felfedi a gödör-csapdát
+      Csapda.GODOR.addAllapot(Allapot.LATHATO);
     }
   }
 

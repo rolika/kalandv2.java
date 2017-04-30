@@ -50,8 +50,13 @@ class Ertelmezo {
           parancsszavak.add(szoEnum);
         }
       }
-
       // csapdákat,
+      for (Szotar csapda : CsapdaSzotar.values()) {
+        szoEnum = csapda.getSzoEnum(szo);
+        if (szoEnum != null) {
+          parancsszavak.add(szoEnum);
+        }
+      }
       // végül az ellenségeket
     }
     return parancsszavak;
@@ -103,6 +108,8 @@ class Ertelmezo {
       return Targy.valueOf(szo.toString());
     } else if (szo.getClass().equals(AjtoSzotar.class)) {
       return Ajto.valueOf(szo.toString());
+    } else if (szo.getClass().equals(CsapdaSzotar.class)) {
+      return Csapda.valueOf(szo.toString());
     }
     return null; // elvileg nem fordulhat elő
   }
