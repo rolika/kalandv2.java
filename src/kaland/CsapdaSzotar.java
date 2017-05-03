@@ -10,9 +10,9 @@ import java.util.Set;
  * @author rolika
  */
 enum CsapdaSzotar implements Szotar {
-  GODOR("gödör"),
-  PENGE("penge"),
-  KURTO("kürtő");
+  GODOR("gödör", "gödröt", "gödörrel", "csapóajtó", "csapóajtót", "csapóajtóval"),
+  PENGE("penge", "pengét", "pengével"),
+  KURTO("kürtő", "kürtőt", "kürtővel");
 
   private final Set<String> szinonimak;
 
