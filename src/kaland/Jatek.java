@@ -38,11 +38,6 @@ class Jatek {
         szoveg.append('\n');
         szoveg.append(targyak);
       }
-      String csapdak = jatekos.getHelyszin().csapdak();
-      if (!csapdak.isEmpty()) {
-        szoveg.append('\n');
-        szoveg.append(targyak);
-      }
       // sortoro(ellensegSorolas());
     }
     return szoveg.toString();

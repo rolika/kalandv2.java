@@ -120,11 +120,6 @@ enum Helyszin {
     return uzenet.toString();
   }
 
-  String csapdak() {
-    Set<Elem> leltar = elemSzuro(Allapot.LATHATO);
-    return "";
-  }
-
   Ajto ajto(Helyszin cel) {
     for (Ajto ajto : Ajto.values()) {
       EnumSet<Helyszin> ajtoHely = ajto.getHely().clone();
@@ -137,8 +132,7 @@ enum Helyszin {
   
   Csapda csapda(Helyszin cel) {
     for (Csapda csapda : Csapda.values()) {
-      EnumSet<Helyszin> csapdaHely = csapda.getHely().clone();
-      if (csapdaHely.remove(this) && csapda.getHely().contains(cel)) {
+      if (csapda.getHely().clone().remove(this) && csapda.getHely().contains(cel)) {
         return csapda;
       }
     }
