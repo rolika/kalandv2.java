@@ -56,22 +56,15 @@ final class Jatekos {
         return csapda.getAktiv();
       }
       Ajto ajto = helyszin.ajto(ujHelyszin);
-      if (ajto == Ajto.NINCS) {
+      if (ajto == Ajto.NINCS || ajto.getAllapot().contains(Allapot.NYITVA)) {
         setHelyszin(ujHelyszin);
         return csapda.getAllapot().contains(Allapot.LATHATO)
-            ? csapda.getInaktiv() : Uzenet.RENDBEN.toString();
+          ? csapda.getInaktiv() : Uzenet.RENDBEN.toString();
       } else {
-        EnumSet<Allapot> ajtoAllapot = ajto.getAllapot();
-        if (ajtoAllapot.contains(Allapot.NYITVA)) {
-          setHelyszin(ujHelyszin);
-          return csapda.getAllapot().contains(Allapot.LATHATO)
-            ? csapda.getInaktiv() : Uzenet.RENDBEN.toString();
-        } else {
-          if (ajtoAllapot.contains(Allapot.CSUKVA)) {
-            return Uzenet.CSUKVA.getNevelo(ajto);
-          } else { // különben be van zárva
-            return Uzenet.ZARVA.getNevelo(ajto);
-          }
+        if (ajto.getAllapot().contains(Allapot.CSUKVA)) {
+          return Uzenet.CSUKVA.getNevelo(ajto);
+        } else { // különben be van zárva
+          return Uzenet.ZARVA.getNevelo(ajto);
         }
       }
     }
