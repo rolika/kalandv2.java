@@ -27,7 +27,6 @@ class Jatek {
   }
 
   String helyzet() {
-    szkript();
     szoveg = new StringBuilder();
     if (jatekos.getHelyszin().getAllapot().contains(Allapot.SOTET)) {
       szoveg.append(Uzenet.SOTET);
@@ -50,12 +49,13 @@ class Jatek {
   /**
    * A játékos tevékenysége következtében beálló, előre meghatározott változások.
    */
-  private void szkript() {
+  void szkript() {
     if (Targy.LABTORLO.getAllapot().contains(Allapot.VIZSGALT)) { // kulcs a lábtörlő alatt
       Targy.KULCS.addAllapot(Allapot.LATHATO);
     }
     if (Targy.ELOTER_PADLO.getAllapot().contains(Allapot.VIZSGALT)) { // felfedi a gödör-csapdát
       Csapda.GODOR.addAllapot(Allapot.LATHATO);
+      Targy.CSAPOAJTO.addAllapot(Allapot.LATHATO);
     }
   }
 
