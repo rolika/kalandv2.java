@@ -15,7 +15,8 @@ enum TargySzotar implements Szotar {
   TAPETA("tapéta", "tapétát", "tapétával", "fal", "falat", "fallal"),
   BICSKA("bicska", "bicskát", "bicskával", "kés", "kést", "késsel", "kiskés", "kiskést", "kiskéssel"),
   ZSEBLAMPA("lámpa", "lámpát", "lámpával", "zseblámpa", "zseblámpát", "zseblámpával"),
-  ELOTER_PADLO("padló", "padlót", "padlóval", "padlódeszka", "padlódeszkát", "padlódeszkával");
+  ELOTER_PADLO("padló", "padlót", "padlóval", "padlódeszka", "padlódeszkát", "padlódeszkával", "hajópadló", "hajópadlót", "hajópadlóval"),
+  CSAPOAJTO("csapóajtó", "csapóajtót", "csapóajtóval");
 
   private final Set<String> szinonimak;
 

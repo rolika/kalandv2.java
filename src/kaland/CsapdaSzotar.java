@@ -10,7 +10,7 @@ import java.util.Set;
  * @author rolika
  */
 enum CsapdaSzotar implements Szotar {
-  GODOR("gödör", "gödröt", "gödörrel", "csapóajtó", "csapóajtót", "csapóajtóval"),
+  GODOR("gödör", "gödröt", "gödörrel"),
   PENGE("penge", "pengét", "pengével"),
   KURTO("kürtő", "kürtőt", "kürtővel");
 

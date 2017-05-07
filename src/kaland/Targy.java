@@ -17,7 +17,8 @@ enum Targy implements Elem {
   TAPETA("tapéta", "A tapéta valaha kellemes pasztellzöld színe valami undorító árnyalatú nyálkává változott és felpúposodott az alatta lévő vizes faltól.", Helyszin.ELOTER, NINCS, Allapot.LATHATO),
   BICSKA("bicska", "A nemesacél pengéjű, szarvasagancs-nyelű zsebkésedet még a nagyapádtól kaptad. Borotvaéles, mint mindig.", Helyszin.LELTAR, NINCS, Allapot.LATHATO, Allapot.FELVEHETO),
   ZSEBLAMPA("zseblámpa", "Bivalyerős, mégis takarékos ledlámpa.", Helyszin.LELTAR, NINCS, Allapot.LATHATO, Allapot.FELVEHETO),
-  ELOTER_PADLO("padló", "Alaposan megnézve a padlót, egy csapóajtó körvonalait fedezed fel!", Helyszin.ELOTER, Targy.NINCS, Allapot.LATHATO);
+  ELOTER_PADLO("padló", "Alaposan megnézve a padlót, egy csapóajtó körvonalait fedezed fel!", Helyszin.ELOTER, NINCS, Allapot.LATHATO),
+  CSAPOAJTO("csapóajtó", "Fenyegető sötétség és hideg áramlik a padlódeszkák rései közül.", Helyszin.ELOTER, NINCS);
 
   private final String nev, leiras;
   private Helyszin hely;
