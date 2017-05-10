@@ -6,7 +6,8 @@ import java.util.EnumSet;
 
 /**
  * A játékban előforduló tárgyak felsorolása Egy tárgy akkor szerepel a helyszín leírásában, ha
- * látható ÉS felvehető. Felépítése: név, leírás, helyszín (enum), állapotok (enumok)
+ * látható ÉS felvehető.
+ * Felépítése: név, leírás, helyszín (enum), pár (pl. kulcs), állapotok (enumok)
  *
  * @author rolika
  */
@@ -23,14 +24,14 @@ enum Targy implements Elem {
 
   private final String nev, leiras;
   private Helyszin hely;
-  private final Targy kulcs;
+  private final Targy par;
   private final EnumSet<Allapot> allapot;
 
-  private Targy(String nev, String leiras, Helyszin hely, Targy kulcs, Allapot... allapot) {
+  private Targy(String nev, String leiras, Helyszin hely, Targy par, Allapot... allapot) {
     this.nev = nev;
     this.leiras = leiras;
     this.hely = hely;
-    this.kulcs = kulcs;
+    this.par = par;
     this.allapot = Sets.newEnumSet(Arrays.asList(allapot), Allapot.class);
   }
 
@@ -70,8 +71,8 @@ enum Targy implements Elem {
   }
 
   @Override
-  public Targy getKulcs() {
-    return kulcs;
+  public Targy getPar() {
+    return par;
   }
 
 }

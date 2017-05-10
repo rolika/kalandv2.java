@@ -66,7 +66,7 @@ enum Csapda implements Elem {
   }
 
   @Override
-  public Targy getKulcs() {
+  public Targy getPar() {
     throw new UnsupportedOperationException("Nincs szükség rá.");
   }
 

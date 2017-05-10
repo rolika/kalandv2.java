@@ -119,7 +119,10 @@ final class Jatekos {
         return Uzenet.NEM_ERTEM.toString();
       } else if (!elem.getAllapot().contains(Allapot.LATHATO)) {
         return Uzenet.NEM_LATHATO.toString();
-      }
+      } else if (elem.getPar() != Targy.NINCS && (!elem.getPar().getHely().contains(helyszin) &&
+        !elem.getPar().getHely().contains(Helyszin.LELTAR))) {
+        return Uzenet.MIVEL.toString();
+      } 
     }
     Ertelmezo.getElemek().forEach(elem ->  elem.addAllapot(Allapot.AKTIV));
     return Uzenet.RENDBEN.toString();
@@ -143,9 +146,9 @@ final class Jatekos {
       nyitandoElem.addAllapot(Allapot.NYITVA);
       return Uzenet.RENDBEN.toString();
     } else if (nyitandoElem.getAllapot().contains(Allapot.ZARVA)
-      && !parancsElemek.contains(nyitandoElem.getKulcs())) {
+      && !parancsElemek.contains(nyitandoElem.getPar())) {
       return Uzenet.MIVEL.toString();
-    } else if (!Helyszin.LELTAR.elemSzuro().contains(nyitandoElem.getKulcs())) {
+    } else if (!Helyszin.LELTAR.elemSzuro().contains(nyitandoElem.getPar())) {
       return Uzenet.NINCS_NALAD.toString();
     } else if (nyitandoElem.getAllapot().contains(Allapot.NYITVA)) {
       return Uzenet.NYITVA.getNevelo(nyitandoElem);
@@ -191,11 +194,11 @@ final class Jatekos {
     Set<Elem> zarhatoElemek = helyszin.elemSzuro(Allapot.NYITHATO);
     if (!zarhatoElemek.contains(zarandoElem)) {
       return Uzenet.NEM_ERTEM.toString();
-    } else if (zarandoElem.getKulcs() == Targy.NINCS) {
+    } else if (zarandoElem.getPar() == Targy.NINCS) {
       return Uzenet.NEM_LEHET.toString();
-    } else if (!parancsElemek.contains(zarandoElem.getKulcs())) {
+    } else if (!parancsElemek.contains(zarandoElem.getPar())) {
       return Uzenet.MIVEL.toString();
-    } else if (!Helyszin.LELTAR.elemSzuro().contains(zarandoElem.getKulcs())) {
+    } else if (!Helyszin.LELTAR.elemSzuro().contains(zarandoElem.getPar())) {
       return Uzenet.NINCS_NALAD.toString();
     } else if ((zarandoElem.getAllapot().contains(Allapot.NYITVA)
       || zarandoElem.getAllapot().contains(Allapot.CSUKVA))) {

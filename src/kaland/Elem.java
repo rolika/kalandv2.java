@@ -16,6 +16,6 @@ interface Elem {
   void addAllapot(Allapot ... allapot);
   void removeAllapot(Allapot ... allapot);
   void setHely(Helyszin hely);
-  Targy getKulcs();
+  Targy getPar();
   
 }
