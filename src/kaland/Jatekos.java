@@ -111,12 +111,18 @@ final class Jatekos {
     return Uzenet.NEM_ERTEM.toString();
   }
 
-  String aktival(Set<Szotar> parancsszavak) {
-    return "Játékos aktivál.";
-  }
-
-  String deaktival(Set<Szotar> parancsszavak) {
-    return "Játékos deaktivál.";
+  String hasznal(Set<Szotar> parancsszavak) {
+    for (Elem elem : Ertelmezo.getElemek()) {
+      if (!elem.getAllapot().contains(Allapot.HASZNALHATO)) {
+        return Uzenet.NEM_LEHET.toString();
+      } else if (!elem.getHely().contains(helyszin) && !elem.getHely().contains(Helyszin.LELTAR)) {
+        return Uzenet.NEM_ERTEM.toString();
+      } else if (!elem.getAllapot().contains(Allapot.LATHATO)) {
+        return Uzenet.NEM_LATHATO.toString();
+      }
+    }
+    Ertelmezo.getElemek().forEach(elem ->  elem.addAllapot(Allapot.AKTIV));
+    return Uzenet.RENDBEN.toString();
   }
 
   String nyit(Set<Szotar> parancsszavak) {
