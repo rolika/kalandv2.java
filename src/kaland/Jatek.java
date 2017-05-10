@@ -54,8 +54,7 @@ class Jatek {
       Targy.KULCS.addAllapot(Allapot.LATHATO);
     }
     if (Targy.ELOTER_PADLO.getAllapot().contains(Allapot.VIZSGALT)) { // felfedi a gödör-csapdát
-      Csapda.GODOR.addAllapot(Allapot.LATHATO);
-      Targy.CSAPOAJTO.addAllapot(Allapot.LATHATO);
+      Csapda.CSAPOAJTO.addAllapot(Allapot.LATHATO);
     }
     if (Targy.SZOBOR.getAllapot().contains(Allapot.VIZSGALT)) { // felfedi a szobor karját
       Targy.SZOBOR_KAR.addAllapot(Allapot.LATHATO);

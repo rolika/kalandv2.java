@@ -11,7 +11,7 @@ import java.util.EnumSet;
  */
 enum Csapda implements Elem {
   
-  GODOR("gödör", "A csapóajtó körvonalai éppenhogy kivehetők a padlódeszkák között.", "A padló megnyílik a lábad alatt és csak zuhansz, zuhansz lefelé a sötétségbe.", "Vigyázva kikerülöd a padlódeszkák között átsejlő csapóajtót.", Helyszin.ELOTER, Helyszin.FOLYOSO),
+  CSAPOAJTO("csapóajtó", "A csapóajtó körvonalai éppenhogy kivehetők a padlódeszkák között.", "A padló megnyílik a lábad alatt és csak zuhansz, zuhansz lefelé a sötétségbe.", "Vigyázva kikerülöd a padlódeszkák között átsejlő csapóajtót.", Helyszin.ELOTER, Helyszin.FOLYOSO),
   PENGE("penge", "Egy borotvaéles penge áll ki az ajtófélfából, éppen nyakmagasságban.", "Éles fájdalmat érzel a nyakadnál, majd rögtön olyan érzésed támad, mintha nem uralnád a testedet. A fejed mintha lebillene, aztán máris körülölel a sötétség.", "Óvatosan elhajolsz az éppen nyakmagasságban kiálló borotvaéles penge útjából.", Helyszin.FOLYOSO, Helyszin.KONYHA),
   KURTO("kürtő", "A kürtő éjfeketén ásít lefelé a semmibe.", "Nincs semmi amiben megkapaszkodhatnál, és csak zuhansz, zuhansz lefelé a sötétségbe.", "Biztonságban leereszkedsz a kürtőben.", Helyszin.PADLAS_VEGE, Helyszin.REJTETT_PINCE),
   NINCS("", "", "", "", Helyszin.NINCS, Helyszin.NINCS);

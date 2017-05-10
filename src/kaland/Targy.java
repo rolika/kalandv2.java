@@ -18,7 +18,6 @@ enum Targy implements Elem {
   BICSKA("bicska", "A nemesacél pengéjű, szarvasagancs-nyelű zsebkésedet még a nagyapádtól kaptad. Borotvaéles, mint mindig.", Helyszin.LELTAR, NINCS, Allapot.LATHATO, Allapot.FELVEHETO),
   ZSEBLAMPA("zseblámpa", "Bivalyerős, mégis takarékos ledlámpa.", Helyszin.LELTAR, NINCS, Allapot.LATHATO, Allapot.FELVEHETO),
   ELOTER_PADLO("padló", "Alaposan megnézve a padlót, egy csapóajtó körvonalait fedezed fel!", Helyszin.ELOTER, NINCS, Allapot.LATHATO),
-  CSAPOAJTO("csapóajtó", "Fenyegető sötétség és hideg áramlik a padlódeszkák rései közül.", Helyszin.ELOTER, NINCS),
   SZOBOR("szobor", "Egy férfialak görög stílusú torzója, érdekesmód egyetlen karral, ami kissé furcsán hat.", Helyszin.SZOBA, NINCS, Allapot.LATHATO),
   SZOBOR_KAR("kar", "A szobor karja kissé szokatlan szögben áll, ezenkívül nem is illik egy torzóra.", Helyszin.SZOBA, NINCS, Allapot.HASZNALHATO);
 
