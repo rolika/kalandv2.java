@@ -119,12 +119,13 @@ final class Jatekos {
         return Uzenet.NEM_ERTEM.toString();
       } else if (!elem.getAllapot().contains(Allapot.LATHATO)) {
         return Uzenet.NEM_LATHATO.toString();
-      } else if (elem.getPar() != Targy.NINCS && (!elem.getPar().getHely().contains(helyszin) &&
-        !elem.getPar().getHely().contains(Helyszin.LELTAR))) {
+      } else if (elem.getPar() != Targy.NINCS && (!elem.getPar().getHely().contains(helyszin)
+        && !elem.getPar().getHely().contains(Helyszin.LELTAR))) {
         return Uzenet.MIVEL.toString();
-      } 
+      }
     }
-    Ertelmezo.getElemek().forEach(elem ->  elem.addAllapot(Allapot.AKTIV));
+    Ertelmezo.getElemek().forEach(elem -> elem.addAllapot(Allapot.AKTIV));
+
     return Uzenet.RENDBEN.toString();
   }
 
@@ -133,7 +134,8 @@ final class Jatekos {
     Elem nyitandoElem;
     try {
       nyitandoElem = parancsElemek.stream()
-        .filter(elem -> elem.getAllapot().contains(Allapot.NYITHATO))
+        .filter(elem -> elem.getAllapot().contains(Allapot.NYITHATO) &&
+          elem.getAllapot().contains(Allapot.LATHATO))
         .iterator().next();
     } catch (NoSuchElementException e) {
       return Uzenet.NEM_ERTEM.toString();

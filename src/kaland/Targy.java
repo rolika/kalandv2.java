@@ -22,11 +22,10 @@ enum Targy implements Elem {
   SZOBOR("szobor", "Egy férfialak görög stílusú torzója, érdekesmód egyetlen karral, ami kissé furcsán hat.", Helyszin.SZOBA, Allapot.LATHATO),
   SZOBOR_KAR("kar", "A szobor karja kissé szokatlan szögben áll, ezenkívül nem is illik egy torzóra.", Helyszin.SZOBA, Allapot.HASZNALHATO),
   KONYHASZEKRENY("szekrény", "A konyhaszekrény nagyon leromlott állapotban van, ajtai egy kivételével mind leszakadtak. Van egy fiókja is.", Helyszin.KONYHA, Allapot.LATHATO),
-  SZEKRENYAJTO("szekrényajtó", "A konyhaszekrény ajtaját egyetlen zsanéron tartja a helyén.", Helyszin.KONYHA, Allapot.NYITHATO),
-  FIOK("fiók", "A fiókot szemmel láthatóan csak az imádság tartja a helyén.", Helyszin.KONYHA, Allapot.NYITHATO),
-  KOTEL("kötél", "Egy tekercs kenderkötél, legalább tíz méter hosszú, és elég vastag, hogy elbírja a súlyodat.", Helyszin.KONYHA),
-  GERENDA_ELOL("gerenda", "A tetőt tartó fő mestergerenda nem mindennapi keresztmetszettel rendelkezik.", Helyszin.PADLAS_ELEJE, Allapot.LATHATO),
-  GERENDA_HATUL("gerenda", "A tetőt tartó fő mestergerenda nem mindennapi keresztmetszettel rendelkezik.", Helyszin.PADLAS_VEGE, Allapot.LATHATO);
+  KONYHASZEKRENYAJTO("szekrényajtó", "A konyhaszekrény ajtaját egyetlen zsanér tartja a helyén.", Helyszin.KONYHA, Allapot.CSUKVA, Allapot.NYITHATO),
+  FIOK("fiók", "A fiókot szemmel láthatóan csak az imádság tartja a helyén.", Helyszin.KONYHA, Allapot.CSUKVA, Allapot.NYITHATO),
+  KOTEL("kötél", "Egy tekercs kenderkötél, legalább tíz méter hosszú, és elég vastag, hogy elbírja a súlyodat.", Helyszin.KONYHA, Allapot.FELVEHETO),
+  GERENDA("gerenda", "A tetőt tartó fő mestergerenda nem mindennapi keresztmetszettel rendelkezik.", Helyszin.PADLAS_VEGE, Allapot.LATHATO);
 
   private final String nev, leiras;
   private Helyszin hely;
@@ -43,7 +42,7 @@ enum Targy implements Elem {
   static {
     NINCS.par = NINCS;
     LABTORLO.par = NINCS;
-    KULCS.par = Ajto.BEJARATI_AJTO;
+    KULCS.par = NINCS;
     TAPETA.par = NINCS;
     BICSKA.par = NINCS;
     ZSEBLAMPA.par = NINCS;
@@ -52,9 +51,8 @@ enum Targy implements Elem {
     SZOBOR_KAR.par = NINCS;
     KONYHASZEKRENY.par = NINCS;
     FIOK.par = NINCS;
-    GERENDA_ELOL.par = NINCS;
-    GERENDA_HATUL.par = KOTEL;
-    KOTEL.par = GERENDA_HATUL;
+    GERENDA.par = KOTEL;
+    KOTEL.par = GERENDA;
   }
 
   @Override

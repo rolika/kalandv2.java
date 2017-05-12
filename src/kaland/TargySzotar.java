@@ -19,11 +19,10 @@ enum TargySzotar implements Szotar {
   SZOBOR("szobor", "szobrot", "szoborral", "torzó", "torzót", "torzóval"),
   SZOBOR_KAR("kar", "kart", "karral", "kéz", "kezet", "kézzel"),
   KONYHASZEKRENY("szekrény", "szekrényt", "szekrénnyel", "konyhaszekrény", "konyhaszekrényt", "konyhaszekrénnyel"),
-  SZEKRENYAJTO("szekrényajtó", "szekrényajtót", "szekrényajtóval"),
+  KONYHASZEKRENYAJTO("szekrényajtó", "szekrényajtót", "szekrényajtóval"),
   FIOK("fiók", "fiókot", "fiókkal"),
   KOTEL("kötél", "kötelet", "kötéllel", "kenderkötél", "kenderkötelet", "kenderkötéllel"),
-  GERENDA_ELOL("gerenda", "gerendát", "gerendával"),
-  GERENDA_HATUL("gerenda", "gerendát", "gerendával");
+  GERENDA("gerenda", "gerendát", "gerendával", "mestergerenda", "mestergerendát", "mestergerendával");
 
   private final Set<String> szinonimak;
 
