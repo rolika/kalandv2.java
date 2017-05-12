@@ -65,7 +65,7 @@ enum Ajto implements Elem {
   }
 
   @Override
-  public Targy getPar() {
+  public Elem getPar() {
     return kulcs;
   }
 
