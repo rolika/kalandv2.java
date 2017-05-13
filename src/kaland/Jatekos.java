@@ -124,9 +124,17 @@ final class Jatekos {
         return Uzenet.MIVEL.toString();
       }
     }
-    Ertelmezo.getElemek().forEach(elem -> elem.addAllapot(Allapot.AKTIV));
-
-    return Uzenet.RENDBEN.toString();
+    for (Elem elem : Ertelmezo.getElemek()) {
+      if (elem.getAllapot().contains(Allapot.KAPCSOLGATHATO)) {
+        if (elem.getAllapot().contains(Allapot.AKTIV)) {
+          elem.removeAllapot(Allapot.AKTIV);
+        } else {
+          elem.addAllapot(Allapot.AKTIV);
+        }
+      } else {
+        elem.addAllapot(Allapot.AKTIV);
+      }
+    }return Uzenet.RENDBEN.toString();
   }
 
   String nyit(Set<Szotar> parancsszavak) {
