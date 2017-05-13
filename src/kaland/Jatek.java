@@ -73,10 +73,11 @@ class Jatek {
     if (Targy.FIOK.getAllapot().contains(Allapot.NYITVA)) { // felfedi a kötelet
       Targy.KOTEL.addAllapot(Allapot.LATHATO);
     }
-    if (jatekos.getHelyszin() == Helyszin.PADLAS_VEGE) { // kötél csak itt használható
-      Targy.KOTEL.addAllapot(Allapot.HASZNALHATO);
-    } else {
-      Targy.KOTEL.removeAllapot(Allapot.HASZNALHATO);
+    if (Targy.GERENDA.getAllapot().contains(Allapot.AKTIV) && // hatástalanítja a kürtőt
+      Targy.KOTEL.getAllapot().contains(Allapot.AKTIV)) {
+      Csapda.KURTO.addAllapot(Allapot.LATHATO);
+      Targy.KOTEL.removeAllapot(Allapot.HASZNALHATO, Allapot.FELVEHETO);
+      Targy.GERENDA.removeAllapot(Allapot.HASZNALHATO);
     }
   }
 

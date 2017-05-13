@@ -33,7 +33,7 @@ enum Ajto implements Elem {
   PORTAL("portál", "A pince falától jól láthatóan elkülönül az egyetlen darabban kifaragott kolosszális kőlap.", Targy.BICSKA,
     Helyszin.REJTETT_PINCE, Helyszin.ODAAT,
     Allapot.ZARVA, Allapot.LATHATO, Allapot.NYITHATO),
-  NINCS("semmi", "semmi", Targy.NINCS, Helyszin.NINCS, Helyszin.NINCS);
+  NINCS("", "", Targy.NINCS, Helyszin.NINCS, Helyszin.NINCS);
 
   private final String nev, leiras;
   private final EnumSet<Allapot> allapot;
