@@ -45,29 +45,42 @@ final class Jatekos {
     helyszin.setKijaratok(Kijarat.valueOf(helyszin.toString())); // ugyanaz a konstans nevük
   }
 
+  /**
+   * Elmozdulás a helyszínről, a következő lehetőségekkel:
+   * 1) a játékos falba ütközik, azaz arra nem mehet;
+   * 2) a játékos csukva vagy zárva lévő ajtóba ütközik, arra sem mehet;
+   * 3) az ajtó/elmozdulás UTÁN csapdába esik és meghal. Fontos, hogy utána: a játékos ugyan ebből
+   *    nem vesz észre semmit, de a csapda az áthaladás HELYETT fog működésbe lépni. Azaz ebben a
+   *    játékban a csapdák mindig az adott helyszín bejárata mögött helyezkednek el. Olyat nem
+   *    lehet, hogy a előbb csapda van és utána jönne az ajtó. Fontos játéktervezési szempont!;
+   * 4) a játékos akadálytalanul mozog a célhelyszínre, kikerülve az esetleges csapdát.
+   * 
+   * @param irany a játékos szándékának megfelelő irányenum
+   * @return szöveges üzenet a szándékolt elmozdulás következményéről
+   */
   String megy(Irany irany) {
     Helyszin ujHelyszin = helyszin.getKijarat(irany);
+    // a játékos falba ütközik
     if (ujHelyszin == null) {
       return Uzenet.ARRA_NEM.toString();
-    } else {
-      Csapda csapda = helyszin.csapda(ujHelyszin);
-      if (csapda != Csapda.NINCS && !csapda.getAllapot().contains(Allapot.LATHATO)) {
-        setMeghalt();
-        return csapda.getAktiv();
-      }
-      Ajto ajto = helyszin.ajto(ujHelyszin);
-      if (ajto == Ajto.NINCS || ajto.getAllapot().contains(Allapot.NYITVA)) {
-        setHelyszin(ujHelyszin);
-        return csapda.getAllapot().contains(Allapot.LATHATO)
-          ? csapda.getInaktiv() : Uzenet.RENDBEN.toString();
-      } else {
-        if (ajto.getAllapot().contains(Allapot.CSUKVA)) {
-          return Uzenet.CSUKVA.getNevelo(ajto);
-        } else { // különben be van zárva
-          return Uzenet.ZARVA.getNevelo(ajto);
-        }
-      }
     }
+    Ajto ajto = helyszin.ajto(ujHelyszin);
+    Csapda csapda = helyszin.csapda(ujHelyszin);
+    // a játékos csukva vagy zárva lévő ajtóba ütközik
+    if (ajto.checkAllapot(Allapot.CSUKVA)) {
+      return Uzenet.CSUKVA.getNevelo(ajto);
+    } else if (ajto.checkAllapot(Allapot.ZARVA)) {
+      return Uzenet.ZARVA.getNevelo(ajto);
+    }
+    // a játékos csapdába esik és meghal
+    if (csapda != Csapda.NINCS && !csapda.checkAllapot(Allapot.LATHATO)) {
+      setMeghalt();
+      return csapda.getAktiv();
+    }
+    // a játékos továbbhalad az új helyszínre
+    // (nincs ajtó, vagy nyitva van, nincs csapda, vagy már inaktív)
+    setHelyszin(ujHelyszin);
+    return csapda == Csapda.NINCS ? Uzenet.RENDBEN.toString() : csapda.getInaktiv();
   }
 
   String kilep(Set<Szotar> parancsszavak) {
@@ -134,7 +147,8 @@ final class Jatekos {
       } else {
         elem.addAllapot(Allapot.AKTIV);
       }
-    }return Uzenet.RENDBEN.toString();
+    }
+    return Uzenet.RENDBEN.toString();
   }
 
   String nyit(Set<Szotar> parancsszavak) {
