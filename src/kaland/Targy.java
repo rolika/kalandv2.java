@@ -19,8 +19,8 @@ enum Targy implements Elem {
   BICSKA("bicska", "A nemesacél pengéjű, szarvasagancs-nyelű zsebkésedet még a nagyapádtól kaptad. Borotvaéles, mint mindig.", Helyszin.LELTAR, Allapot.LATHATO, Allapot.FELVEHETO),
   ZSEBLAMPA("zseblámpa", "Bivalyerős, mégis takarékos ledlámpa.", Helyszin.LELTAR, Allapot.LATHATO, Allapot.FELVEHETO, Allapot.HASZNALHATO, Allapot.KAPCSOLGATHATO),
   ELOTER_PADLO("padló", "Alaposan megnézve a padlót, egy csapóajtó körvonalait fedezed fel!", Helyszin.ELOTER, Allapot.LATHATO),
-  SZOBOR("szobor", "Egy férfialak görög stílusú torzója, érdekesmód egyetlen karral, ami kissé furcsán hat.", Helyszin.SZOBA, Allapot.LATHATO),
-  SZOBOR_KAR("kar", "A szobor karja kissé szokatlan szögben áll, mintha forgatható lenne.", Helyszin.SZOBA),
+  SZOBOR("szobor", "Egy férfialak görög stílusú torzója, érdekesmód egyetlen karral, ami forgathatónak tűnik.", Helyszin.SZOBA, Allapot.LATHATO),
+  SZOBOR_KAR("kar", "A szobor karja kissé szokatlan szögben áll, mintha forgatható lenne.", Helyszin.SZOBA, Allapot.HASZNALHATO),
   KONYHASZEKRENY("szekrény", "A konyhaszekrény nagyon leromlott állapotban van, ajtai egy kivételével mind leszakadtak. Van egy fiókja is.", Helyszin.KONYHA, Allapot.LATHATO),
   KONYHASZEKRENYAJTO("szekrényajtó", "A konyhaszekrény ajtaját egyetlen zsanér tartja a helyén.", Helyszin.KONYHA, Allapot.CSUKVA, Allapot.NYITHATO),
   FIOK("fiók", "A fiókot szemmel láthatóan csak az imádság tartja a helyén.", Helyszin.KONYHA, Allapot.CSUKVA, Allapot.NYITHATO),
@@ -39,6 +39,7 @@ enum Targy implements Elem {
     this.allapot = Sets.newEnumSet(Arrays.asList(allapot), Allapot.class);
   }
   
+  // így kerülöm ki a forward reference helyzetet (via stackoverflow)
   static {
     NINCS.par = NINCS;
     LABTORLO.par = NINCS;
@@ -83,6 +84,10 @@ enum Targy implements Elem {
   @Override
   public void removeAllapot(Allapot... allapot) {
     this.allapot.removeAll(Arrays.asList(allapot));
+  }
+  
+  public boolean checkAllapot(Allapot... allapot) {
+    return this.allapot.containsAll(Arrays.asList(allapot));
   }
 
   @Override

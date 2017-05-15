@@ -59,6 +59,10 @@ enum Csapda implements Elem {
   public void removeAllapot(Allapot... allapot) {
     this.allapot.removeAll(Arrays.asList(allapot));
   }
+  
+  public boolean checkAllapot(Allapot... allapot) {
+    return this.allapot.containsAll(Arrays.asList(allapot));
+  }
 
   @Override
   public void setHely(Helyszin hely) {
