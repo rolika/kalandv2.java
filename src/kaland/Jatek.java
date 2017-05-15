@@ -60,9 +60,6 @@ class Jatek {
     if (Targy.SZOBOR.getAllapot().contains(Allapot.VIZSGALT)) { // felfedi a szobor karját
       Targy.SZOBOR_KAR.addAllapot(Allapot.LATHATO);
     }
-    if (Targy.SZOBOR_KAR.getAllapot().contains(Allapot.VIZSGALT)) { // a kar forgatható
-      Targy.SZOBOR_KAR.addAllapot(Allapot.HASZNALHATO);
-    }
     if (Targy.SZOBOR_KAR.getAllapot().contains(Allapot.AKTIV)) { // hatástalanítja a penge-csapdát
       Csapda.PENGE.addAllapot(Allapot.LATHATO);
     }
