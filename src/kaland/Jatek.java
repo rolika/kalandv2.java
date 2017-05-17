@@ -29,7 +29,7 @@ class Jatek {
   String helyzet() {
     szoveg = new StringBuilder();
     if (jatekos.getHelyszin().getAllapot().contains(Allapot.SOTET) &&
-      !Targy.ZSEBLAMPA.getAllapot().contains(Allapot.AKTIV)) {
+      !Targy.ZSEBLAMPA.checkAllapot(Allapot.AKTIV)) {
       szoveg.append(Uzenet.SOTET);
     } else {
       szoveg.append(jatekos.getHelyszin().getLeiras());
@@ -51,28 +51,27 @@ class Jatek {
    * A játékos tevékenysége következtében beálló, előre meghatározott változások.
    */
   void szkript() {
-    if (Targy.LABTORLO.getAllapot().contains(Allapot.VIZSGALT)) { // kulcs a lábtörlő alatt
+    if (Targy.LABTORLO.checkAllapot(Allapot.VIZSGALT)) { // kulcs a lábtörlő alatt
       Targy.KULCS.addAllapot(Allapot.LATHATO);
     }
-    if (Targy.ELOTER_PADLO.getAllapot().contains(Allapot.VIZSGALT)) { // felfedi a gödör-csapdát
+    if (Targy.ELOTER_PADLO.checkAllapot(Allapot.VIZSGALT)) { // felfedi a gödör-csapdát
       Csapda.CSAPOAJTO.addAllapot(Allapot.LATHATO);
     }
-    if (Targy.SZOBOR.getAllapot().contains(Allapot.VIZSGALT)) { // felfedi a szobor karját
+    if (Targy.SZOBOR.checkAllapot(Allapot.VIZSGALT)) { // felfedi a szobor karját
       Targy.SZOBOR_KAR.addAllapot(Allapot.LATHATO);
     }
-    if (Targy.SZOBOR_KAR.getAllapot().contains(Allapot.AKTIV)) { // hatástalanítja a penge-csapdát
+    if (Targy.SZOBOR_KAR.checkAllapot(Allapot.AKTIV)) { // hatástalanítja a penge-csapdát
       Csapda.PENGE.addAllapot(Allapot.LATHATO);
     }
-    if (Targy.KONYHASZEKRENY.getAllapot().contains(Allapot.VIZSGALT)) {
+    if (Targy.KONYHASZEKRENY.checkAllapot(Allapot.VIZSGALT)) {
       Targy.FIOK.addAllapot(Allapot.LATHATO);
       Targy.KONYHASZEKRENYAJTO.addAllapot(Allapot.LATHATO);
     }
-    if (Targy.FIOK.getAllapot().contains(Allapot.NYITVA)) { // felfedi a kötelet
+    if (Targy.FIOK.checkAllapot(Allapot.NYITVA)) { // felfedi a kötelet
       Targy.KOTEL.addAllapot(Allapot.LATHATO);
     }
-    if (Targy.GERENDA.getAllapot().contains(Allapot.AKTIV) && // hatástalanítja a kürtőt
-      Targy.KOTEL.getAllapot().contains(Allapot.AKTIV)) {
-      Csapda.KURTO.addAllapot(Allapot.LATHATO);
+    if (Targy.GERENDA.checkAllapot(Allapot.AKTIV) && Targy.KOTEL.checkAllapot(Allapot.AKTIV)) {
+      Csapda.KURTO.addAllapot(Allapot.LATHATO); // hatástalanítja kürtőt
       Targy.KOTEL.removeAllapot(Allapot.HASZNALHATO, Allapot.FELVEHETO);
       Targy.GERENDA.removeAllapot(Allapot.HASZNALHATO);
     }

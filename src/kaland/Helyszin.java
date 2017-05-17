@@ -73,9 +73,8 @@ enum Helyszin {
   }
 
   Set<Elem> elemSzuro(Allapot... allapotok) {
-    EnumSet<Allapot> szuro = Sets.newEnumSet(Arrays.asList(allapotok), Allapot.class);
     return mindenElem().stream()
-      .filter(elem -> elem.getAllapot().containsAll(szuro))
+      .filter(elem -> elem.checkAllapot(allapotok))
       .collect(Collectors.toSet());
   }
 

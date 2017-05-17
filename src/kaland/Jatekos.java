@@ -108,14 +108,14 @@ final class Jatekos {
       if (lathatoTargyak.contains(elem)) {
         elem.addAllapot(Allapot.VIZSGALT);
         StringBuilder leiras = new StringBuilder(elem.getLeiras());
-        if (elem.getAllapot().contains(Allapot.NYITHATO)) {
+        if (elem.checkAllapot(Allapot.NYITHATO)) {
           leiras.append('\n');
         }
-        if (elem.getAllapot().contains(Allapot.NYITVA)) {
+        if (elem.checkAllapot(Allapot.NYITVA)) {
           leiras.append(Uzenet.NYITVA.getNevelo(elem));
-        } else if (elem.getAllapot().contains(Allapot.CSUKVA)) {
+        } else if (elem.checkAllapot(Allapot.CSUKVA)) {
           leiras.append(Uzenet.CSUKVA.getNevelo(elem));
-        } else if (elem.getAllapot().contains(Allapot.ZARVA)) {
+        } else if (elem.checkAllapot(Allapot.ZARVA)) {
           leiras.append(Uzenet.ZARVA.getNevelo(elem));
         }
         return leiras.toString();
@@ -137,19 +137,19 @@ final class Jatekos {
   String hasznal(Set<Szotar> parancsszavak) {
     Set<Elem> elemek = Ertelmezo.getElemek();
     for (Elem elem : elemek) {
-      if (!elem.getAllapot().contains(Allapot.HASZNALHATO)) {
+      if (!elem.checkAllapot(Allapot.HASZNALHATO)) {
         return Uzenet.NEM_LEHET.toString();
       } else if (!elem.getHely().contains(helyszin) && !elem.getHely().contains(Helyszin.LELTAR)) {
         return Uzenet.NEM_ERTEM.toString();
-      } else if (!elem.getAllapot().contains(Allapot.LATHATO)) {
+      } else if (!elem.checkAllapot(Allapot.LATHATO)) {
         return Uzenet.NEM_LATHATO.toString();
       } else if (elem.getPar() != Targy.NINCS && !elemek.contains(elem.getPar())) {
         return Uzenet.MIVEL.toString();
       }
     }
     for (Elem elem : elemek) {
-      if (elem.getAllapot().contains(Allapot.KAPCSOLGATHATO)) {
-        if (elem.getAllapot().contains(Allapot.AKTIV)) {
+      if (elem.checkAllapot(Allapot.KAPCSOLGATHATO)) {
+        if (elem.checkAllapot(Allapot.AKTIV)) {
           elem.removeAllapot(Allapot.AKTIV);
         } else {
           elem.addAllapot(Allapot.AKTIV);
@@ -166,8 +166,7 @@ final class Jatekos {
     Elem nyitandoElem;
     try {
       nyitandoElem = parancsElemek.stream()
-        .filter(elem -> elem.getAllapot().contains(Allapot.NYITHATO) &&
-          elem.getAllapot().contains(Allapot.LATHATO))
+        .filter(elem -> elem.checkAllapot(Allapot.NYITHATO, Allapot.LATHATO))
         .iterator().next();
     } catch (NoSuchElementException e) {
       return Uzenet.NEM_ERTEM.toString();
@@ -175,16 +174,16 @@ final class Jatekos {
     Set<Elem> nyithatoElemek = helyszin.elemSzuro(Allapot.NYITHATO);
     if (!nyithatoElemek.contains(nyitandoElem)) {
       return Uzenet.NEM_ERTEM.toString();
-    } else if (nyitandoElem.getAllapot().contains(Allapot.CSUKVA)) {
+    } else if (nyitandoElem.checkAllapot(Allapot.CSUKVA)) {
       nyitandoElem.removeAllapot(Allapot.CSUKVA);
       nyitandoElem.addAllapot(Allapot.NYITVA);
       return Uzenet.RENDBEN.toString();
-    } else if (nyitandoElem.getAllapot().contains(Allapot.ZARVA)
+    } else if (nyitandoElem.checkAllapot(Allapot.ZARVA)
       && !parancsElemek.contains(nyitandoElem.getPar())) {
       return Uzenet.MIVEL.toString();
     } else if (!Helyszin.LELTAR.elemSzuro().contains(nyitandoElem.getPar())) {
       return Uzenet.NINCS_NALAD.toString();
-    } else if (nyitandoElem.getAllapot().contains(Allapot.NYITVA)) {
+    } else if (nyitandoElem.checkAllapot(Allapot.NYITVA)) {
       return Uzenet.NYITVA.getNevelo(nyitandoElem);
     } else {
       nyitandoElem.removeAllapot(Allapot.ZARVA, Allapot.CSUKVA);
@@ -198,7 +197,7 @@ final class Jatekos {
     Elem csukandoElem;
     try {
       csukandoElem = parancsElemek.stream()
-        .filter(elem -> elem.getAllapot().contains(Allapot.NYITHATO))
+        .filter(elem -> elem.checkAllapot(Allapot.NYITHATO))
         .iterator().next();
     } catch (NoSuchElementException e) {
       return Uzenet.NEM_ERTEM.toString();
@@ -206,7 +205,7 @@ final class Jatekos {
     Set<Elem> csukhatoElemek = helyszin.elemSzuro(Allapot.NYITHATO);
     if (!csukhatoElemek.contains(csukandoElem)) {
       return Uzenet.NEM_ERTEM.toString();
-    } else if (csukandoElem.getAllapot().contains(Allapot.NYITVA)) {
+    } else if (csukandoElem.checkAllapot(Allapot.NYITVA)) {
       csukandoElem.removeAllapot(Allapot.NYITVA);
       csukandoElem.addAllapot(Allapot.CSUKVA);
       return Uzenet.RENDBEN.toString();
@@ -220,7 +219,7 @@ final class Jatekos {
     Elem zarandoElem;
     try {
       zarandoElem = parancsElemek.stream()
-        .filter(elem -> elem.getAllapot().contains(Allapot.NYITHATO))
+        .filter(elem -> elem.checkAllapot(Allapot.NYITHATO))
         .iterator().next();
     } catch (NoSuchElementException e) {
       return Uzenet.NEM_ERTEM.toString();
@@ -234,8 +233,8 @@ final class Jatekos {
       return Uzenet.MIVEL.toString();
     } else if (!Helyszin.LELTAR.elemSzuro().contains(zarandoElem.getPar())) {
       return Uzenet.NINCS_NALAD.toString();
-    } else if ((zarandoElem.getAllapot().contains(Allapot.NYITVA)
-      || zarandoElem.getAllapot().contains(Allapot.CSUKVA))) {
+    } else if ((zarandoElem.checkAllapot(Allapot.NYITVA)
+      || zarandoElem.checkAllapot(Allapot.CSUKVA))) {
       zarandoElem.removeAllapot(Allapot.NYITVA, Allapot.CSUKVA);
       zarandoElem.addAllapot(Allapot.ZARVA);
       return Uzenet.RENDBEN.toString();

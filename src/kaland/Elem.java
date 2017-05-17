@@ -12,9 +12,9 @@ interface Elem {
   String getNev();
   String getLeiras();
   EnumSet<Helyszin> getHely();
-  EnumSet<Allapot> getAllapot();
   void addAllapot(Allapot ... allapot);
   void removeAllapot(Allapot ... allapot);
+  boolean checkAllapot(Allapot ... allapot);
   void setHely(Helyszin hely);
   Elem getPar();
   

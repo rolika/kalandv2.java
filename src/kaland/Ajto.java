@@ -60,11 +60,6 @@ enum Ajto implements Elem {
   }
 
   @Override
-  public EnumSet<Allapot> getAllapot() {
-    return allapot;
-  }
-
-  @Override
   public Elem getPar() {
     return kulcs;
   }
@@ -84,6 +79,7 @@ enum Ajto implements Elem {
     this.allapot.removeAll(Arrays.asList(allapot));
   }
   
+  @Override
   public boolean checkAllapot(Allapot... allapot) {
     return this.allapot.containsAll(Arrays.asList(allapot));
   }

@@ -46,11 +46,6 @@ enum Csapda implements Elem {
   }
 
   @Override
-  public EnumSet<Allapot> getAllapot() {
-    return allapot;
-  }
-
-  @Override
   public void addAllapot(Allapot... allapot) {
     this.allapot.addAll(Arrays.asList(allapot));
   }
@@ -60,6 +55,7 @@ enum Csapda implements Elem {
     this.allapot.removeAll(Arrays.asList(allapot));
   }
   
+  @Override
   public boolean checkAllapot(Allapot... allapot) {
     return this.allapot.containsAll(Arrays.asList(allapot));
   }
