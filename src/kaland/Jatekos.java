@@ -124,20 +124,31 @@ final class Jatekos {
     return Uzenet.NEM_ERTEM.toString();
   }
 
+  // TODO: még mindig nem ellenőrzi a pár meglétét az elemek között!
+  /**
+   * Elem(ek) használata. Lehetséges kimenetelek:
+   * 1) az elem nem használható
+   * 2) az elem nincs se a helyszínen, se a leltárban
+   * 3) az elem nem látható
+   * 4) az elemnek van egy kötelezően használandő párja, ami nincs benn a parancsban
+   * 
+   * @param parancsszavak
+   * @return szöveges üzenet az eredményről
+   */
   String hasznal(Set<Szotar> parancsszavak) {
-    for (Elem elem : Ertelmezo.getElemek()) {
+    Set<Elem> elemek = Ertelmezo.getElemek();
+    for (Elem elem : elemek) {
       if (!elem.getAllapot().contains(Allapot.HASZNALHATO)) {
         return Uzenet.NEM_LEHET.toString();
       } else if (!elem.getHely().contains(helyszin) && !elem.getHely().contains(Helyszin.LELTAR)) {
         return Uzenet.NEM_ERTEM.toString();
       } else if (!elem.getAllapot().contains(Allapot.LATHATO)) {
         return Uzenet.NEM_LATHATO.toString();
-      } else if (elem.getPar() != Targy.NINCS && (!elem.getPar().getHely().contains(helyszin)
-        && !elem.getPar().getHely().contains(Helyszin.LELTAR))) {
+      } else if (elem.getPar() != Targy.NINCS && !elemek.contains(elem.getPar())) {
         return Uzenet.MIVEL.toString();
       }
     }
-    for (Elem elem : Ertelmezo.getElemek()) {
+    for (Elem elem : elemek) {
       if (elem.getAllapot().contains(Allapot.KAPCSOLGATHATO)) {
         if (elem.getAllapot().contains(Allapot.AKTIV)) {
           elem.removeAllapot(Allapot.AKTIV);
