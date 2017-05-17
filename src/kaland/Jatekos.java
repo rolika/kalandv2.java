@@ -124,7 +124,6 @@ final class Jatekos {
     return Uzenet.NEM_ERTEM.toString();
   }
 
-  // TODO: még mindig nem ellenőrzi a pár meglétét az elemek között!
   /**
    * Elem(ek) használata. Lehetséges kimenetelek:
    * 1) az elem nem használható
