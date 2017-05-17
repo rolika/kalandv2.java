@@ -20,7 +20,7 @@ enum Parancs implements Szotar {
   ZAR("bezárom"),
   VESZ("felveszem", "elteszem", "elrakom", "felveszek", "elteszek", "elrakok"),
   TESZ("leteszem", "lerakom", "eldobom", "leteszek", "lerakok", "eldobok"),
-  VIZSGAL("megvizsgálom", "megnézem", "ellenőrzöm", "elolvasom"),
+  VIZSGAL("megvizsgálom", "megnézem", "ellenőrzöm", "elolvasom", "körülnézek", "nézek", "nézem"),
   TAMAD("megtámadom", "megölöm", "agyoncsapom"),
   HOSSZU("hosszú", "bő", "info", "infó", "mutasd", "leírás"),
   ROVID("rövid", "kevés"),

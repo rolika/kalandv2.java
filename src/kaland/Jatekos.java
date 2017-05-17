@@ -46,15 +46,14 @@ final class Jatekos {
   }
 
   /**
-   * Elmozdulás a helyszínről, a következő lehetőségekkel:
-   * 1) a játékos falba ütközik, azaz arra nem mehet;
-   * 2) a játékos csukva vagy zárva lévő ajtóba ütközik, arra sem mehet;
-   * 3) az ajtó/elmozdulás UTÁN csapdába esik és meghal. Fontos, hogy utána: a játékos ugyan ebből
-   *    nem vesz észre semmit, de a csapda az áthaladás HELYETT fog működésbe lépni. Azaz ebben a
-   *    játékban a csapdák mindig az adott helyszín bejárata mögött helyezkednek el. Olyat nem
-   *    lehet, hogy a előbb csapda van és utána jönne az ajtó. Fontos játéktervezési szempont!;
-   * 4) a játékos akadálytalanul mozog a célhelyszínre, kikerülve az esetleges csapdát.
-   * 
+   * Elmozdulás a helyszínről, a következő lehetőségekkel: 1) a játékos falba ütközik, azaz arra nem
+   * mehet; 2) a játékos csukva vagy zárva lévő ajtóba ütközik, arra sem mehet; 3) az
+   * ajtó/elmozdulás UTÁN csapdába esik és meghal. Fontos, hogy utána: a játékos ugyan ebből nem
+   * vesz észre semmit, de a csapda az áthaladás HELYETT fog működésbe lépni. Azaz ebben a játékban
+   * a csapdák mindig az adott helyszín bejárata mögött helyezkednek el. Olyat nem lehet, hogy a
+   * előbb csapda van és utána jönne az ajtó. Fontos játéktervezési szempont!; 4) a játékos
+   * akadálytalanul mozog a célhelyszínre, kikerülve az esetleges csapdát.
+   *
    * @param irany a játékos szándékának megfelelő irányenum
    * @return szöveges üzenet a szándékolt elmozdulás következményéről
    */
@@ -100,6 +99,14 @@ final class Jatekos {
     return mozgat(parancsszavak, Helyszin.LELTAR, helyszin);
   }
 
+  /**
+   * Kalandelemek vizsgálata. A parancsnak egy elemmel van igazán értelme, és persze látható elemek
+   * esetén. Nyitható elemek esetén kiírja a nyitva-csukva-zárva állapotot is.
+   * Magában állva ("megnézem") a helyszín leírását adja vissza.
+   *
+   * @param parancsszavak
+   * @return elemek, helyszínek leírása
+   */
   String vizsgal(Set<Szotar> parancsszavak) {
     if (parancsszavak.size() == 1) {
       Elem elem = Ertelmezo.getElem(parancsszavak.iterator().next());
@@ -120,17 +127,17 @@ final class Jatekos {
         }
         return leiras.toString();
       }
+    } else if (parancsszavak.size() < 1) {
+      return helyszin.getHosszuLeiras();
     }
     return Uzenet.NEM_ERTEM.toString();
   }
 
   /**
-   * Elem(ek) használata. Lehetséges kimenetelek:
-   * 1) az elem nem használható
-   * 2) az elem nincs se a helyszínen, se a leltárban
-   * 3) az elem nem látható
-   * 4) az elemnek van egy kötelezően használandő párja, ami nincs benn a parancsban
-   * 
+   * Elem(ek) használata. Lehetséges kimenetelek: 1) az elem nem használható 2) az elem nincs se a
+   * helyszínen, se a leltárban 3) az elem nem látható 4) az elemnek van egy kötelezően használandő
+   * párja, ami nincs benn a parancsban
+   *
    * @param parancsszavak
    * @return szöveges üzenet az eredményről
    */

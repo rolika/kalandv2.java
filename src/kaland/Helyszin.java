@@ -51,7 +51,11 @@ enum Helyszin {
       return normal;
     }
   }
-
+  
+  String getHosszuLeiras() {
+    return leiras;
+  }
+  
   Helyszin getKijarat(Irany irany) {
     return kijaratok.getKijarat(irany);
   }
