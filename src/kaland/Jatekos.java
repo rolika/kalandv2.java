@@ -14,47 +14,74 @@ final class Jatekos {
   private final EnumSet<Allapot> allapot;
   private Helyszin helyszin;
 
+  /**
+   * A konstruktor beállítja a játékos állapotait és elhelyezi a térképen
+   *
+   * @param helyszin
+   */
   Jatekos(Helyszin helyszin) {
     allapot = EnumSet.of(Allapot.EL, Allapot.NEM_NYERT, Allapot.NEM_VESZTETT);
     setHelyszin(helyszin);
   }
 
+  /**
+   * Ellenőrzi, hogy a játékos a játékban van-e még
+   *
+   * @return igaz, ha igen, hamis, ha nem
+   */
   boolean jatekbanVan() {
     return allapot.contains(Allapot.EL) && allapot.contains(Allapot.NEM_NYERT)
       && allapot.contains(Allapot.NEM_VESZTETT);
   }
 
+  /**
+   * A helyszín, amelyben a játékos éppen tartózkodik
+   *
+   * @return aktuális helyszín
+   */
   Helyszin getHelyszin() {
     return helyszin;
   }
 
+  /**
+   * A játékos meghalt (csapda vagy ellenség)
+   */
   void setMeghalt() {
     allapot.remove(Allapot.EL);
   }
 
+  /**
+   * A játékos megnyerte a játékot, azaz elérte a kitűzött célt
+   */
   void setNyert() {
     allapot.remove(Allapot.NEM_NYERT);
   }
 
+  /**
+   * A játékos kilép
+   */
   void setVesztett() {
     allapot.remove(Allapot.NEM_VESZTETT);
   }
 
-  void setHelyszin(Helyszin helyszin) {
-    this.helyszin = helyszin;
+  /**
+   * Új helyszínt állít be
+   *
+   * @param helyszin új helyszín
+   */
+  void setHelyszin(Helyszin ujHelyszin) {
+    this.helyszin = ujHelyszin;
     helyszin.setKijaratok(Kijarat.valueOf(helyszin.toString())); // ugyanaz a konstans nevük
   }
 
   /**
-   * Elmozdulás a helyszínről, a következő lehetőségekkel:
-   * 1) a játékos falba ütközik, azaz arra nem mehet;
-   * 2) a játékos csukva vagy zárva lévő ajtóba ütközik, arra sem mehet;
-   * 3) az ajtó/elmozdulás UTÁN csapdába esik és meghal.
-   *    Fontos, hogy utána: a játékos ugyan ebből nem vesz észre semmit, de a csapda az áthaladás
-   *    HELYETT fog működésbe lépni. Azaz ebben a játékban a csapdák mindig az adott helyszín
-   *    bejárata mögött helyezkednek el. Olyat nem lehet, hogy a előbb csapda van és utána jönne
-   *    az ajtó. Fontos játéktervezési szempont!;
-   * 4) a játékos akadálytalanul mozog a célhelyszínre, kikerülve az esetleges csapdát.
+   * Elmozdulás a helyszínről, a következő lehetőségekkel: 1) a játékos falba ütközik, azaz arra nem
+   * mehet; 2) a játékos csukva vagy zárva lévő ajtóba ütközik, arra sem mehet; 3) az
+   * ajtó/elmozdulás UTÁN csapdába esik és meghal. Fontos, hogy utána: a játékos ugyan ebből nem
+   * vesz észre semmit, de a csapda az áthaladás HELYETT fog működésbe lépni. Azaz ebben a játékban
+   * a csapdák mindig az adott helyszín bejárata mögött helyezkednek el. Olyat nem lehet, hogy a
+   * előbb csapda van és utána jönne az ajtó. Fontos játéktervezési szempont!; 4) a játékos
+   * akadálytalanul mozog a célhelyszínre, kikerülve az esetleges csapdát.
    *
    * @param irany a játékos szándékának megfelelő irányenum
    * @return szöveges üzenet a szándékolt elmozdulás következményéről
@@ -84,11 +111,21 @@ final class Jatekos {
     return csapda == Csapda.NINCS ? Uzenet.RENDBEN.toString() : csapda.getInaktiv();
   }
 
+  /**
+   * A játékos kilép
+   *
+   * @return viszlát üzenet
+   */
   String kilep() {
     setVesztett();
     return Uzenet.VISZLAT.toString();
   }
 
+  /**
+   * Felsorolja a játékosnál lévő tárgyakat
+   *
+   * @return
+   */
   String leltar() {
     return Helyszin.LELTAR.targyak();
   }
@@ -103,8 +140,8 @@ final class Jatekos {
 
   /**
    * Kalandelemek vizsgálata. A parancsnak egy elemmel van igazán értelme, és persze látható elemek
-   * esetén. Nyitható elemek esetén kiírja a nyitva-csukva-zárva állapotot is.
-   * Magában állva ("megnézem") a helyszín leírását adja vissza.
+   * esetén. Nyitható elemek esetén kiírja a nyitva-csukva-zárva állapotot is. Magában állva
+   * ("megnézem") a helyszín leírását adja vissza.
    *
    * @return elemek, helyszínek leírása
    */
@@ -137,10 +174,10 @@ final class Jatekos {
 
   /**
    * Elem(ek) használata. Lehetséges kimenetelek: 1) az elem nem használható 2) az elem nincs se a
-   * helyszínen, se a leltárban 3) az elem nem látható 4) az elemnek van egy kötelezően használandő
+   * helyszínen, se a leltárban 3) az elem nem látható 4) az elemnek van egy kötelezően használandó
    * párja, ami nincs benn a parancsban
    *
-   * @return the java.lang.String
+   * @return megfelelő szöveges üzenet
    */
   String hasznal() {
     Set<Elem> elemek = Ertelmezo.getElemek();
@@ -169,6 +206,14 @@ final class Jatekos {
     return Uzenet.RENDBEN.toString();
   }
 
+  /**
+   * A játékos megpróbál kinyitni valamit: 1) csak nyitható és látható elemeket lehet kinyitni 2) az
+   * elemnek nyilván a helyszínen kell lennie 3) az elemnek csukva kell lennie 4) ha zárva van, kell
+   * a párja (kulcsa) is a parancsba (és nyilván a játékosnál kell legyen) 5) ha az elem már nyitva
+   * van
+   *
+   * @return megfelelő szöveges üzenet
+   */
   String nyit() {
     Set<Elem> parancsElemek = Ertelmezo.getElemek();
     Elem nyitandoElem;
@@ -179,7 +224,7 @@ final class Jatekos {
     } catch (NoSuchElementException e) {
       return Uzenet.NEM_ERTEM.toString();
     }
-    Set<Elem> nyithatoElemek = helyszin.elemSzuro(Allapot.NYITHATO);
+    Set<Elem> nyithatoElemek = helyszin.elemSzuro(Allapot.NYITHATO, Allapot.LATHATO);
     if (!nyithatoElemek.contains(nyitandoElem)) {
       return Uzenet.NEM_ERTEM.toString();
     } else if (nyitandoElem.checkAllapot(Allapot.CSUKVA)) {
@@ -200,17 +245,24 @@ final class Jatekos {
     }
   }
 
+  /**
+   * A játékos megpróbál becsukni valamit: 1) csak nyitható és látható elemeket lehet becsukni 2) az
+   * elemnek nyilván a helyszínen kell lennie 3) az elemnek nyitva kell lennie 4) ha az elem már
+   * csukva van
+   *
+   * @return megfelelő szöveges üzenet
+   */
   String csuk() {
     Set<Elem> parancsElemek = Ertelmezo.getElemek();
     Elem csukandoElem;
     try {
       csukandoElem = parancsElemek.stream()
-        .filter(elem -> elem.checkAllapot(Allapot.NYITHATO))
+        .filter(elem -> elem.checkAllapot(Allapot.NYITHATO, Allapot.LATHATO))
         .iterator().next();
     } catch (NoSuchElementException e) {
       return Uzenet.NEM_ERTEM.toString();
     }
-    Set<Elem> csukhatoElemek = helyszin.elemSzuro(Allapot.NYITHATO);
+    Set<Elem> csukhatoElemek = helyszin.elemSzuro(Allapot.NYITHATO, Allapot.LATHATO);
     if (!csukhatoElemek.contains(csukandoElem)) {
       return Uzenet.NEM_ERTEM.toString();
     } else if (csukandoElem.checkAllapot(Allapot.NYITVA)) {
@@ -222,17 +274,24 @@ final class Jatekos {
     }
   }
 
+  /**
+   * A játékos megpróbál bezárni valamit: 1) csak nyitható és látható elemeket lehet becsukni 2) az
+   * elemnek nyilván a helyszínen kell lennie 3) az elemnek nyitva vagy csukva kell lennie 4) ha az
+   * elemnek van kulcsa, az is a parancsban ill. a játékosnál legyen
+   *
+   * @return megfelelő szöveges üzenet
+   */
   String zar() {
     Set<Elem> parancsElemek = Ertelmezo.getElemek();
     Elem zarandoElem;
     try {
       zarandoElem = parancsElemek.stream()
-        .filter(elem -> elem.checkAllapot(Allapot.NYITHATO))
+        .filter(elem -> elem.checkAllapot(Allapot.NYITHATO, Allapot.LATHATO))
         .iterator().next();
     } catch (NoSuchElementException e) {
       return Uzenet.NEM_ERTEM.toString();
     }
-    Set<Elem> zarhatoElemek = helyszin.elemSzuro(Allapot.NYITHATO);
+    Set<Elem> zarhatoElemek = helyszin.elemSzuro(Allapot.NYITHATO, Allapot.LATHATO);
     if (!zarhatoElemek.contains(zarandoElem)) {
       return Uzenet.NEM_ERTEM.toString();
     } else if (zarandoElem.getPar() == Targy.NINCS) {
@@ -251,25 +310,52 @@ final class Jatekos {
     }
   }
 
-  String tamad(Set<Szotar> parancsszavak) {
+  /**
+   * A játékos megtámad valamit: 1) a támadás céljának megtámadhatónak, láthatónak és a helyszínen
+   * lévőnek kell lennie 2) ha van párja (ellenszere, ellenfegyvere), a játékosnál kell lennie, ill
+   * szerepelnie kell a parancsban
+   *
+   * @return megfelelő szöveges üzenet
+   */
+  String tamad() {
     return "Játékos támad.";
   }
 
+  /**
+   * Mindig a helyszín hosszú leírását közli
+   *
+   * @return rendben üzenet
+   */
   String hosszu() {
     helyszin.setLeiroMod(Allapot.HOSSZU);
     return Uzenet.RENDBEN.toString();
   }
 
+  /**
+   * Mindig a helyszín rövid leírását közli
+   *
+   * @return rendben üzenet
+   */
   String rovid() {
     helyszin.setLeiroMod(Allapot.ROVID);
     return Uzenet.RENDBEN.toString();
   }
 
+  /**
+   * Bejárt helyszín esetén a rövid, új esetén a hosszú leírást közli
+   *
+   * @return rendben üzenet
+   */
   String normal() {
     helyszin.setLeiroMod(Allapot.NORMAL);
     return Uzenet.RENDBEN.toString();
   }
 
+  /**
+   * A játékos igennel vagy nemmel válaszol egy kérdésre.
+   *
+   * @return megfelelő szöveges üzenet
+   */
   String megerosit() {
     return "Játékos megerősít.";
   }
