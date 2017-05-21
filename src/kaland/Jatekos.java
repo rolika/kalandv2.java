@@ -46,13 +46,15 @@ final class Jatekos {
   }
 
   /**
-   * Elmozdulás a helyszínről, a következő lehetőségekkel: 1) a játékos falba ütközik, azaz arra nem
-   * mehet; 2) a játékos csukva vagy zárva lévő ajtóba ütközik, arra sem mehet; 3) az
-   * ajtó/elmozdulás UTÁN csapdába esik és meghal. Fontos, hogy utána: a játékos ugyan ebből nem
-   * vesz észre semmit, de a csapda az áthaladás HELYETT fog működésbe lépni. Azaz ebben a játékban
-   * a csapdák mindig az adott helyszín bejárata mögött helyezkednek el. Olyat nem lehet, hogy a
-   * előbb csapda van és utána jönne az ajtó. Fontos játéktervezési szempont!; 4) a játékos
-   * akadálytalanul mozog a célhelyszínre, kikerülve az esetleges csapdát.
+   * Elmozdulás a helyszínről, a következő lehetőségekkel:
+   * 1) a játékos falba ütközik, azaz arra nem mehet;
+   * 2) a játékos csukva vagy zárva lévő ajtóba ütközik, arra sem mehet;
+   * 3) az ajtó/elmozdulás UTÁN csapdába esik és meghal.
+   *    Fontos, hogy utána: a játékos ugyan ebből nem vesz észre semmit, de a csapda az áthaladás
+   *    HELYETT fog működésbe lépni. Azaz ebben a játékban a csapdák mindig az adott helyszín
+   *    bejárata mögött helyezkednek el. Olyat nem lehet, hogy a előbb csapda van és utána jönne
+   *    az ajtó. Fontos játéktervezési szempont!;
+   * 4) a játékos akadálytalanul mozog a célhelyszínre, kikerülve az esetleges csapdát.
    *
    * @param irany a játékos szándékának megfelelő irányenum
    * @return szöveges üzenet a szándékolt elmozdulás következményéről
