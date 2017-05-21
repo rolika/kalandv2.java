@@ -13,23 +13,33 @@ class Jatek {
   private final Jatekos jatekos;
   private StringBuilder szoveg;
 
+  /**
+   * A konstruktor létrehozza a játékost és egy üres szövegmezőt.
+   */
   Jatek() {
     jatekos = new Jatekos(KEZDO_HELYSZIN);
     szoveg = new StringBuilder();
   }
 
-  Jatekos getJatekos() {
-    return jatekos;
-  }
-
+  /**
+   * A játékos játékban van (nem halt meg, nem nyert, nem vesztett)
+   *
+   * @return igaz, ha játékban van, hamis, ha nem
+   */
   boolean fut() {
     return jatekos.jatekbanVan();
   }
 
+  /**
+   * Felvázolja a játékos helyzetét. Ha nincs sötét: - helyszínleírás - látható és felvhető tárgyak
+   * felsorolása
+   *
+   * @return megfelelő szövege üzenet
+   */
   String helyzet() {
     szoveg = new StringBuilder();
-    if (jatekos.getHelyszin().getAllapot().contains(Allapot.SOTET) &&
-      !Targy.ZSEBLAMPA.checkAllapot(Allapot.AKTIV)) {
+    if (jatekos.getHelyszin().getAllapot().contains(Allapot.SOTET)
+      && !Targy.ZSEBLAMPA.checkAllapot(Allapot.AKTIV)) {
       szoveg.append(Uzenet.SOTET);
     } else {
       szoveg.append(jatekos.getHelyszin().getLeiras());
@@ -43,6 +53,13 @@ class Jatek {
     return szoveg.toString();
   }
 
+  /**
+   * Meghívja az parancsvégrehajtót. Azért van rá szükség, hogy a konzolos és a gui-változat
+   * független lehessen, mivel kell a játékos (amúgy a játékost a konzolban és a gui-ban is
+   * deklarálni kellene valahogy); az értelmező a megfelelő metódust reflection-nel hívja meg.
+   *
+   * @return a játékos szándékának megfelelő szöveges üzenet
+   */
   Object vegrehajt() {
     return Ertelmezo.vegrehajt(jatekos);
   }
@@ -63,7 +80,7 @@ class Jatek {
     if (Targy.SZOBOR_KAR.checkAllapot(Allapot.AKTIV)) { // hatástalanítja a penge-csapdát
       Csapda.PENGE.addAllapot(Allapot.LATHATO);
     }
-    if (Targy.KONYHASZEKRENY.checkAllapot(Allapot.VIZSGALT)) {
+    if (Targy.KONYHASZEKRENY.checkAllapot(Allapot.VIZSGALT)) { // felfedi a fiókot és az ajtót
       Targy.FIOK.addAllapot(Allapot.LATHATO);
       Targy.KONYHASZEKRENYAJTO.addAllapot(Allapot.LATHATO);
     }
@@ -72,8 +89,8 @@ class Jatek {
     }
     if (Targy.GERENDA.checkAllapot(Allapot.AKTIV) && Targy.KOTEL.checkAllapot(Allapot.AKTIV)) {
       Csapda.KURTO.addAllapot(Allapot.LATHATO); // hatástalanítja kürtőt
-      Targy.KOTEL.removeAllapot(Allapot.HASZNALHATO, Allapot.FELVEHETO);
-      Targy.GERENDA.removeAllapot(Allapot.HASZNALHATO);
+      Targy.KOTEL.removeAllapot(Allapot.HASZNALHATO, Allapot.FELVEHETO); // és már nem lehet
+      Targy.GERENDA.removeAllapot(Allapot.HASZNALHATO); // visszacsinálni
     }
   }
 
