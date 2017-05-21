@@ -16,11 +16,10 @@ class Ertelmezo {
   private static Set<Szotar> parancsszavak;
 
   /**
-   * A kapott parancsból kiszűri az szótárában szereplő szavakat és megpróbálja a megfelelő
+   * A kapott parancsból kiszűri az szótárában szereplő szavakat és megpróbálja a megfelelő szótár-
    * enumokhoz hozzárendelni. A megértett parancsszavak enumjaiból egy hashsetet készít.
    *
    * @param parancs játékos által begépelt parancs
-   * @return
    */
   static void szetbont(String parancs) {
     parancsszavak = new HashSet<>();
@@ -116,7 +115,8 @@ class Ertelmezo {
   }
 
   /**
-   * Az értelmezett elemeket tartalmazó enumok set-jét adja vissza
+   * Az értelmezett elemeket tartalmazó szótárenumokat hozzárendeli a szótári elemhez tartozó
+   * tényleges elemhez.
    *
    * @return elemek set-je
    */
