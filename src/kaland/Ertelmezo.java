@@ -15,6 +15,13 @@ class Ertelmezo {
 
   private static Set<Szotar> parancsszavak;
 
+  /**
+   * A kapott parancsból kiszűri az szótárában szereplő szavakat és megpróbálja a megfelelő
+   * enumokhoz hozzárendelni. A megértett parancsszavak enumjaiból egy hashsetet készít.
+   *
+   * @param parancs játékos által begépelt parancs
+   * @return
+   */
   static Set<Szotar> szetbont(String parancs) {
     parancsszavak = new HashSet<>();
     parancs = parancs.replaceAll(",", "");
@@ -62,6 +69,13 @@ class Ertelmezo {
     return parancsszavak;
   }
 
+  /**
+   * Megpóbálja végrehajtani a játékos által begépelt parancsot, előbb kiszűrve az esetleges mozgási
+   * szándékot, ill. ha ez nincs, akkor az utasítást követni.
+   *
+   * @param jatekos a játékost megvalósító osztály
+   * @return megfelelő szöveges üzenet
+   */
   static Object vegrehajt(Jatekos jatekos) {
     Irany irany = (Irany) mozgasiSzandek();
     Method parancs = cselekvesiSzandek(jatekos);
@@ -78,7 +92,7 @@ class Ertelmezo {
     }
   }
 
-  static Szotar mozgasiSzandek() {
+  private static Szotar mozgasiSzandek() {
     for (Irany parancsszo : Irany.values()) {
       if (parancsszavak.contains(parancsszo)) {
         return parancsszo;
@@ -87,7 +101,7 @@ class Ertelmezo {
     return null;
   }
 
-  static Method cselekvesiSzandek(Jatekos jatekos) {
+  private static Method cselekvesiSzandek(Jatekos jatekos) {
     for (Parancs parancsszo : Parancs.values()) {
       if (parancsszavak.remove(parancsszo)) {
         try {
@@ -102,6 +116,11 @@ class Ertelmezo {
     return null;
   }
 
+  /**
+   * Az értelmezett elemeket tartalmazó enumok set-jét adja vissza
+   *
+   * @return elemek set-je
+   */
   static Set<Elem> getElemek() {
     return parancsszavak.stream()
       .map(Ertelmezo::getElem)
