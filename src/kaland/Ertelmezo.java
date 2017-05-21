@@ -102,7 +102,13 @@ class Ertelmezo {
     return null;
   }
 
-  static Elem getElem(Szotar szo) {
+  static Set<Elem> getElemek() {
+    return parancsszavak.stream()
+      .map(Ertelmezo::getElem)
+      .collect(Collectors.toSet());
+  }
+
+  private static Elem getElem(Szotar szo) {
     if (szo.getClass().equals(TargySzotar.class)) {
       return Targy.valueOf(szo.toString());
     } else if (szo.getClass().equals(AjtoSzotar.class)) {
@@ -111,12 +117,6 @@ class Ertelmezo {
       return Csapda.valueOf(szo.toString());
     }
     return null; // elvileg nem fordulhat elő
-  }
-
-  static Set<Elem> getElemek() {
-    return parancsszavak.stream()
-      .map(Ertelmezo::getElem)
-      .collect(Collectors.toSet());
   }
 
 }
