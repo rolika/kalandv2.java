@@ -22,7 +22,8 @@ enum TargySzotar implements Szotar {
   KONYHASZEKRENYAJTO("szekrényajtó", "szekrényajtót", "szekrényajtóval"),
   FIOK("fiók", "fiókot", "fiókkal"),
   KOTEL("kötél", "kötelet", "kötéllel", "kenderkötél", "kenderkötelet", "kenderkötéllel"),
-  GERENDA("gerenda", "gerendát", "gerendával", "mestergerenda", "mestergerendát", "mestergerendával");
+  GERENDA("gerenda", "gerendát", "gerendával", "mestergerenda", "mestergerendát", "mestergerendával"),
+  MINDEN("minden", "mindent", "mindet", "összeset");
 
   private final Set<String> szinonimak;
 

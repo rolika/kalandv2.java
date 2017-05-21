@@ -275,16 +275,12 @@ final class Jatekos {
     return "Játékos megerősít.";
   }
 
-  String minden(Set<Szotar> parancsszavak) {
-    return Uzenet.NEM_ERTEM.toString();
-  }
-
   private String mozgat(Set<Szotar> parancsszavak, Helyszin forras, Helyszin cel) {
-    Set<Elem> mozgathatoTargyak
-      = forras.elemSzuro(Allapot.LATHATO, Allapot.FELVEHETO);
-    Set<Elem> mozgatandoTargyak;
-    mozgatandoTargyak = parancsszavak.remove(Parancs.MINDEN)
-      ? mozgathatoTargyak : Ertelmezo.getElemek();
+    Set<Elem> mozgathatoTargyak = forras.elemSzuro(Allapot.LATHATO, Allapot.FELVEHETO);
+    Set<Elem> mozgatandoTargyak = Ertelmezo.getElemek();
+    if (mozgatandoTargyak.remove(Targy.MINDEN)) {
+      mozgatandoTargyak = mozgathatoTargyak;
+    }
     if (mozgathatoTargyak.containsAll(mozgatandoTargyak)) {
       Helyszin tmp = forras == Helyszin.LELTAR ? Helyszin.KEZ_LE : Helyszin.KEZ_FEL;
       mozgatandoTargyak.forEach(targy -> targy.setHely(tmp));

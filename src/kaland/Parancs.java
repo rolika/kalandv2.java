@@ -25,8 +25,7 @@ enum Parancs implements Szotar {
   HOSSZU("hosszú", "bő", "info", "infó", "mutasd", "leírás"),
   ROVID("rövid", "kevés"),
   NORMAL("normál", "rendes"),
-  MEGEROSIT("igen", "i"),
-  MINDEN("minden", "mindent", "mindet", "összeset");
+  MEGEROSIT("igen", "i");
 
   private final Set<String> szinonimak;
 
