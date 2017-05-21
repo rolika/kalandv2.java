@@ -84,21 +84,21 @@ final class Jatekos {
     return csapda == Csapda.NINCS ? Uzenet.RENDBEN.toString() : csapda.getInaktiv();
   }
 
-  String kilep(Set<Szotar> parancsszavak) {
+  String kilep() {
     setVesztett();
     return Uzenet.VISZLAT.toString();
   }
 
-  String leltar(Set<Szotar> parancsszavak) {
+  String leltar() {
     return Helyszin.LELTAR.targyak();
   }
 
-  String vesz(Set<Szotar> parancsszavak) {
-    return mozgat(parancsszavak, helyszin, Helyszin.LELTAR);
+  String vesz() {
+    return mozgat(helyszin, Helyszin.LELTAR);
   }
 
-  String tesz(Set<Szotar> parancsszavak) {
-    return mozgat(parancsszavak, Helyszin.LELTAR, helyszin);
+  String tesz() {
+    return mozgat(Helyszin.LELTAR, helyszin);
   }
 
   /**
@@ -106,10 +106,9 @@ final class Jatekos {
    * esetén. Nyitható elemek esetén kiírja a nyitva-csukva-zárva állapotot is.
    * Magában állva ("megnézem") a helyszín leírását adja vissza.
    *
-   * @param parancsszavak
    * @return elemek, helyszínek leírása
    */
-  String vizsgal(Set<Szotar> parancsszavak) {
+  String vizsgal() {
     Set<Elem> vizsgalandoElem = Ertelmezo.getElemek();
     if (vizsgalandoElem.size() == 1) {
       Elem elem = vizsgalandoElem.iterator().next();
@@ -141,10 +140,9 @@ final class Jatekos {
    * helyszínen, se a leltárban 3) az elem nem látható 4) az elemnek van egy kötelezően használandő
    * párja, ami nincs benn a parancsban
    *
-   * @param parancsszavak
-   * @return szöveges üzenet az eredményről
+   * @return the java.lang.String
    */
-  String hasznal(Set<Szotar> parancsszavak) {
+  String hasznal() {
     Set<Elem> elemek = Ertelmezo.getElemek();
     for (Elem elem : elemek) {
       if (!elem.checkAllapot(Allapot.HASZNALHATO)) {
@@ -157,7 +155,7 @@ final class Jatekos {
         return Uzenet.MIVEL.toString();
       }
     }
-    for (Elem elem : elemek) {
+    elemek.forEach(elem -> {
       if (elem.checkAllapot(Allapot.KAPCSOLGATHATO)) {
         if (elem.checkAllapot(Allapot.AKTIV)) {
           elem.removeAllapot(Allapot.AKTIV);
@@ -167,11 +165,11 @@ final class Jatekos {
       } else {
         elem.addAllapot(Allapot.AKTIV);
       }
-    }
+    });
     return Uzenet.RENDBEN.toString();
   }
 
-  String nyit(Set<Szotar> parancsszavak) {
+  String nyit() {
     Set<Elem> parancsElemek = Ertelmezo.getElemek();
     Elem nyitandoElem;
     try {
@@ -202,7 +200,7 @@ final class Jatekos {
     }
   }
 
-  String csuk(Set<Szotar> parancsszavak) {
+  String csuk() {
     Set<Elem> parancsElemek = Ertelmezo.getElemek();
     Elem csukandoElem;
     try {
@@ -224,7 +222,7 @@ final class Jatekos {
     }
   }
 
-  String zar(Set<Szotar> parancsszavak) {
+  String zar() {
     Set<Elem> parancsElemek = Ertelmezo.getElemek();
     Elem zarandoElem;
     try {
@@ -257,26 +255,26 @@ final class Jatekos {
     return "Játékos támad.";
   }
 
-  String hosszu(Set<Szotar> parancsszavak) {
+  String hosszu() {
     helyszin.setLeiroMod(Allapot.HOSSZU);
     return Uzenet.RENDBEN.toString();
   }
 
-  String rovid(Set<Szotar> parancsszavak) {
+  String rovid() {
     helyszin.setLeiroMod(Allapot.ROVID);
     return Uzenet.RENDBEN.toString();
   }
 
-  String normal(Set<Szotar> parancsszavak) {
+  String normal() {
     helyszin.setLeiroMod(Allapot.NORMAL);
     return Uzenet.RENDBEN.toString();
   }
 
-  String megerosit(Set<Szotar> parancsszavak) {
+  String megerosit() {
     return "Játékos megerősít.";
   }
 
-  private String mozgat(Set<Szotar> parancsszavak, Helyszin forras, Helyszin cel) {
+  private String mozgat(Helyszin forras, Helyszin cel) {
     Set<Elem> mozgathatoTargyak = forras.elemSzuro(Allapot.LATHATO, Allapot.FELVEHETO);
     Set<Elem> mozgatandoTargyak = Ertelmezo.getElemek();
     if (mozgatandoTargyak.remove(Targy.MINDEN)) {

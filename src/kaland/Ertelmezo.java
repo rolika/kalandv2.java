@@ -69,7 +69,7 @@ class Ertelmezo {
       return jatekos.megy(irany);
     } else if (parancs != null) {
       try {
-        return parancs.invoke(jatekos, parancsszavak);
+        return parancs.invoke(jatekos);
       } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
         return null;
       }
@@ -92,8 +92,7 @@ class Ertelmezo {
       if (parancsszavak.remove(parancsszo)) {
         try {
           String kezelo = parancsszo.toString().toLowerCase();
-          Class parameter = Set.class;
-          return jatekos.getClass().getDeclaredMethod(kezelo, parameter);
+          return jatekos.getClass().getDeclaredMethod(kezelo);
         } catch (NoSuchMethodException | IllegalArgumentException e) {
           System.out.println(e.toString()); // debug
           return null;
