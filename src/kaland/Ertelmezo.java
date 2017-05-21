@@ -22,7 +22,7 @@ class Ertelmezo {
    * @param parancs játékos által begépelt parancs
    * @return
    */
-  static Set<Szotar> szetbont(String parancs) {
+  static void szetbont(String parancs) {
     parancsszavak = new HashSet<>();
     parancs = parancs.replaceAll(",", "");
     parancs = parancs.replaceAll("\\s+", " ");
@@ -66,7 +66,6 @@ class Ertelmezo {
       }
       // végül az ellenségeket
     }
-    return parancsszavak;
   }
 
   /**
