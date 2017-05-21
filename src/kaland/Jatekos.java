@@ -110,8 +110,9 @@ final class Jatekos {
    * @return elemek, helyszínek leírása
    */
   String vizsgal(Set<Szotar> parancsszavak) {
-    if (parancsszavak.size() == 1) {
-      Elem elem = Ertelmezo.getElem(parancsszavak.iterator().next());
+    Set<Elem> vizsgalandoElem = Ertelmezo.getElemek();
+    if (vizsgalandoElem.size() == 1) {
+      Elem elem = vizsgalandoElem.iterator().next();
       Set<Elem> lathatoTargyak = helyszin.elemSzuro(Allapot.LATHATO);
       lathatoTargyak.addAll(Helyszin.LELTAR.elemSzuro());
       if (lathatoTargyak.contains(elem)) {
@@ -129,7 +130,7 @@ final class Jatekos {
         }
         return leiras.toString();
       }
-    } else if (parancsszavak.size() < 1) {
+    } else if (vizsgalandoElem.size() < 1) {
       return helyszin.getHosszuLeiras();
     }
     return Uzenet.NEM_ERTEM.toString();
