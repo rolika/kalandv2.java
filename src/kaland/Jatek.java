@@ -27,7 +27,7 @@ class Jatek {
    * @return igaz, ha játékban van, hamis, ha nem
    */
   boolean fut() {
-    return jatekos.jatekbanVan();
+    return jatekos.checkAllapot(Allapot.EL, Allapot.NEM_NYERT, Allapot.NEM_VESZTETT);
   }
 
   /**

@@ -1,5 +1,6 @@
 package kaland;
 
+import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.NoSuchElementException;
 import java.util.Set;
@@ -9,29 +10,60 @@ import java.util.Set;
  *
  * @author rolika
  */
-final class Jatekos {
+final class Jatekos implements Elem {
 
   private final EnumSet<Allapot> allapot;
-  private Helyszin helyszin;
+  private Helyszin hely;
 
   /**
    * A konstruktor beállítja a játékos állapotait és elhelyezi a térképen
    *
-   * @param helyszin
+   * @param hely
    */
-  Jatekos(Helyszin helyszin) {
+  Jatekos(Helyszin hely) {
     allapot = EnumSet.of(Allapot.EL, Allapot.NEM_NYERT, Allapot.NEM_VESZTETT);
-    setHelyszin(helyszin);
+    setHely(hely);
   }
 
-  /**
-   * Ellenőrzi, hogy a játékos a játékban van-e még
-   *
-   * @return igaz, ha igen, hamis, ha nem
-   */
-  boolean jatekbanVan() {
-    return allapot.contains(Allapot.EL) && allapot.contains(Allapot.NEM_NYERT)
-      && allapot.contains(Allapot.NEM_VESZTETT);
+  @Override
+  public String getNev() {
+    throw new UnsupportedOperationException("Nincs szükség rá.");
+  }
+
+  @Override
+  public String getLeiras() {
+    throw new UnsupportedOperationException("Nincs szükség rá.");
+  }
+
+  @Override
+  public EnumSet<Helyszin> getHely() {
+    throw new UnsupportedOperationException("Nincs szükség rá.");
+  }
+
+  @Override
+  public void addAllapot(Allapot... allapot) {
+    this.allapot.addAll(Arrays.asList(allapot));
+  }
+
+  @Override
+  public void removeAllapot(Allapot... allapot) {
+    this.allapot.removeAll(Arrays.asList(allapot));
+  }
+
+  @Override
+  public boolean checkAllapot(Allapot... allapot) {
+    return this.allapot.containsAll(Arrays.asList(allapot));
+  }
+
+  @Override
+  public void setHely(Helyszin hely) {
+    this.hely = hely;
+    hely.setKijaratok(Kijarat.valueOf(hely.toString())); // ugyanaz a konstans nevük
+  }
+
+  @Override
+  public Elem getPar() {
+    throw new UnsupportedOperationException("Nincs szükség rá.");
   }
 
   /**
@@ -40,28 +72,7 @@ final class Jatekos {
    * @return aktuális helyszín
    */
   Helyszin getHelyszin() {
-    return helyszin;
-  }
-
-  /**
-   * A játékos meghalt (csapda vagy ellenség)
-   */
-  void setMeghalt() {
-    allapot.remove(Allapot.EL);
-  }
-
-  /**
-   * A játékos megnyerte a játékot, azaz elérte a kitűzött célt
-   */
-  void setNyert() {
-    allapot.remove(Allapot.NEM_NYERT);
-  }
-
-  /**
-   * A játékos kilép
-   */
-  void setVesztett() {
-    allapot.remove(Allapot.NEM_VESZTETT);
+    return hely;
   }
 
   /**
@@ -70,8 +81,8 @@ final class Jatekos {
    * @param helyszin új helyszín
    */
   void setHelyszin(Helyszin ujHelyszin) {
-    this.helyszin = ujHelyszin;
-    helyszin.setKijaratok(Kijarat.valueOf(helyszin.toString())); // ugyanaz a konstans nevük
+    this.hely = ujHelyszin;
+    hely.setKijaratok(Kijarat.valueOf(hely.toString())); // ugyanaz a konstans nevük
   }
 
   /**
@@ -87,13 +98,13 @@ final class Jatekos {
    * @return szöveges üzenet a szándékolt elmozdulás következményéről
    */
   String megy(Irany irany) {
-    Helyszin ujHelyszin = helyszin.getKijarat(irany);
+    Helyszin ujHelyszin = hely.getKijarat(irany);
     // a játékos falba ütközik
     if (ujHelyszin == null) {
       return Uzenet.ARRA_NEM.toString();
     }
-    Ajto ajto = helyszin.ajto(ujHelyszin);
-    Csapda csapda = helyszin.csapda(ujHelyszin);
+    Ajto ajto = hely.ajto(ujHelyszin);
+    Csapda csapda = hely.csapda(ujHelyszin);
     // a játékos csukva vagy zárva lévő ajtóba ütközik
     if (ajto.checkAllapot(Allapot.CSUKVA)) {
       return Uzenet.CSUKVA.getNevelo(ajto);
@@ -102,12 +113,12 @@ final class Jatekos {
     }
     // a játékos csapdába esik és meghal
     if (csapda != Csapda.NINCS && !csapda.checkAllapot(Allapot.LATHATO)) {
-      setMeghalt();
+      removeAllapot(Allapot.EL);
       return csapda.getAktiv();
     }
     // a játékos továbbhalad az új helyszínre
     // (nincs ajtó, vagy nyitva van, nincs csapda, vagy már inaktív)
-    setHelyszin(ujHelyszin);
+    setHely(ujHelyszin);
     return csapda == Csapda.NINCS ? Uzenet.RENDBEN.toString() : csapda.getInaktiv();
   }
 
@@ -117,7 +128,7 @@ final class Jatekos {
    * @return viszlát üzenet
    */
   String kilep() {
-    setVesztett();
+    removeAllapot(Allapot.NEM_VESZTETT);
     return Uzenet.VISZLAT.toString();
   }
 
@@ -131,11 +142,11 @@ final class Jatekos {
   }
 
   String vesz() {
-    return mozgat(helyszin, Helyszin.LELTAR);
+    return mozgat(hely, Helyszin.LELTAR);
   }
 
   String tesz() {
-    return mozgat(Helyszin.LELTAR, helyszin);
+    return mozgat(Helyszin.LELTAR, hely);
   }
 
   /**
@@ -149,7 +160,7 @@ final class Jatekos {
     Set<Elem> vizsgalandoElem = Ertelmezo.getElemek();
     if (vizsgalandoElem.size() == 1) {
       Elem elem = vizsgalandoElem.iterator().next();
-      Set<Elem> lathatoTargyak = helyszin.elemSzuro(Allapot.LATHATO);
+      Set<Elem> lathatoTargyak = hely.elemSzuro(Allapot.LATHATO);
       lathatoTargyak.addAll(Helyszin.LELTAR.elemSzuro());
       if (lathatoTargyak.contains(elem)) {
         elem.addAllapot(Allapot.VIZSGALT);
@@ -167,7 +178,7 @@ final class Jatekos {
         return leiras.toString();
       }
     } else if (vizsgalandoElem.size() < 1) {
-      return helyszin.getHosszuLeiras();
+      return hely.getHosszuLeiras();
     }
     return Uzenet.NEM_ERTEM.toString();
   }
@@ -184,7 +195,7 @@ final class Jatekos {
     for (Elem elem : elemek) {
       if (!elem.checkAllapot(Allapot.HASZNALHATO)) {
         return Uzenet.NEM_LEHET.toString();
-      } else if (!elem.getHely().contains(helyszin) && !elem.getHely().contains(Helyszin.LELTAR)) {
+      } else if (!elem.getHely().contains(hely) && !elem.getHely().contains(Helyszin.LELTAR)) {
         return Uzenet.NEM_ERTEM.toString();
       } else if (!elem.checkAllapot(Allapot.LATHATO)) {
         return Uzenet.NEM_LATHATO.toString();
@@ -224,7 +235,7 @@ final class Jatekos {
     } catch (NoSuchElementException e) {
       return Uzenet.NEM_ERTEM.toString();
     }
-    Set<Elem> nyithatoElemek = helyszin.elemSzuro(Allapot.NYITHATO, Allapot.LATHATO);
+    Set<Elem> nyithatoElemek = hely.elemSzuro(Allapot.NYITHATO, Allapot.LATHATO);
     if (!nyithatoElemek.contains(nyitandoElem)) {
       return Uzenet.NEM_ERTEM.toString();
     } else if (nyitandoElem.checkAllapot(Allapot.CSUKVA)) {
@@ -262,7 +273,7 @@ final class Jatekos {
     } catch (NoSuchElementException e) {
       return Uzenet.NEM_ERTEM.toString();
     }
-    Set<Elem> csukhatoElemek = helyszin.elemSzuro(Allapot.NYITHATO, Allapot.LATHATO);
+    Set<Elem> csukhatoElemek = hely.elemSzuro(Allapot.NYITHATO, Allapot.LATHATO);
     if (!csukhatoElemek.contains(csukandoElem)) {
       return Uzenet.NEM_ERTEM.toString();
     } else if (csukandoElem.checkAllapot(Allapot.NYITVA)) {
@@ -291,7 +302,7 @@ final class Jatekos {
     } catch (NoSuchElementException e) {
       return Uzenet.NEM_ERTEM.toString();
     }
-    Set<Elem> zarhatoElemek = helyszin.elemSzuro(Allapot.NYITHATO, Allapot.LATHATO);
+    Set<Elem> zarhatoElemek = hely.elemSzuro(Allapot.NYITHATO, Allapot.LATHATO);
     if (!zarhatoElemek.contains(zarandoElem)) {
       return Uzenet.NEM_ERTEM.toString();
     } else if (zarandoElem.getPar() == Targy.NINCS) {
@@ -327,7 +338,7 @@ final class Jatekos {
    * @return rendben üzenet
    */
   String hosszu() {
-    helyszin.setLeiroMod(Allapot.HOSSZU);
+    hely.setLeiroMod(Allapot.HOSSZU);
     return Uzenet.RENDBEN.toString();
   }
 
@@ -337,7 +348,7 @@ final class Jatekos {
    * @return rendben üzenet
    */
   String rovid() {
-    helyszin.setLeiroMod(Allapot.ROVID);
+    hely.setLeiroMod(Allapot.ROVID);
     return Uzenet.RENDBEN.toString();
   }
 
@@ -347,7 +358,7 @@ final class Jatekos {
    * @return rendben üzenet
    */
   String normal() {
-    helyszin.setLeiroMod(Allapot.NORMAL);
+    hely.setLeiroMod(Allapot.NORMAL);
     return Uzenet.RENDBEN.toString();
   }
 
