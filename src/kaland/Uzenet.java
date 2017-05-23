@@ -1,7 +1,5 @@
 package kaland;
 
-import java.util.Arrays;
-
 /**
  * Kalandozás közben előforduló üzenetek
  *
@@ -34,7 +32,9 @@ public enum Uzenet {
   FELVEVE("Felvéve"),
   LETEVE("Letéve"),
   A("A "),
-  AZ("Az");
+  AZ("Az"),
+  KOTEL_1("A kötél a gerendán lóg."),
+  KOTEL_2("A kötél a gerendán lóg, a vége eltűnik a láda mélyén.");
 
   private final String uzenet;
 

@@ -43,6 +43,7 @@ class Jatek {
       szoveg.append(Uzenet.SOTET);
     } else {
       szoveg.append(jatekos.getHelyszin().getLeiras());
+      allapotfuggoUzenetek();
       String targyak = jatekos.getHelyszin().targyak();
       if (!targyak.isEmpty()) {
         szoveg.append('\n');
@@ -91,6 +92,21 @@ class Jatek {
       Csapda.KURTO.addAllapot(Allapot.LATHATO); // hatástalanítja kürtőt
       Targy.KOTEL.removeAllapot(Allapot.HASZNALHATO, Allapot.FELVEHETO); // és már nem lehet
       Targy.GERENDA.removeAllapot(Allapot.HASZNALHATO); // visszacsinálni
+    }
+    if (Ajto.LADA.checkAllapot(Allapot.NYITVA)) { // ha egyszer kinyílt,
+      Ajto.LADA.removeAllapot(Allapot.NYITHATO); // nem lehet visszacsukni
+    }
+  }
+  
+  private void allapotfuggoUzenetek() {    
+    if (jatekos.getHelyszin() == Helyszin.PADLAS_VEGE 
+      && Targy.KOTEL.checkAllapot(Allapot.AKTIV) && !Ajto.LADA.checkAllapot(Allapot.NYITVA)) {
+      szoveg.append('\n');
+      szoveg.append(Uzenet.KOTEL_1);
+    } else if (jatekos.getHelyszin() == Helyszin.PADLAS_VEGE 
+      && Targy.KOTEL.checkAllapot(Allapot.AKTIV) && Ajto.LADA.checkAllapot(Allapot.NYITVA)) {
+      szoveg.append('\n');
+      szoveg.append(Uzenet.KOTEL_2);
     }
   }
 
