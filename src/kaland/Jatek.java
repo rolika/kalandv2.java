@@ -17,7 +17,7 @@ class Jatek {
    * A konstruktor létrehozza a játékost és egy üres szövegmezőt.
    */
   Jatek() {
-    jatekos = new Jatekos(KEZDO_HELYSZIN);
+    jatekos = new Jatekos(KEZDO_HELYSZIN, Allapot.EL, Allapot.NEM_NYERT, Allapot.NEM_VESZTETT);
     szoveg = new StringBuilder();
   }
 

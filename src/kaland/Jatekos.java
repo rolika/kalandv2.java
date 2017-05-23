@@ -1,5 +1,6 @@
 package kaland;
 
+import com.google.common.collect.Sets;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.NoSuchElementException;
@@ -20,8 +21,8 @@ final class Jatekos implements Elem {
    *
    * @param hely
    */
-  Jatekos(Helyszin hely) {
-    allapot = EnumSet.of(Allapot.EL, Allapot.NEM_NYERT, Allapot.NEM_VESZTETT);
+  Jatekos(Helyszin hely, Allapot ... allapot) {
+    this.allapot = Sets.newEnumSet(Arrays.asList(allapot), Allapot.class);
     setHely(hely);
   }
 
