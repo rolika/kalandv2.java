@@ -76,16 +76,6 @@ final class Jatekos implements Elem {
   }
 
   /**
-   * Új helyszínt állít be
-   *
-   * @param helyszin új helyszín
-   */
-  void setHelyszin(Helyszin ujHelyszin) {
-    this.hely = ujHelyszin;
-    hely.setKijaratok(Kijarat.valueOf(hely.toString())); // ugyanaz a konstans nevük
-  }
-
-  /**
    * Elmozdulás a helyszínről, a következő lehetőségekkel: 1) a játékos falba ütközik, azaz arra nem
    * mehet; 2) a játékos csukva vagy zárva lévő ajtóba ütközik, arra sem mehet; 3) az
    * ajtó/elmozdulás UTÁN csapdába esik és meghal. Fontos, hogy utána: a játékos ugyan ebből nem
