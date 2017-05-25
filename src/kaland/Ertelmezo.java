@@ -63,6 +63,13 @@ class Ertelmezo {
           parancsszavak.add(szoEnum);
         }
       }
+      // helyszíneket,
+      for (Szotar csapda : HelyszinSzotar.values()) {
+        szoEnum = csapda.getSzoEnum(szo);
+        if (szoEnum != null) {
+          parancsszavak.add(szoEnum);
+        }
+      }
       // végül az ellenségeket
     }
   }
@@ -133,6 +140,8 @@ class Ertelmezo {
       return Ajto.valueOf(szo.toString());
     } else if (szo.getClass().equals(CsapdaSzotar.class)) {
       return Csapda.valueOf(szo.toString());
+    } else if(szo.getClass().equals(HelyszinSzotar.class)) {
+      return Helyszin.valueOf(szo.toString());
     }
     return null; // elvileg nem fordulhat elő
   }
