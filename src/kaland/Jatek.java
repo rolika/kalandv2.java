@@ -38,7 +38,7 @@ class Jatek {
    */
   String helyzet() {
     szoveg = new StringBuilder();
-    if (jatekos.getHelyszin().getAllapot().contains(Allapot.SOTET)
+    if (jatekos.getHelyszin().checkAllapot(Allapot.SOTET)
       && !Targy.ZSEBLAMPA.checkAllapot(Allapot.AKTIV)) {
       szoveg.append(Uzenet.SOTET);
     } else {

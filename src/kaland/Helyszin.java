@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  *
  * @author rolika
  */
-enum Helyszin {
+enum Helyszin implements Elem {
 
   HAZ_ELOTT("Ház előtt", "Egy rémisztően régi ház teraszán állsz, mely sejtésed szerint olyan ősi titkot rejt, melyet igazán még magadnak sem mersz bevallani. A civilizációtól érintetlen erdő tisztását a napfény csak nehéz párákkal terhesen tudja megvilágítani, pedig kora délután érkeztél. A fura félhomályban ódon falak tornyosulnak fenyegetően föléd, korhadó favázukat kizárólag istenkáromló imádság tarthatja össze, a málló vakolat alól nedvesen csillogó téglák látszanak. A tető fazsindelyei viharvertek, nagy részük mohával borított. Az opálos ablaküvegek mögül rossz emlékek sötétje ásít, néhányuk bedeszkázva várja az elmúlást. Előtted, észak felé a bejárati ajtó vár rád.", Allapot.VILAGOS),
   ELOTER("Előtér", "Tépett, málló, világoszöld mintás tapéta púposodik és kunkorodik az előtér erős dohszagot árasztó falain. A nedves falakat alul megfakult, penészes, itt-ott hiányos faburkolat takarja, nagyjából derékmagasságig. A hajópadló a lábad alatt hangosan tiltakozik a rég nem viselt teher ellen. A mennyezetről súlyos porréteggel terhelt pókhálók lógnak. Északra egy folyosóban folytatódik a helyiség, míg délre a bejárati ajtó van.", Allapot.VILAGOS),
@@ -32,13 +32,19 @@ enum Helyszin {
   private Kijarat kijaratok;
   private final EnumSet<Allapot> allapot;
 
-  private Helyszin(String nev, String leiras, Allapot vilagitas) {
+  private Helyszin(String nev, String leiras, Allapot ... allapot) {
     this.nev = nev;
     this.leiras = leiras;
-    allapot = EnumSet.of(vilagitas);
+    this.allapot = Sets.newEnumSet(Arrays.asList(allapot), Allapot.class);
   }
 
-  String getLeiras() {
+  @Override
+  public String getNev() {
+    return nev;
+  }
+
+  @Override
+  public String getLeiras() {
     if (allapot.contains(Allapot.HOSSZU)) {
       allapot.remove(Allapot.BEJART);
       return leiras;
@@ -51,6 +57,21 @@ enum Helyszin {
       return normal;
     }
   }
+
+  @Override
+  public void addAllapot(Allapot... allapot) {
+    this.allapot.addAll(Arrays.asList(allapot));
+  }
+
+  @Override
+  public void removeAllapot(Allapot... allapot) {
+    this.allapot.removeAll(Arrays.asList(allapot));
+  }
+
+  @Override
+  public boolean checkAllapot(Allapot... allapot) {
+    return this.allapot.containsAll(Arrays.asList(allapot));
+  }
   
   String getHosszuLeiras() {
     return leiras;
@@ -58,10 +79,6 @@ enum Helyszin {
   
   Helyszin getKijarat(Irany irany) {
     return kijaratok.getKijarat(irany);
-  }
-
-  EnumSet<Allapot> getAllapot() {
-    return allapot;
   }
 
   void setKijaratok(Kijarat kijaratok) {
@@ -140,6 +157,21 @@ enum Helyszin {
       }
     }
     return Csapda.NINCS;
+  }
+
+  @Override
+  public EnumSet<Helyszin> getHely() {
+    throw new UnsupportedOperationException("Nincs szükség rá.");
+  }
+
+  @Override
+  public void setHely(Helyszin hely) {
+    throw new UnsupportedOperationException("Nincs szükség rá.");
+  }
+
+  @Override
+  public Elem getPar() {
+    throw new UnsupportedOperationException("Nincs szükség rá.");
   }
 
 }
