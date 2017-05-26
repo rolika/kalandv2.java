@@ -87,8 +87,10 @@ class Ertelmezo {
     if (irany != null) {
       return jatekos.megy(irany);
     } else if (parancs != null) {
-      if (jatekos.getHelyszin().checkAllapot(Allapot.LATHATO) ||
-        Targy.ZSEBLAMPA.checkAllapot(Allapot.AKTIV) || parancsszavak.contains(TargySzotar.ZSEBLAMPA)) {
+      if (jatekos.getHelyszin().checkAllapot(Allapot.LATHATO)
+        || Targy.ZSEBLAMPA.checkAllapot(Allapot.AKTIV)
+        || parancsszavak.contains(TargySzotar.ZSEBLAMPA)
+        || parancs.toString().contains("kilep")) {
         try {
           return parancs.invoke(jatekos);
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
@@ -145,7 +147,7 @@ class Ertelmezo {
       return Ajto.valueOf(szo.toString());
     } else if (szo.getClass().equals(CsapdaSzotar.class)) {
       return Csapda.valueOf(szo.toString());
-    } else if(szo.getClass().equals(HelyszinSzotar.class)) {
+    } else if (szo.getClass().equals(HelyszinSzotar.class)) {
       return Helyszin.valueOf(szo.toString());
     }
     return null; // elvileg nem fordulhat elő
