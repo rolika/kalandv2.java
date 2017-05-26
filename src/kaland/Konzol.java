@@ -26,7 +26,10 @@ final class Konzol {
         System.out.println(szotoro(jatek.helyzet()));
         System.out.print(Uzenet.PROMPT);
         Ertelmezo.szetbont(bevitel.nextLine());
-        System.out.println(szotoro(jatek.vegrehajt().toString()));
+        String akcio = jatek.vegrehajt().toString();
+        if (!akcio.isEmpty()) { // sötétben csak menni és lámpát használni lehet
+          System.out.println(szotoro(akcio));
+        }
         jatek.szkript();
       }
       break;

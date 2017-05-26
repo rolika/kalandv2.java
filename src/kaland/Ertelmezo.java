@@ -87,10 +87,15 @@ class Ertelmezo {
     if (irany != null) {
       return jatekos.megy(irany);
     } else if (parancs != null) {
-      try {
-        return parancs.invoke(jatekos);
-      } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-        return null;
+      if (jatekos.getHelyszin().checkAllapot(Allapot.LATHATO) ||
+        Targy.ZSEBLAMPA.checkAllapot(Allapot.AKTIV) || parancsszavak.contains(TargySzotar.ZSEBLAMPA)) {
+        try {
+          return parancs.invoke(jatekos);
+        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+          return null;
+        }
+      } else {
+        return "";
       }
     } else {
       return Uzenet.NEM_ERTEM.toString();
