@@ -43,7 +43,6 @@ enum Helyszin implements Elem {
     return nev;
   }
 
-  // TODO a getLeiras csak a hosszút adja vissza és legyen egy getNormal
   @Override
   public String getLeiras() {
     if (allapot.contains(Allapot.HOSSZU)) {
