@@ -74,8 +74,19 @@ enum Helyszin implements Elem {
     return this.allapot.containsAll(Arrays.asList(allapot));
   }
   
-  String getHosszuLeiras() {
-    return leiras;
+  String getNormalLeiras() {
+    String uzenet;
+    if (checkAllapot(Allapot.HOSSZU)) {
+      removeAllapot(Allapot.BEJART);
+      uzenet = leiras;
+    } else if (checkAllapot(Allapot.ROVID)) {
+      addAllapot(Allapot.BEJART);
+      uzenet = nev;
+    } else {
+      uzenet = checkAllapot(Allapot.BEJART) ? nev : leiras;
+      addAllapot(Allapot.BEJART);
+    }
+    return uzenet;
   }
   
   Helyszin getKijarat(Irany irany) {

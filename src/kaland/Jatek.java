@@ -38,18 +38,18 @@ class Jatek {
    */
   String helyzet() {
     szoveg = new StringBuilder();
-    if (!jatekos.getHelyszin().checkAllapot(Allapot.LATHATO)
-      && !Targy.ZSEBLAMPA.checkAllapot(Allapot.AKTIV)) {
-      szoveg.append(Uzenet.SOTET);
-    } else {
-      szoveg.append(jatekos.getHelyszin().getLeiras());
+    Helyszin helyszin = jatekos.getHelyszin();
+    if (helyszin.checkAllapot(Allapot.LATHATO) || Targy.ZSEBLAMPA.checkAllapot(Allapot.AKTIV)) {
+      szoveg.append(helyszin.getNormalLeiras());
       allapotfuggoUzenetek();
-      String targyak = jatekos.getHelyszin().targyak();
+      String targyak = helyszin.targyak();
       if (!targyak.isEmpty()) {
         szoveg.append('\n');
         szoveg.append(targyak);
       }
       // sortoro(ellensegSorolas());
+    } else {
+      szoveg.append(Uzenet.SOTET.toString());
     }
     return szoveg.toString();
   }

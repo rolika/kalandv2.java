@@ -149,7 +149,6 @@ final class Jatekos implements Elem {
    */
   String vizsgal() {
     Set<Elem> vizsgalandoElem = Ertelmezo.getElemek();
-    System.out.println(vizsgalandoElem.toString());
     if (vizsgalandoElem.size() == 1) {
       Elem elem = vizsgalandoElem.iterator().next();
       Set<Elem> lathatoTargyak = hely.elemSzuro(Allapot.LATHATO);
@@ -170,7 +169,7 @@ final class Jatekos implements Elem {
         return leiras.toString();
       }
     } else if (vizsgalandoElem.size() < 1) {
-      return hely.getHosszuLeiras();
+      return hely.getLeiras();
     }
     return Uzenet.NEM_ERTEM.toString();
   }
