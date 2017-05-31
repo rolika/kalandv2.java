@@ -15,7 +15,7 @@ enum Targy implements Elem {
   NINCS("semmi", "semmi", Helyszin.NINCS),
   MINDEN("minden", "minden", Helyszin.NINCS),
   LABTORLO("lábtörlő", "Ilyen elnyűtt és koszos lábtörlőt még soha nem láttál. Valamilyen növényi rostból fonták, de az nagyon régen lehetett.", Helyszin.HAZ_ELOTT, Allapot.LATHATO, Allapot.FELVEHETO),
-  KULCS("kis kulcs", "Egy meglehetősen kicsiny, ám annál jobban kidolgozott kulcs, mely a méretéhez képest meglepően nehéznek tűnik.", Helyszin.HAZ_ELOTT, Allapot.FELVEHETO),
+  KIS_KULCS("kis kulcs", "Egy meglehetősen kicsiny, ám annál jobban kidolgozott kulcs, mely a méretéhez képest meglepően nehéznek tűnik.", Helyszin.HAZ_ELOTT, Allapot.FELVEHETO),
   TAPETA("tapéta", "A tapéta valaha kellemes pasztellzöld színe valami undorító árnyalatú nyálkává változott és felpúposodott az alatta lévő vizes faltól.", Helyszin.ELOTER, Allapot.LATHATO),
   BICSKA("bicska", "A nemesacél pengéjű, szarvasagancs-nyelű zsebkésedet még a nagyapádtól kaptad. Borotvaéles, mint mindig.", Helyszin.LELTAR, Allapot.LATHATO, Allapot.FELVEHETO),
   ZSEBLAMPA("zseblámpa", "Bivalyerős, mégis takarékos ledlámpa.", Helyszin.LELTAR, Allapot.LATHATO, Allapot.FELVEHETO, Allapot.HASZNALHATO, Allapot.KAPCSOLGATHATO),
@@ -45,7 +45,7 @@ enum Targy implements Elem {
     NINCS.par = NINCS;
     MINDEN.par = NINCS;
     LABTORLO.par = NINCS;
-    KULCS.par = NINCS;
+    KIS_KULCS.par = NINCS;
     TAPETA.par = NINCS;
     BICSKA.par = NINCS;
     ZSEBLAMPA.par = NINCS;

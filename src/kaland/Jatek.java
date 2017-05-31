@@ -70,7 +70,7 @@ class Jatek {
    */
   void szkript() {
     if (Targy.LABTORLO.checkAllapot(Allapot.VIZSGALT)) { // kulcs a lábtörlő alatt
-      Targy.KULCS.addAllapot(Allapot.LATHATO);
+      Targy.KIS_KULCS.addAllapot(Allapot.LATHATO);
     }
     if (Targy.ELOTER_PADLO.checkAllapot(Allapot.VIZSGALT)) { // felfedi a gödör-csapdát
       Csapda.CSAPOAJTO.addAllapot(Allapot.LATHATO);
