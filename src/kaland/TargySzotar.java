@@ -11,7 +11,7 @@ import java.util.Set;
  */
 enum TargySzotar implements Szotar {
   LABTORLO("lábtörlő", "lábtörlőt", "lábtörlővel"),
-  KULCS("kulcs", "kulcsot", "kulccsal"),
+  KIS_KULCS("kulcs", "kulcsot", "kulccsal"),
   TAPETA("tapéta", "tapétát", "tapétával", "fal", "falat", "fallal"),
   BICSKA("bicska", "bicskát", "bicskával", "kés", "kést", "késsel", "kiskés", "kiskést", "kiskéssel"),
   ZSEBLAMPA("lámpa", "lámpát", "lámpával", "zseblámpa", "zseblámpát", "zseblámpával"),

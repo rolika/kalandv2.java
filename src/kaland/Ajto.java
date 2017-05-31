@@ -13,7 +13,7 @@ import java.util.EnumSet;
 enum Ajto implements Elem {
 
   BEJARATI_AJTO("bejárati ajtó", "Erőteljes, megvasalt tölgyfa bejárati ajtó, rajta rabláncra fűzött groteszk szörnyalak vicsorgó pofája várja, hogy valaki bekopogjon súlyos orrkarikájával. A roppant kilincs alatti kicsiny kulcslyuk valószerűtlenül finom kidolgozású zárat sejtet.", 
-    Targy.KULCS,
+    Targy.KIS_KULCS,
     Helyszin.HAZ_ELOTT, Helyszin.ELOTER,
     Allapot.ZARVA, Allapot.LATHATO, Allapot.NYITHATO),
   SZOBAAJTO("faajtó", "Valaha szép lehetett az intarziás faajtó, de mára elveszítette minden vonzerejét, megkopott betétei szinte felismerhetetlenek.",
