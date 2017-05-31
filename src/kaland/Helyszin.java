@@ -45,17 +45,7 @@ enum Helyszin implements Elem {
 
   @Override
   public String getLeiras() {
-    if (allapot.contains(Allapot.HOSSZU)) {
-      allapot.remove(Allapot.BEJART);
-      return leiras;
-    } else if (allapot.contains(Allapot.ROVID)) {
-      allapot.add(Allapot.BEJART);
-      return nev;
-    } else {
-      String normal = allapot.contains(Allapot.BEJART) ? nev : leiras;
-      allapot.add(Allapot.BEJART);
-      return normal;
-    }
+    return leiras;
   }
 
   @Override
