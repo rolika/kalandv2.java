@@ -66,14 +66,14 @@ enum Helyszin implements Elem {
   String getNormalLeiras() {
     String uzenet;
     if (checkAllapot(Allapot.HOSSZU)) {
-      removeAllapot(Allapot.BEJART);
+      removeAllapot(Allapot.VIZSGALT);
       uzenet = leiras;
     } else if (checkAllapot(Allapot.ROVID)) {
-      addAllapot(Allapot.BEJART);
+      addAllapot(Allapot.VIZSGALT);
       uzenet = nev;
     } else {
-      uzenet = checkAllapot(Allapot.BEJART) ? nev : leiras;
-      addAllapot(Allapot.BEJART);
+      uzenet = checkAllapot(Allapot.VIZSGALT) ? nev : leiras;
+      addAllapot(Allapot.VIZSGALT);
     }
     return uzenet;
   }
