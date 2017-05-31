@@ -25,7 +25,9 @@ enum Targy implements Elem {
   KONYHASZEKRENY("szekrény", "A konyhaszekrény nagyon leromlott állapotban van, ajtai egy kivételével mind leszakadtak. Van egy fiókja is.", Helyszin.KONYHA, Allapot.LATHATO),
   KONYHASZEKRENYAJTO("szekrényajtó", "A konyhaszekrény ajtaját egyetlen zsanér tartja a helyén.", Helyszin.KONYHA, Allapot.CSUKVA, Allapot.NYITHATO),
   FIOK("fiók", "A fiókot szemmel láthatóan csak az imádság tartja a helyén.", Helyszin.KONYHA, Allapot.CSUKVA, Allapot.NYITHATO),
-  KOTEL("kötél", "Egy tekercs kenderkötél, legalább tíz méter hosszú, és elég vastag, hogy elbírja a súlyodat.", Helyszin.KONYHA, Allapot.FELVEHETO, Allapot.HASZNALHATO),
+  KACAT("kacat", "Csupa réges-régi kacat, a többségét nem is tudod beazonosítani.", Helyszin.KONYHA, Allapot.FELVEHETO),
+  NAGY_KULCS("nagy kulcs", "Egy nagy, súlyos kulcs, nagy, súlyos zárhoz.", Helyszin.KONYHA, Allapot.FELVEHETO),
+  KOTEL("kötél", "Egy tekercs kenderkötél, legalább tíz méter hosszú, és elég vastag, hogy elbírja a súlyodat.", Helyszin.PADLAS_ELEJE, Allapot.LATHATO, Allapot.FELVEHETO, Allapot.HASZNALHATO),
   GERENDA("gerenda", "A tetőt tartó fő mestergerenda nem mindennapi keresztmetszettel rendelkezik.", Helyszin.PADLAS_VEGE, Allapot.LATHATO, Allapot.HASZNALHATO);
 
   private final String nev, leiras;

@@ -85,8 +85,11 @@ class Jatek {
       Targy.FIOK.addAllapot(Allapot.LATHATO);
       Targy.KONYHASZEKRENYAJTO.addAllapot(Allapot.LATHATO);
     }
-    if (Targy.FIOK.checkAllapot(Allapot.NYITVA)) { // felfedi a kötelet
-      Targy.KOTEL.addAllapot(Allapot.LATHATO);
+    if (Targy.FIOK.checkAllapot(Allapot.NYITVA)) { // felfedi a kacatot
+      Targy.KACAT.addAllapot(Allapot.LATHATO);
+    }
+    if (Targy.KACAT.checkAllapot(Allapot.VIZSGALT)) { // felfedi a ládakulcsot
+      Targy.NAGY_KULCS.addAllapot(Allapot.LATHATO);
     }
     if (Targy.GERENDA.checkAllapot(Allapot.AKTIV) && Targy.KOTEL.checkAllapot(Allapot.AKTIV)) {
       Csapda.KURTO.addAllapot(Allapot.LATHATO); // hatástalanítja kürtőt

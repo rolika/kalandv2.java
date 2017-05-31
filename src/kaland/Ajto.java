@@ -27,7 +27,7 @@ enum Ajto implements Elem {
   VAKAJTO("vakajtó", "A boltívet egy sebtében, elnagyoltan befalazott téglafal teszi átjárhatatlanná.", Targy.NINCS,
     Helyszin.PINCE, Helyszin.REJTETT_PINCE,
     Allapot.ZARVA, Allapot.LATHATO, Allapot.NYITHATO),
-  LADA("láda", "A vasalt tölgyfaláda oldalán mindenféle jelek vannak.", Targy.BICSKA,
+  LADA("láda", "A vasalt tölgyfaláda oldalán mindenféle érthetetlen jelek vannak, egy jó nagy zár társaságában.", Targy.NAGY_KULCS,
     Helyszin.PADLAS_VEGE, Helyszin.REJTETT_PINCE,
     Allapot.ZARVA, Allapot.LATHATO, Allapot.NYITHATO),
   PORTAL("portál", "A pince falától jól láthatóan elkülönül az egyetlen darabban kifaragott kolosszális kőlap.", Targy.BICSKA,
