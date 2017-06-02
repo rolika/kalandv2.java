@@ -87,6 +87,7 @@ class Jatek {
     }
     if (Targy.FIOK.checkAllapot(Allapot.NYITVA)) { // felfedi a kacatot
       Targy.KACAT.addAllapot(Allapot.LATHATO);
+      Targy.FIOK.setLeiras(Uzenet.FIOK.toString());
     }
     if (Targy.KACAT.checkAllapot(Allapot.VIZSGALT)) { // felfedi a ládakulcsot
       Targy.NAGY_KULCS.addAllapot(Allapot.LATHATO);

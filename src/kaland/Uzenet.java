@@ -34,7 +34,8 @@ public enum Uzenet {
   A("A "),
   AZ("Az"),
   KOTEL_1("A kötél a gerendán lóg."),
-  KOTEL_2("A kötél a gerendán lóg, a vége eltűnik a láda mélyén.");
+  KOTEL_2("A kötél a gerendán lóg, a vége eltűnik a láda mélyén."),
+  FIOK("A fiók tele van mindenféle kacattal.");
 
   private final String uzenet;
 
