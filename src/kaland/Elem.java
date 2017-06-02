@@ -17,5 +17,6 @@ interface Elem {
   boolean checkAllapot(Allapot ... allapot);
   void setHely(Helyszin hely);
   Elem getPar();
+  void setLeiras(String leiras);
   
 }

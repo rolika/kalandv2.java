@@ -100,4 +100,9 @@ enum Targy implements Elem {
     return par;
   }
 
+  @Override
+  public void setLeiras(String leiras) {
+    throw new UnsupportedOperationException("Nincs szükség rá.");
+  }
+
 }

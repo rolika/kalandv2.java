@@ -67,6 +67,11 @@ final class Jatekos implements Elem {
     throw new UnsupportedOperationException("Nincs szükség rá.");
   }
 
+  @Override
+  public void setLeiras(String leiras) {
+    throw new UnsupportedOperationException("Nincs szükség rá.");
+  }
+
   /**
    * A helyszín, amelyben a játékos éppen tartózkodik
    *

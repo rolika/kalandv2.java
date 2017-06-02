@@ -70,6 +70,11 @@ enum Csapda implements Elem {
     throw new UnsupportedOperationException("Nincs szükség rá.");
   }
 
+  @Override
+  public void setLeiras(String leiras) {
+    throw new UnsupportedOperationException("Nincs szükség rá.");
+  }
+
   String getAktiv() {
     return aktiv;
   }
