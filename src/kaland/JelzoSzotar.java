@@ -11,7 +11,8 @@ import java.util.Set;
  */
 enum JelzoSzotar implements Szotar {
   KIS("kicsi", "nagy"),
-  NAGY("nagy");
+  NAGY("nagy"),
+  NINCS();
   
   private final Set<String> szinonimak;
 
