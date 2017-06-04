@@ -82,5 +82,10 @@ enum Csapda implements Elem {
   String getInaktiv() {
     return inaktiv;
   }
+
+  @Override
+  public JelzoSzotar getJelzo() {
+    throw new UnsupportedOperationException("Nincs szükség rá.");
+  }
   
 }

@@ -34,12 +34,14 @@ enum Targy implements Elem {
   private String leiras;
   private Helyszin hely;
   private Elem par;
+  private JelzoSzotar jelzo;
   private final EnumSet<Allapot> allapot;
 
   private Targy(String nev, String leiras, Helyszin hely, Allapot... allapot) {
     this.nev = nev;
     this.leiras = leiras;
     this.hely = hely;
+    this.jelzo = JelzoSzotar.NINCS;
     this.allapot = Sets.newEnumSet(Arrays.asList(allapot), Allapot.class);
   }
   
@@ -59,6 +61,12 @@ enum Targy implements Elem {
     FIOK.par = NINCS;
     GERENDA.par = KOTEL;
     KOTEL.par = GERENDA;
+  }
+  
+  // így egyszerűbbnek tűnik a jelzőt hozzáadni
+  static {
+    KIS_KULCS.jelzo = JelzoSzotar.KIS;
+    NAGY_KULCS.jelzo = JelzoSzotar.NAGY;
   }
 
   @Override
@@ -104,6 +112,11 @@ enum Targy implements Elem {
   @Override
   public void setLeiras(String leiras) {
     this.leiras = leiras;
+  }
+
+  @Override
+  public JelzoSzotar getJelzo() {
+    return jelzo;
   }
 
 }

@@ -181,4 +181,9 @@ enum Helyszin implements Elem {
     throw new UnsupportedOperationException("Nincs szükség rá.");
   }
 
+  @Override
+  public JelzoSzotar getJelzo() {
+    throw new UnsupportedOperationException("Nincs szükség rá.");
+  }
+
 }

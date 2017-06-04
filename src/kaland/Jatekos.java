@@ -385,4 +385,9 @@ final class Jatekos implements Elem {
     }
   }
 
+  @Override
+  public JelzoSzotar getJelzo() {
+    throw new UnsupportedOperationException("Nincs szükség rá.");
+  }
+
 }
