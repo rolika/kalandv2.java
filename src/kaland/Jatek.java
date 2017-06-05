@@ -39,7 +39,7 @@ class Jatek {
   String helyzet() {
     szoveg = new StringBuilder();
     Helyszin helyszin = jatekos.getHelyszin();
-    if (helyszin.checkAllapot(Allapot.LATHATO) || Targy.ZSEBLAMPA.checkAllapot(Allapot.AKTIV)) {
+    if (jatekos.lat()) {
       szoveg.append(helyszin.getNormalLeiras());
       allapotfuggoUzenetek();
       String targyak = helyszin.targyak();
