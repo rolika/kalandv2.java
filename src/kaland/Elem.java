@@ -3,7 +3,7 @@ package kaland;
 import java.util.EnumSet;
 
 /**
- * Interface a kalandelemekhez (tárgy, ajtó, csapda, ellenség)
+ * Interface a kalandelemekhez (játékos, helyszín, tárgy, ajtó, csapda, ellenség)
  * 
  * @author rolika
  */
