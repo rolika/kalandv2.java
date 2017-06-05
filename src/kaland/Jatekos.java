@@ -383,7 +383,7 @@ final class Jatekos implements Elem {
     if (mozgatandoTargyak.remove(Targy.MINDEN)) {
       mozgatandoTargyak = mozgathatoTargyak;
     }
-    if (mozgathatoTargyak.containsAll(mozgatandoTargyak) && vanJelzo(mozgatandoTargyak)) {
+    if (mozgathatoTargyak.containsAll(mozgatandoTargyak)) {
       Helyszin tmp = forras == Helyszin.LELTAR ? Helyszin.KEZ_LE : Helyszin.KEZ_FEL;
       mozgatandoTargyak.forEach(targy -> targy.setHely(tmp));
       String uzenet = tmp.targyak();
@@ -393,16 +393,6 @@ final class Jatekos implements Elem {
     } else {
       return Uzenet.NEM_ERTEM.toString();
     }
-  }
-  
-  /**
-   * Leellenőrzi, hogy a parancsban szereplő elemeknek van-e jelzője, és ha van, akkor szerepel-e
-   * 
-   * @param elemek
-   * @return igaz, ha minden elemnek megvan a jelzője (vagy egyiknek sincs beállítva)
-   */
-  private boolean vanJelzo(Set<Elem> elemek) {
-    return elemek.stream().allMatch(Ertelmezo::szerepelJelzo);
   }
 
   @Override
