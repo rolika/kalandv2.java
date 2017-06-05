@@ -87,9 +87,7 @@ class Ertelmezo {
     if (irany != null) {
       return jatekos.megy(irany);
     } else if (parancs != null) {
-      if (jatekos.getHelyszin().checkAllapot(Allapot.LATHATO)
-        || Targy.ZSEBLAMPA.checkAllapot(Allapot.AKTIV)
-        || parancsszavak.contains(TargySzotar.ZSEBLAMPA)
+      if (jatekos.lat() || parancsszavak.contains(TargySzotar.ZSEBLAMPA)
         || parancs.toString().contains("kilep")) {
         try {
           return parancs.invoke(jatekos);

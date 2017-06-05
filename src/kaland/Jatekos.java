@@ -366,6 +366,16 @@ final class Jatekos implements Elem {
   String megerosit() {
     return "Játékos megerősít.";
   }
+  
+  /**
+   * Lát-e a játékos, azaz látható-e a helyszín
+   * 
+   * @return igaz, ha nincs sötét, vagy ég a lámpa
+   */
+  boolean lat() {
+    return hely.checkAllapot(Allapot.LATHATO) || Targy.ZSEBLAMPA.checkAllapot(Allapot.AKTIV);
+  }
+  
 
   private String mozgat(Helyszin forras, Helyszin cel) {
     Set<Elem> mozgathatoTargyak = forras.elemSzuro(Allapot.LATHATO, Allapot.FELVEHETO);
