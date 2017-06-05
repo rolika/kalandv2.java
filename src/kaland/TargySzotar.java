@@ -22,7 +22,7 @@ enum TargySzotar implements Szotar {
   KONYHASZEKRENYAJTO("szekrényajtó", "szekrényajtót", "szekrényajtóval"),
   FIOK("fiók", "fiókot", "fiókkal"),
   KACAT("kacat", "kacatot", "kacattal"),
-  NAGY_KULCS("ládakulcs", "ládakulcsot", "ládakulccsal"),
+  NAGY_KULCS("kulcs", "kulcsot", "kulccsal"),
   KOTEL("kötél", "kötelet", "kötéllel", "kenderkötél", "kenderkötelet", "kenderkötéllel"),
   GERENDA("gerenda", "gerendát", "gerendával", "gerendán", "mestergerenda", "mestergerendát", "mestergerendával", "mestergerendán"),
   MINDEN("minden", "mindent", "mindet", "összeset");

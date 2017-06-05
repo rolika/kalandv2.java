@@ -99,6 +99,7 @@ class Ertelmezo {
         try {
           return parancs.invoke(jatekos);
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+          e.printStackTrace();
           return null;
         }
       } else {
@@ -119,7 +120,6 @@ class Ertelmezo {
   }
 
   private static Method cselekvesiSzandek(Jatekos jatekos) {
-    System.out.println(parancsszavak);
     for (Parancs parancsszo : Parancs.values()) {
       if (parancsszavak.remove(parancsszo)) {
         try {
@@ -143,12 +143,16 @@ class Ertelmezo {
   static Set<Elem> getElemek() {
     return parancsszavak.stream()
       .map(Ertelmezo::getElem)
+      .filter(elem -> elem != null)
       .collect(Collectors.toSet());
   }
 
   private static Elem getElem(Szotar szo) {
     if (szo.getClass().equals(TargySzotar.class)) {
-      return Targy.valueOf(szo.toString());
+      Targy targy = Targy.valueOf(szo.toString());
+      if (szerepelJelzo(targy)) {
+        return Targy.valueOf(szo.toString());
+      }
     } else if (szo.getClass().equals(AjtoSzotar.class)) {
       return Ajto.valueOf(szo.toString());
     } else if (szo.getClass().equals(CsapdaSzotar.class)) {
@@ -156,7 +160,7 @@ class Ertelmezo {
     } else if (szo.getClass().equals(HelyszinSzotar.class)) {
       return Helyszin.valueOf(szo.toString());
     }
-    return null; // elvileg nem fordulhat elő
+    return null;
   }
   
   /**
