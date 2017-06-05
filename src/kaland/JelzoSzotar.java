@@ -10,7 +10,7 @@ import java.util.Set;
  * @author rolika
  */
 enum JelzoSzotar implements Szotar {
-  KIS("kicsi", "nagy"),
+  KIS("kicsi", "kis"),
   NAGY("nagy"),
   NINCS();
   
@@ -23,16 +23,6 @@ enum JelzoSzotar implements Szotar {
   @Override
   public Szotar getSzoEnum(String szo) {
     return szinonimak.contains(szo) ? this : null;
-  }
-  
-  /**
-   * A kalandelemek neve tartalmazza egyedül az esetleges jelzőt, erre ellenőriz rá
-   * 
-   * @param elem
-   * @return igaz, ha egyezik az elem jelzőjével
-   */
-  boolean checkJelzo(Elem elem) {
-    return szinonimak.stream().anyMatch(szo -> elem.getNev().contains(szo));
   }
 
 }

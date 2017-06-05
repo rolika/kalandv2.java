@@ -64,8 +64,15 @@ class Ertelmezo {
         }
       }
       // helyszíneket,
-      for (Szotar csapda : HelyszinSzotar.values()) {
-        szoEnum = csapda.getSzoEnum(szo);
+      for (Szotar helyszin : HelyszinSzotar.values()) {
+        szoEnum = helyszin.getSzoEnum(szo);
+        if (szoEnum != null) {
+          parancsszavak.add(szoEnum);
+        }
+      }
+      // jelzőket,
+      for (Szotar jelzo : JelzoSzotar.values()) {
+        szoEnum = jelzo.getSzoEnum(szo);
         if (szoEnum != null) {
           parancsszavak.add(szoEnum);
         }
@@ -114,6 +121,7 @@ class Ertelmezo {
   }
 
   private static Method cselekvesiSzandek(Jatekos jatekos) {
+    System.out.println(parancsszavak);
     for (Parancs parancsszo : Parancs.values()) {
       if (parancsszavak.remove(parancsszo)) {
         try {
@@ -151,6 +159,16 @@ class Ertelmezo {
       return Helyszin.valueOf(szo.toString());
     }
     return null; // elvileg nem fordulhat elő
+  }
+  
+  /**
+   * Ellenőrzi, szerepel-e az adott elem jelzője a parancsban
+   * 
+   * @param elem
+   * @return igaz, ha szerepel, vagy ha nincs jelzője
+   */
+  static boolean szerepelJelzo(Elem elem) {
+    return elem.getJelzo() == JelzoSzotar.NINCS ? true : parancsszavak.contains(elem.getJelzo());
   }
 
 }
