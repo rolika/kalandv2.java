@@ -28,7 +28,11 @@ enum Targy implements Elem {
   KACAT("kacat", "Csupa réges-régi kacat, a többségét nem is tudod beazonosítani.", Helyszin.KONYHA),
   NAGY_KULCS("nagy kulcs", "Egy nagy, súlyos kulcs, nagy, súlyos zárhoz.", Helyszin.KONYHA, Allapot.FELVEHETO),
   KOTEL("kötél", "Egy tekercs kenderkötél, legalább tíz méter hosszú, és elég vastag, hogy elbírja a súlyodat.", Helyszin.PADLAS_ELEJE, Allapot.LATHATO, Allapot.FELVEHETO, Allapot.HASZNALHATO),
-  GERENDA("gerenda", "A tetőt tartó fő mestergerenda nem mindennapi keresztmetszettel rendelkezik.", Helyszin.PADLAS_VEGE, Allapot.LATHATO, Allapot.HASZNALHATO);
+  GERENDA("gerenda", "A tetőt tartó fő mestergerenda nem mindennapi keresztmetszettel rendelkezik.", Helyszin.PADLAS_VEGE, Allapot.LATHATO, Allapot.HASZNALHATO),
+  TORMELEK("törmelék", "Egy rakás tégla, sitt, csempe és fadarabok egymásra hegyén-hátán.", Helyszin.PINCE, Allapot.LATHATO),
+  JEGYZET("jegyzet", "Egy erős kartonlapra mindenféle ábrát rajzoltak, aminek így nem igazán látod értelmét.", Helyszin.PINCE, Allapot.FELVEHETO),
+  GEP("gép", "Egy óriási, érthetetlen rendeltetésű gép pöffeszkedik középen, elfoglalva a pince felét.", Helyszin.REJTETT_PINCE, Allapot.LATHATO),
+  NYOMOGOMB("nyomógomb", "Egy első látásra fel sem tűnő gomb, amit nyilván meg lehet nyomni.", Helyszin.REJTETT_PINCE, Allapot.HASZNALHATO);
 
   private final String nev;
   private String leiras;
