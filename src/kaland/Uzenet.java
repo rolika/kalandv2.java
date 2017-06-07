@@ -28,7 +28,7 @@ public enum Uzenet {
   NYITVA("%s nyitva van."),
   CSUKVA("%s be van csukva."),
   ZARVA("%s be van zárva."),
-  MIVEL("Mivel?"),
+  HOGYAN("Hogyan?"),
   FELVEVE("Felvéve"),
   LETEVE("Letéve"),
   A("A "),
