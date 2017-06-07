@@ -30,7 +30,7 @@ enum Ajto implements Elem {
   LADA("láda", "A vasalt tölgyfaláda oldalán mindenféle érthetetlen jelek vannak, egy jó nagy zár társaságában.", Targy.NAGY_KULCS,
     Helyszin.PADLAS_VEGE, Helyszin.REJTETT_PINCE,
     Allapot.ZARVA, Allapot.LATHATO, Allapot.NYITHATO),
-  PORTAL("portál", "A pince falától jól láthatóan elkülönül az egyetlen darabban kifaragott kolosszális kőlap.", Targy.BICSKA,
+  PORTAL("portál", "A pince falától jól láthatóan elkülönül az egyetlen darabban kifaragott kolosszális kőlap.", Targy.NINCS,
     Helyszin.REJTETT_PINCE, Helyszin.ODAAT,
     Allapot.ZARVA, Allapot.LATHATO, Allapot.NYITHATO),
   NINCS("", "", Targy.NINCS, Helyszin.NINCS, Helyszin.NINCS);
