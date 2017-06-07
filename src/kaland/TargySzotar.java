@@ -24,7 +24,7 @@ enum TargySzotar implements Szotar {
   KACAT("kacat", "kacatot", "kacattal"),
   NAGY_KULCS("kulcs", "kulcsot", "kulccsal"),
   KOTEL("kötél", "kötelet", "kötéllel", "kenderkötél", "kenderkötelet", "kenderkötéllel"),
-  GERENDA("gerenda", "gerendát", "gerendával", "gerendán", "mestergerenda", "mestergerendát", "mestergerendával", "mestergerendán"),
+  GERENDA("gerenda", "gerendát", "gerendával", "gerendán", "gerendára", "mestergerenda", "mestergerendát", "mestergerendával", "mestergerendán"),
   MINDEN("minden", "mindent", "mindet", "összeset"),
   TORMELEK("törmelék", "törmeléket", "törmelékkel", "limlom", "limlomot", "limlommal"),
   JEGYZET("jegyzet", "jegyzetet", "jegyzettel", "lap", "lapot", "lappal"),
