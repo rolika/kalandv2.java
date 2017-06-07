@@ -196,7 +196,7 @@ final class Jatekos implements Elem {
       } else if (!elem.checkAllapot(Allapot.LATHATO)) {
         return Uzenet.NEM_LATHATO.toString();
       } else if (elem.getPar() != Targy.NINCS && !elemek.contains(elem.getPar())) {
-        return Uzenet.MIVEL.toString();
+        return Uzenet.HOGYAN.toString();
       }
     }
     elemek.forEach(elem -> {
@@ -240,7 +240,7 @@ final class Jatekos implements Elem {
       return Uzenet.RENDBEN.toString();
     } else if (nyitandoElem.checkAllapot(Allapot.ZARVA)
       && !parancsElemek.contains(nyitandoElem.getPar())) {
-      return Uzenet.MIVEL.toString();
+      return Uzenet.HOGYAN.toString();
     } else if (!Helyszin.LELTAR.elemSzuro().contains(nyitandoElem.getPar())) {
       return Uzenet.NINCS_NALAD.toString();
     } else if (nyitandoElem.checkAllapot(Allapot.NYITVA)) {
@@ -304,7 +304,7 @@ final class Jatekos implements Elem {
     } else if (zarandoElem.getPar() == Targy.NINCS) {
       return Uzenet.NEM_LEHET.toString();
     } else if (!parancsElemek.contains(zarandoElem.getPar())) {
-      return Uzenet.MIVEL.toString();
+      return Uzenet.HOGYAN.toString();
     } else if (!Helyszin.LELTAR.elemSzuro().contains(zarandoElem.getPar())) {
       return Uzenet.NINCS_NALAD.toString();
     } else if ((zarandoElem.checkAllapot(Allapot.NYITVA)
