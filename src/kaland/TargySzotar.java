@@ -26,7 +26,7 @@ enum TargySzotar implements Szotar {
   KOTEL("kötél", "kötelet", "kötéllel", "kenderkötél", "kenderkötelet", "kenderkötéllel"),
   GERENDA("gerenda", "gerendát", "gerendával", "gerendán", "gerendára", "mestergerenda", "mestergerendát", "mestergerendával", "mestergerendán"),
   MINDEN("minden", "mindent", "mindet", "összeset"),
-  TORMELEK("törmelék", "törmeléket", "törmelékkel", "limlom", "limlomot", "limlommal"),
+  TORMELEK("törmelék", "törmeléket", "törmelékkel", "limlom", "limlomot", "limlommal", "kupac", "kupacot", "kupaccal"),
   JEGYZET("jegyzet", "jegyzetet", "jegyzettel", "lap", "lapot", "lappal"),
   GEP("gép", "gépet", "géppel", "berendezés", "berendezést", "berendezéssel"),
   NYOMOGOMB("gomb", "gombot", "gombbal", "nyomógomb", "nyomógombot", "nyomógombbal");
