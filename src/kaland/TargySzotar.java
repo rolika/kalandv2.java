@@ -25,7 +25,11 @@ enum TargySzotar implements Szotar {
   NAGY_KULCS("kulcs", "kulcsot", "kulccsal"),
   KOTEL("kötél", "kötelet", "kötéllel", "kenderkötél", "kenderkötelet", "kenderkötéllel"),
   GERENDA("gerenda", "gerendát", "gerendával", "gerendán", "mestergerenda", "mestergerendát", "mestergerendával", "mestergerendán"),
-  MINDEN("minden", "mindent", "mindet", "összeset");
+  MINDEN("minden", "mindent", "mindet", "összeset"),
+  TORMELEK("törmelék", "törmeléket", "törmelékkel", "limlom", "limlomot", "limlommal"),
+  JEGYZET("jegyzet", "jegyzetet", "jegyzettel", "lap", "lapot", "lappal"),
+  GEP("gép", "gépet", "géppel", "berendezés", "berendezést", "berendezéssel"),
+  NYOMOGOMB("gomb", "gombot", "gombbal", "nyomógomb", "nyomógombot", "nyomógombbal");
 
   private final Set<String> szinonimak;
 
