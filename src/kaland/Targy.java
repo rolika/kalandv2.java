@@ -65,6 +65,10 @@ enum Targy implements Elem {
     FIOK.par = NINCS;
     GERENDA.par = KOTEL;
     KOTEL.par = GERENDA;
+    TORMELEK.par = NINCS;
+    JEGYZET.par = NINCS;
+    GEP.par = NINCS;
+    NYOMOGOMB.par = NINCS;
   }
   
   // így egyszerűbbnek tűnik a jelzőt hozzáadni
