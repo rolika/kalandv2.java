@@ -15,7 +15,7 @@ enum Parancs implements Szotar {
   LELTAR("leltár", "leltárt"),
   HASZNAL("bekapcsolom", "felkapcsolom", "használom", "mozgatom", "mozdítom", "elmozdítom",
     "forgatom", "elforgatom", "fordítom", "elfordítom", "kikapcsolom", "lekapcsolom", "nyomom",
-    "megnyomom", "kötöm", "felkötöm"),
+    "megnyomom", "kötöm", "felkötöm", "benézek", "belenézek"),
   NYIT("kinyitom", "kitárom", "kihúzom"),
   CSUK("becsukom", "behajtom", "betolom"),
   ZAR("bezárom"),
