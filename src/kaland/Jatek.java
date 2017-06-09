@@ -100,6 +100,23 @@ class Jatek {
     if (Ajto.LADA.checkAllapot(Allapot.NYITVA)) { // ha egyszer kinyílt,
       Ajto.LADA.removeAllapot(Allapot.NYITHATO); // nem lehet visszacsukni
     }
+    if (Targy.TORMELEK.checkAllapot(Allapot.VIZSGALT)) { // a jegyzet a törmelék között bújik meg
+      Targy.JEGYZET.addAllapot(Allapot.LATHATO);
+    }
+    if (Targy.JEGYZET.checkAllapot(Allapot.VIZSGALT) && Targy.GEP.checkAllapot(Allapot.VIZSGALT)) {
+      Targy.NYOMOGOMB.addAllapot(Allapot.LATHATO);
+    }
+    if (Targy.GEP.checkAllapot(Allapot.VIZSGALT)) {
+      Targy.JEGYZET.setLeiras(Uzenet.JEGYZET.toString());
+    }
+    if (Targy.NYOMOGOMB.checkAllapot(Allapot.AKTIV) &&  Ajto.PORTAL.checkAllapot(Allapot.ZARVA)) {
+      Ajto.PORTAL.removeAllapot(Allapot.ZARVA);
+      Ajto.PORTAL.addAllapot(Allapot.CSUKVA);
+    }
+    if (!Targy.NYOMOGOMB.checkAllapot(Allapot.AKTIV)) {
+      Ajto.PORTAL.removeAllapot(Allapot.NYITVA, Allapot.CSUKVA);
+      Ajto.PORTAL.addAllapot(Allapot.ZARVA);
+    }
   }
   
   private void allapotfuggoUzenetek() {    
@@ -111,6 +128,11 @@ class Jatek {
       && Targy.KOTEL.checkAllapot(Allapot.AKTIV) && Ajto.LADA.checkAllapot(Allapot.NYITVA)) {
       szoveg.append('\n');
       szoveg.append(Uzenet.KOTEL_2);
+    }
+    if (jatekos.getHelyszin() == Helyszin.REJTETT_PINCE
+      && Targy.JEGYZET.checkAllapot(Allapot.VIZSGALT) && Targy.GEP.checkAllapot(Allapot.VIZSGALT)) {
+      szoveg.append('\n');
+      szoveg.append(Uzenet.GOMB);
     }
   }
 

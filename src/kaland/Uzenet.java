@@ -28,14 +28,16 @@ public enum Uzenet {
   NYITVA("%s nyitva van."),
   CSUKVA("%s be van csukva."),
   ZARVA("%s be van zárva."),
-  MIVEL("Mivel?"),
+  HOGYAN("Hogyan?"),
   FELVEVE("Felvéve"),
   LETEVE("Letéve"),
   A("A "),
   AZ("Az"),
   KOTEL_1("A kötél a gerendán lóg."),
   KOTEL_2("A kötél a gerendán lóg, a vége eltűnik a láda mélyén."),
-  FIOK("A fiók tele van mindenféle kacattal.");
+  FIOK("A fiók tele van mindenféle kacattal."),
+  JEGYZET("A géppel összevetve a jegyzet értelmet nyer."),
+  GOMB("A gépen van egy nyomógomb.");
 
   private final String uzenet;
 

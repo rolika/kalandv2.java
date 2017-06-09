@@ -20,12 +20,16 @@ enum TargySzotar implements Szotar {
   SZOBOR_KAR("kar", "kart", "karral", "kéz", "kezet", "kézzel"),
   KONYHASZEKRENY("szekrény", "szekrényt", "szekrénnyel", "konyhaszekrény", "konyhaszekrényt", "konyhaszekrénnyel"),
   KONYHASZEKRENYAJTO("szekrényajtó", "szekrényajtót", "szekrényajtóval"),
-  FIOK("fiók", "fiókot", "fiókkal"),
+  FIOK("fiók", "fiókot", "fiókkal", "fiókba"),
   KACAT("kacat", "kacatot", "kacattal"),
   NAGY_KULCS("kulcs", "kulcsot", "kulccsal"),
   KOTEL("kötél", "kötelet", "kötéllel", "kenderkötél", "kenderkötelet", "kenderkötéllel"),
-  GERENDA("gerenda", "gerendát", "gerendával", "gerendán", "mestergerenda", "mestergerendát", "mestergerendával", "mestergerendán"),
-  MINDEN("minden", "mindent", "mindet", "összeset");
+  GERENDA("gerenda", "gerendát", "gerendával", "gerendán", "gerendára", "mestergerenda", "mestergerendát", "mestergerendával", "mestergerendán"),
+  MINDEN("minden", "mindent", "mindet", "összeset"),
+  TORMELEK("törmelék", "törmeléket", "törmelékkel", "limlom", "limlomot", "limlommal", "kupac", "kupacot", "kupaccal"),
+  JEGYZET("jegyzet", "jegyzetet", "jegyzettel", "lap", "lapot", "lappal"),
+  GEP("gép", "gépet", "géppel", "berendezés", "berendezést", "berendezéssel"),
+  NYOMOGOMB("gomb", "gombot", "gombbal", "nyomógomb", "nyomógombot", "nyomógombbal");
 
   private final Set<String> szinonimak;
 
