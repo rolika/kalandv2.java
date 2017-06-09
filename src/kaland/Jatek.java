@@ -109,8 +109,9 @@ class Jatek {
     if (Targy.GEP.checkAllapot(Allapot.VIZSGALT)) {
       Targy.JEGYZET.setLeiras(Uzenet.JEGYZET.toString());
     }
-    if (Targy.NYOMOGOMB.checkAllapot(Allapot.AKTIV)) {
+    if (Targy.NYOMOGOMB.checkAllapot(Allapot.AKTIV) &&  Ajto.PORTAL.checkAllapot(Allapot.ZARVA)) {
       Ajto.PORTAL.removeAllapot(Allapot.ZARVA);
+      Ajto.PORTAL.addAllapot(Allapot.CSUKVA);
     }
   }
   
