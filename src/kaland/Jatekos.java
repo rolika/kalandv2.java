@@ -388,7 +388,6 @@ final class Jatekos implements Elem {
       mozgatandoTargyak.forEach(targy -> targy.setHely(tmp));
       String uzenet = tmp.targyak();
       mozgatandoTargyak.forEach(targy -> targy.setHely(cel));
-      mozgatandoTargyak.forEach(targy -> targy.addAllapot(Allapot.VIZSGALT));
       return uzenet;
     } else {
       return Uzenet.NEM_ERTEM.toString();
