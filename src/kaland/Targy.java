@@ -32,7 +32,7 @@ enum Targy implements Elem {
   TORMELEK("törmelék", "Egy rakás tégla, sitt, csempe, üveg-, fém- és fadarabok egymásra hegyén-hátán.", Helyszin.PINCE, Allapot.LATHATO),
   JEGYZET("jegyzet", "Egy erős kartonlapra mindenféle ábrát rajzoltak, aminek így nem igazán látod értelmét.", Helyszin.PINCE, Allapot.FELVEHETO),
   GEP("gép", "Egy óriási, érthetetlen rendeltetésű gép pöffeszkedik középen, elfoglalva a pince felét.", Helyszin.REJTETT_PINCE, Allapot.LATHATO),
-  NYOMOGOMB("nyomógomb", "Egy első látásra fel sem tűnő gomb, amit nyilván meg lehet nyomni.", Helyszin.REJTETT_PINCE, Allapot.HASZNALHATO);
+  NYOMOGOMB("nyomógomb", "Egy első látásra fel sem tűnő gomb, amit nyilván meg lehet nyomni.", Helyszin.REJTETT_PINCE, Allapot.HASZNALHATO, Allapot.KAPCSOLGATHATO);
 
   private final String nev;
   private String leiras;

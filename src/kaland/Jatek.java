@@ -113,6 +113,10 @@ class Jatek {
       Ajto.PORTAL.removeAllapot(Allapot.ZARVA);
       Ajto.PORTAL.addAllapot(Allapot.CSUKVA);
     }
+    if (!Targy.NYOMOGOMB.checkAllapot(Allapot.AKTIV)) {
+      Ajto.PORTAL.removeAllapot(Allapot.NYITVA, Allapot.CSUKVA);
+      Ajto.PORTAL.addAllapot(Allapot.ZARVA);
+    }
   }
   
   private void allapotfuggoUzenetek() {    
