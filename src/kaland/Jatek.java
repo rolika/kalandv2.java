@@ -125,7 +125,7 @@ class Jatek {
       szoveg.append('\n');
       szoveg.append(Uzenet.KOTEL_2);
     }
-    if (jatekos.getHelyszin() == Helyszin.REJTETT_PINCE && Ajto.PORTAL.checkAllapot(Allapot.ZARVA)
+    if (jatekos.getHelyszin() == Helyszin.REJTETT_PINCE
       && Targy.JEGYZET.checkAllapot(Allapot.VIZSGALT) && Targy.GEP.checkAllapot(Allapot.VIZSGALT)) {
       szoveg.append('\n');
       szoveg.append(Uzenet.GOMB);
