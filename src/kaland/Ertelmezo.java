@@ -78,6 +78,12 @@ class Ertelmezo {
         }
       }
       // végül az ellenségeket
+      for (Szotar ellenseg : EllensegSzotar.values()) {
+        szoEnum = ellenseg.getSzoEnum(szo);
+        if (szoEnum != null) {
+          parancsszavak.add(szoEnum);
+        }
+      }
     }
   }
 
@@ -150,7 +156,7 @@ class Ertelmezo {
   private static Elem getElem(Szotar szo) {
     if (szo.getClass().equals(TargySzotar.class)) {
       Targy targy = Targy.valueOf(szo.toString());
-      if (szerepelJelzo(targy)) {
+      if (szerepelJelzo(targy)) { // a tárgyat csak akkor fogadja el, ha szerepel a jelzője is
         return Targy.valueOf(szo.toString());
       }
     } else if (szo.getClass().equals(AjtoSzotar.class)) {
@@ -159,17 +165,13 @@ class Ertelmezo {
       return Csapda.valueOf(szo.toString());
     } else if (szo.getClass().equals(HelyszinSzotar.class)) {
       return Helyszin.valueOf(szo.toString());
+    } else if (szo.getClass().equals(EllensegSzotar.class)) {
+      return Ellenseg.valueOf(szo.toString());
     }
     return null;
   }
   
-  /**
-   * Ellenőrzi, szerepel-e az adott elem jelzője a parancsban
-   * 
-   * @param elem
-   * @return igaz, ha szerepel, vagy ha nincs jelzője
-   */
-  static boolean szerepelJelzo(Elem elem) {
+  private static boolean szerepelJelzo(Elem elem) {
     return elem.getJelzo() == JelzoSzotar.NINCS ? true : parancsszavak.contains(elem.getJelzo());
   }
 
