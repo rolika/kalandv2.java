@@ -8,6 +8,7 @@ import java.util.EnumSet;
  * A játék ellenségeit megvalósító enum.
  * Paraméterei: név - leírás - üzenet, ha megölte a játékost - üzenet, ha a játékos ölte meg -
  * ártalmatlan üzenet - pár, azaz hasznos tárgy (fegyver) ellene - állapot-enumset
+ * 
  * @author rolika
  */
 enum Ellenseg implements Elem {
@@ -83,15 +84,15 @@ enum Ellenseg implements Elem {
     return jelzo;
   }
 
-  public String getMegol() {
+  String getMegol() {
     return megol;
   }
 
-  public String getMeghal() {
+  String getMeghal() {
     return meghal;
   }
 
-  public String getHalott() {
+  String getHalott() {
     return halott;
   }
   
