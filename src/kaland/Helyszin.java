@@ -105,7 +105,7 @@ enum Helyszin implements Elem {
     minden.addAll(Arrays.asList(Ajto.values()));
     minden.addAll(Arrays.asList(Csapda.values()));
     minden.addAll(Arrays.asList(Helyszin.values()));
-    //minden.addAll(Arrays.asList(EllensegEnum.values()));
+    minden.addAll(Arrays.asList(Ellenseg.values()));
     minden.removeIf(elem -> !elem.getHely().contains(this));
     return minden;
   }
@@ -138,6 +138,26 @@ enum Helyszin implements Elem {
           uzenet.append(",");
         });
       uzenet.replace(uzenet.length() - 1, uzenet.length(), ".");
+    }
+    return uzenet.toString();
+  }
+  
+  String ellensegek() {
+    EnumSet<Ellenseg> ellensegek = EnumSet.noneOf(Ellenseg.class);
+    StringBuilder uzenet = new StringBuilder();
+    for (Ellenseg ellenseg : Ellenseg.values()) {
+      if (ellenseg.getHely().contains(this)) {
+        ellensegek.add(ellenseg);
+      }
+    }
+    if (!ellensegek.isEmpty()) {
+      uzenet.append(Uzenet.VAN_ITT);
+      ellensegek.forEach(ellenseg -> {
+        uzenet.append(Uzenet.EGY);
+        uzenet.append(ellenseg.getNev());
+        uzenet.append(",");
+      });
+      uzenet.replace(uzenet.length()-1, uzenet.length(), "!");
     }
     return uzenet.toString();
   }

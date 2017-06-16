@@ -47,7 +47,11 @@ class Jatek {
         szoveg.append('\n');
         szoveg.append(targyak);
       }
-      // sortoro(ellensegSorolas());
+      String ellensegek = helyszin.ellensegek();
+      if (!ellensegek.isEmpty()) {
+        szoveg.append('\n');
+        szoveg.append(ellensegek);
+      }
     } else {
       szoveg.append(Uzenet.SOTET.toString());
     }
