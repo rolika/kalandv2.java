@@ -149,15 +149,19 @@ enum Helyszin implements Elem {
     return uzenet.toString();
   }
   
-  String ellensegek() {
+  String ellensegek(Jatekos jatekos) {
     Set<Elem> ellensegek = elemSzuro(elem -> elem.getClass().equals(Ellenseg.class));
     StringBuilder uzenet = new StringBuilder();
     if (!ellensegek.isEmpty()) {
-      ellensegek.forEach(ellenseg -> {
-        Ellenseg ellen = (Ellenseg) ellenseg;
-        uzenet.append(ellen.uzenet());
+      for (Elem ellen : ellensegek) {
+        Ellenseg ellenseg = (Ellenseg) ellen;
+        uzenet.append(ellenseg.uzenet());
+        if (ellenseg.checkAllapot(Allapot.TAMAD)) { // csak egyszer lehessen megölni,
+          jatekos.removeAllapot(Allapot.EL); // ha több ellenség is van
+          return uzenet.toString();
+        }
         uzenet.append('\n');
-      });
+      }
       uzenet.replace(uzenet.length()-1, uzenet.length(), " "); // utolsó újsor törölve
     }
     return uzenet.toString();

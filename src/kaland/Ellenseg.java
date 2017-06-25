@@ -6,7 +6,7 @@ import java.util.EnumSet;
 
 /**
  * A játék ellenségeit megvalósító enum. Az ellenségnek három fokozata van: - passzív (EL): csak úgy
- * van, ha a játékos nem piszkálja, nem csinál semmit - aktív (AKTIV): támadásra kész, a játékosnak
+ * van, ha a játékos nem piszkálja, nem csinál semmit - aktív (AKTIV): támadásra kész, a játékos
  * vagy elmegy, vagy megtámadja, vagy: - támad (TAMAD): megtámadja a játékost. Jelenleg ez a játékos
  * halálát jelenti. - halott (egyik se): a játékos megölte A játék ebből a négy üzenetből válogat a
  * helyszín leírásakor, ha jelen van egy ellenség. Paraméterei: - név - leírás - passzív (nem csinál
@@ -26,7 +26,7 @@ enum Ellenseg implements Elem {
     "A zombi hirtelen kinyúl feléd és megragad! Rothadó fogai felé húz, érzed a szája irtóztató szagát, és ahogy a fogai beléd mélyednek. Aztán sötét lesz...",
     "Egy szétroncsolt fejű holttest van itt.",
     "Lesújtasz a zombira és szétloccsantod a fejét!",
-    Helyszin.HAZ_ELOTT, Targy.BICSKA, Allapot.EL, Allapot.LATHATO);
+    Helyszin.PINCE, Targy.BICSKA, Allapot.EL, Allapot.LATHATO);
 
   private final String nev, leiras, passziv, aktiv, tamad, artalmatlan, megol;
   private final Helyszin hely;

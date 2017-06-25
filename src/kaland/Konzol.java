@@ -16,14 +16,17 @@ final class Konzol {
 
   Konzol() {
     bevitel = new Scanner(System.in);
-    futas();
+    jatekciklus();
   }
 
-  void futas() {
+  void jatekciklus() {
     while (true) {
       jatek = new Jatek();
       while (jatek.fut()) {
         System.out.println(szotoro(jatek.helyzet()));
+        if (!jatek.fut()) { // az ellenség támadó állapotban megölheti a játékost,
+          break; // és ekkor ki kell lépni a prompt előtt
+        }
         System.out.print(Uzenet.PROMPT);
         Ertelmezo.szetbont(bevitel.nextLine());
         String akcio = jatek.vegrehajt().toString();

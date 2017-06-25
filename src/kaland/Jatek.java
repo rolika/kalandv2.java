@@ -47,7 +47,7 @@ class Jatek {
         szoveg.append('\n');
         szoveg.append(targyak);
       }
-      String ellensegek = helyszin.ellensegek();
+      String ellensegek = helyszin.ellensegek(jatekos);
       if (!ellensegek.isEmpty()) {
         szoveg.append('\n');
         szoveg.append(ellensegek);
