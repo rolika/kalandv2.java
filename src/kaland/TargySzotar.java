@@ -16,6 +16,8 @@ enum TargySzotar implements Szotar {
   BICSKA("bicska", "bicskát", "bicskával", "kés", "kést", "késsel", "kiskés", "kiskést", "kiskéssel"),
   ZSEBLAMPA("lámpa", "lámpát", "lámpával", "zseblámpa", "zseblámpát", "zseblámpával"),
   ELOTER_PADLO("padló", "padlót", "padlóval", "padlódeszka", "padlódeszkát", "padlódeszkával", "hajópadló", "hajópadlót", "hajópadlóval"),
+  KANDALLO("kandalló", "kandallót", "kandallóval", "kályha", "kályhát", "kályhával"),
+  PISZKAVAS("piszkavas", "piszkavasat", "piszkavassal"),
   SZOBOR("szobor", "szobrot", "szoborral", "torzó", "torzót", "torzóval"),
   SZOBOR_KAR("kar", "kart", "karral", "kéz", "kezet", "kézzel"),
   KONYHASZEKRENY("szekrény", "szekrényt", "szekrénnyel", "konyhaszekrény", "konyhaszekrényt", "konyhaszekrénnyel"),

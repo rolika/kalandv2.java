@@ -20,6 +20,8 @@ enum Targy implements Elem {
   BICSKA("bicska", "A nemesacél pengéjű, szarvasagancs-nyelű zsebkésedet még a nagyapádtól kaptad. Borotvaéles, mint mindig.", Helyszin.LELTAR, Allapot.LATHATO, Allapot.FELVEHETO),
   ZSEBLAMPA("zseblámpa", "Bivalyerős, mégis takarékos ledlámpa.", Helyszin.LELTAR, Allapot.LATHATO, Allapot.FELVEHETO, Allapot.HASZNALHATO, Allapot.KAPCSOLGATHATO),
   ELOTER_PADLO("padló", "Alaposan megnézve a padlót, egy csapóajtó körvonalait fedezed fel!", Helyszin.ELOTER, Allapot.LATHATO),
+  KANDALLO("kandalló", "A kandallóban néhány üszkös fadarab hever.", Helyszin.SZOBA, Allapot.LATHATO),
+  PISZKAVAS("piszkavas", "Békebeli öntöttvasból készült piszkavas. Akkora és olyan nehéz, hogy akár fegyverként is használható.", Helyszin.SZOBA, Allapot.FELVEHETO),
   SZOBOR("szobor", "Egy férfialak görög stílusú torzója, érdekesmód egyetlen karral, ami forgathatónak tűnik.", Helyszin.SZOBA, Allapot.LATHATO),
   SZOBOR_KAR("kar", "A szobor karja kissé szokatlan szögben áll, mintha forgatható lenne.", Helyszin.SZOBA, Allapot.HASZNALHATO),
   KONYHASZEKRENY("szekrény", "A konyhaszekrény nagyon leromlott állapotban van, ajtai egy kivételével mind leszakadtak. Van egy fiókja is.", Helyszin.KONYHA, Allapot.LATHATO),
