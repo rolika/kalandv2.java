@@ -158,6 +158,7 @@ enum Helyszin implements Elem {
         uzenet.append(ellen.uzenet());
         uzenet.append('\n');
       });
+      uzenet.replace(uzenet.length()-1, uzenet.length(), " "); // utolsó újsor törölve
     }
     return uzenet.toString();
   }
