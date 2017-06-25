@@ -7,9 +7,9 @@ package kaland;
  * @author rolika
  */
 class Jatek {
-
+  
   private static final Helyszin KEZDO_HELYSZIN = Helyszin.HAZ_ELOTT;
-
+  
   private final Jatekos jatekos;
   private StringBuilder szoveg;
 
@@ -82,6 +82,9 @@ class Jatek {
     if (Targy.SZOBOR.checkAllapot(Allapot.VIZSGALT)) { // felfedi a szobor karját
       Targy.SZOBOR_KAR.addAllapot(Allapot.LATHATO);
     }
+    if (Targy.KANDALLO.checkAllapot(Allapot.VIZSGALT)) { // felfedi a piszkavasat
+      Targy.PISZKAVAS.addAllapot(Allapot.LATHATO);
+    }
     if (Targy.SZOBOR_KAR.checkAllapot(Allapot.AKTIV)) { // hatástalanítja a penge-csapdát
       Csapda.PENGE.addAllapot(Allapot.LATHATO);
     }
@@ -113,7 +116,7 @@ class Jatek {
     if (Targy.GEP.checkAllapot(Allapot.VIZSGALT)) {
       Targy.JEGYZET.setLeiras(Uzenet.JEGYZET.toString());
     }
-    if (Targy.NYOMOGOMB.checkAllapot(Allapot.AKTIV) &&  Ajto.PORTAL.checkAllapot(Allapot.ZARVA)) {
+    if (Targy.NYOMOGOMB.checkAllapot(Allapot.AKTIV) && Ajto.PORTAL.checkAllapot(Allapot.ZARVA)) {
       Ajto.PORTAL.removeAllapot(Allapot.ZARVA);
       Ajto.PORTAL.addAllapot(Allapot.CSUKVA);
     }
@@ -124,11 +127,11 @@ class Jatek {
   }
   
   private void allapotfuggoUzenetek() {    
-    if (jatekos.getHelyszin() == Helyszin.PADLAS_VEGE 
+    if (jatekos.getHelyszin() == Helyszin.PADLAS_VEGE
       && Targy.KOTEL.checkAllapot(Allapot.AKTIV) && !Ajto.LADA.checkAllapot(Allapot.NYITVA)) {
       szoveg.append('\n');
       szoveg.append(Uzenet.KOTEL_1);
-    } else if (jatekos.getHelyszin() == Helyszin.PADLAS_VEGE 
+    } else if (jatekos.getHelyszin() == Helyszin.PADLAS_VEGE
       && Targy.KOTEL.checkAllapot(Allapot.AKTIV) && Ajto.LADA.checkAllapot(Allapot.NYITVA)) {
       szoveg.append('\n');
       szoveg.append(Uzenet.KOTEL_2);
@@ -139,5 +142,5 @@ class Jatek {
       szoveg.append(Uzenet.GOMB);
     }
   }
-
+  
 }

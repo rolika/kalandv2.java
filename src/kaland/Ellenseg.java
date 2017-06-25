@@ -26,7 +26,7 @@ enum Ellenseg implements Elem {
     "A zombi hirtelen kinyúl feléd és megragad! Rothadó fogai felé húz, érzed a szája irtóztató szagát, és ahogy a fogai beléd mélyednek. Aztán sötét lesz...",
     "Egy szétroncsolt fejű holttest van itt.",
     "Lesújtasz a zombira és szétloccsantod a fejét!",
-    Helyszin.PINCE, Targy.BICSKA, Allapot.EL, Allapot.LATHATO);
+    Helyszin.PINCE, Targy.PISZKAVAS, Allapot.EL, Allapot.LATHATO);
 
   private final String nev, leiras, passziv, aktiv, tamad, artalmatlan, megol;
   private final Helyszin hely;
@@ -49,7 +49,7 @@ enum Ellenseg implements Elem {
     this.jelzo = JelzoSzotar.NINCS;
     this.allapot = Sets.newEnumSet(Arrays.asList(allapot), Allapot.class);
   }
-  
+
   String uzenet() {
     if (checkAllapot(Allapot.EL)) {
       return passziv;
