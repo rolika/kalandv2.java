@@ -26,7 +26,7 @@ enum Ellenseg implements Elem {
     "A zombi hirtelen kinyúl feléd és megragad! Rothadó fogai felé húz, érzed a szája irtóztató szagát, és ahogy a fogai beléd mélyednek. Aztán sötét lesz...",
     "Egy szétroncsolt fejű holttest van itt.",
     "Lesújtasz a zombira és szétloccsantod a fejét!",
-    Helyszin.PINCE, Targy.PISZKAVAS, Allapot.EL, Allapot.LATHATO);
+    Helyszin.PINCE, Targy.PISZKAVAS, Allapot.EL, Allapot.LATHATO, Allapot.TAMADHATO);
 
   private final String nev, leiras, passziv, aktiv, tamad, artalmatlan, megol;
   private final Helyszin hely;
@@ -50,6 +50,11 @@ enum Ellenseg implements Elem {
     this.allapot = Sets.newEnumSet(Arrays.asList(allapot), Allapot.class);
   }
 
+  /**
+   * Az ellenség állapotának megfelelő leírást adja vissza.
+   *
+   * @return állapotnak megfelelő szöveg
+   */
   String uzenet() {
     if (checkAllapot(Allapot.EL)) {
       return passziv;
@@ -59,6 +64,28 @@ enum Ellenseg implements Elem {
       return tamad;
     } else {
       return artalmatlan;
+    }
+  }
+
+  /**
+   * Ha a játékos sikeresen megöl egy ellenséget, ezt az üzenetet kapja.
+   *
+   * @return szöveg
+   */
+  String getMegol() {
+    return megol;
+  }
+
+  /**
+   * Az ellenség a sikertelen támadási kísérletekkel egyre aktívabb lesz.
+   */
+  void gerjeszt() {
+    if (checkAllapot(Allapot.EL)) {
+      removeAllapot(Allapot.EL);
+      addAllapot(Allapot.AKTIV);
+    } else if (checkAllapot(Allapot.AKTIV)) {
+      removeAllapot(Allapot.AKTIV);
+      addAllapot(Allapot.TAMAD);
     }
   }
 

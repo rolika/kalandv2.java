@@ -325,7 +325,30 @@ final class Jatekos implements Elem {
    * @return megfelelő szöveges üzenet
    */
   String tamad() {
-    return "Játékos támad.";
+    Set<Elem> parancsElemek = Ertelmezo.getElemek();
+    Elem ellen;
+    try {
+      ellen = parancsElemek.stream()
+        .filter(elem -> elem.checkAllapot(Allapot.TAMADHATO, Allapot.LATHATO))
+        .iterator().next();
+    } catch (NoSuchElementException e) {
+      return Uzenet.NEM_ERTEM.toString();
+    }
+    Set<Elem> ellensegek = hely.elemSzuro(Allapot.TAMADHATO);
+    if (!ellensegek.contains(ellen)) {
+      return Uzenet.NEM_ERTEM.toString();
+    }
+    Ellenseg ellenseg = (Ellenseg) ellen;
+    if (!parancsElemek.contains(ellen.getPar())) {
+      ellenseg.gerjeszt();
+      return Uzenet.HOGYAN.toString();
+    } else if (!Helyszin.LELTAR.elemSzuro().contains(ellen.getPar())) {
+      ellenseg.gerjeszt();
+      return Uzenet.NINCS_NALAD.toString();
+    } else {
+      ellenseg.removeAllapot(Allapot.EL, Allapot.AKTIV, Allapot.TAMAD, Allapot.TAMADHATO);
+      return ellenseg.getMegol();
+    }
   }
 
   /**
