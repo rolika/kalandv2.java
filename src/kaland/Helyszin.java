@@ -4,6 +4,7 @@ import com.google.common.collect.Sets;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -99,6 +100,12 @@ enum Helyszin implements Elem {
       .filter(elem -> elem.checkAllapot(allapotok))
       .collect(Collectors.toSet());
   }
+  
+  Set<Elem> elemSzuro(Predicate szuro) {
+    return (Set<Elem>) mindenElem().stream()
+      .filter(szuro)
+      .collect(Collectors.toSet());
+  }
 
   private Set<Elem> mindenElem() {
     Set<Elem> minden = Sets.newHashSet(Targy.values());
@@ -143,21 +150,14 @@ enum Helyszin implements Elem {
   }
   
   String ellensegek() {
-    EnumSet<Ellenseg> ellensegek = EnumSet.noneOf(Ellenseg.class);
+    Set<Elem> ellensegek = elemSzuro(elem -> elem.getClass().equals(Ellenseg.class));
     StringBuilder uzenet = new StringBuilder();
-    for (Ellenseg ellenseg : Ellenseg.values()) {
-      if (ellenseg.getHely().contains(this)) {
-        ellensegek.add(ellenseg);
-      }
-    }
     if (!ellensegek.isEmpty()) {
-      uzenet.append(Uzenet.VAN_ITT);
       ellensegek.forEach(ellenseg -> {
-        uzenet.append(Uzenet.EGY);
-        uzenet.append(ellenseg.getNev());
-        uzenet.append(",");
+        Ellenseg ellen = (Ellenseg) ellenseg;
+        uzenet.append(ellen.uzenet());
+        uzenet.append('\n');
       });
-      uzenet.replace(uzenet.length()-1, uzenet.length(), "!");
     }
     return uzenet.toString();
   }
