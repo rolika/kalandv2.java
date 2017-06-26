@@ -37,7 +37,8 @@ public enum Uzenet {
   KOTEL_2("A kötél a gerendán lóg, a vége eltűnik a láda mélyén."),
   FIOK("A fiók tele van mindenféle kacattal."),
   JEGYZET("A géppel összevetve a jegyzet értelmet nyer."),
-  GOMB("A gépen van egy nyomógomb.");
+  GOMB("A gépen van egy nyomógomb."),
+  SOTETBEN_TAMAD("A sötétben valami rádtámad és elemészt a sötétség.");
 
   private final String uzenet;
 

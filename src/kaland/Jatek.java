@@ -1,5 +1,7 @@
 package kaland;
 
+import java.util.Set;
+
 /**
  * A játék logikáját tartalmazó osztály Alapvetően stringeket ad vissza, a játékos helyzetének,
  * akcióinak függvényében
@@ -7,9 +9,9 @@ package kaland;
  * @author rolika
  */
 class Jatek {
-  
+
   private static final Helyszin KEZDO_HELYSZIN = Helyszin.HAZ_ELOTT;
-  
+
   private final Jatekos jatekos;
   private StringBuilder szoveg;
 
@@ -30,6 +32,7 @@ class Jatek {
     return jatekos.checkAllapot(Allapot.EL, Allapot.NEM_NYERT, Allapot.NEM_VESZTETT);
   }
 
+  // 2. az aktív ellenség a játékos egy lépése után támadó legyen
   /**
    * Felvázolja a játékos helyzetét. Ha nincs sötét: - helyszínleírás - látható és felvhető tárgyak
    * felsorolása
@@ -53,7 +56,19 @@ class Jatek {
         szoveg.append(ellensegek);
       }
     } else {
-      szoveg.append(Uzenet.SOTET.toString());
+      Set<Elem> ellensegek = helyszin.elemSzuro(elem -> elem.getClass().equals(Ellenseg.class));
+      if (!ellensegek.isEmpty()) {
+        for (Elem ellen : ellensegek) {
+          if (ellen.checkAllapot(Allapot.EL) || ellen.checkAllapot(Allapot.AKTIV)
+            || ellen.checkAllapot(Allapot.TAMAD)) {
+            szoveg.append(Uzenet.SOTETBEN_TAMAD.toString());
+            jatekos.removeAllapot(Allapot.EL);
+            break;
+          }
+        }
+      } else {
+        szoveg.append(Uzenet.SOTET.toString());
+      }
     }
     return szoveg.toString();
   }
@@ -125,8 +140,8 @@ class Jatek {
       Ajto.PORTAL.addAllapot(Allapot.ZARVA);
     }
   }
-  
-  private void allapotfuggoUzenetek() {    
+
+  private void allapotfuggoUzenetek() {
     if (jatekos.getHelyszin() == Helyszin.PADLAS_VEGE
       && Targy.KOTEL.checkAllapot(Allapot.AKTIV) && !Ajto.LADA.checkAllapot(Allapot.NYITVA)) {
       szoveg.append('\n');
@@ -142,5 +157,5 @@ class Jatek {
       szoveg.append(Uzenet.GOMB);
     }
   }
-  
+
 }
