@@ -93,7 +93,8 @@ class Jatek {
    * A játékos tevékenysége következtében beálló, előre meghatározott változások.
    */
   void szkript() {
-    if (Targy.LABTORLO.checkAllapot(Allapot.VIZSGALT)) { // kulcs a lábtörlő alatt
+    if (Targy.LABTORLO.checkAllapot(Allapot.VIZSGALT) ||
+      Targy.LABTORLO.getHely().contains(Helyszin.LELTAR)) { // kulcs a lábtörlő alatt
       Targy.KIS_KULCS.addAllapot(Allapot.LATHATO);
     }
     if (Targy.ELOTER_PADLO.checkAllapot(Allapot.VIZSGALT)) { // felfedi a gödör-csapdát
