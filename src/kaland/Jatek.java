@@ -32,10 +32,10 @@ class Jatek {
     return jatekos.checkAllapot(Allapot.EL, Allapot.NEM_NYERT, Allapot.NEM_VESZTETT);
   }
 
-  // 2. az aktív ellenség a játékos egy lépése után támadó legyen
   /**
-   * Felvázolja a játékos helyzetét. Ha nincs sötét: - helyszínleírás - látható és felvhető tárgyak
-   * felsorolása
+   * Felvázolja a játékos helyzetét. Ha nincs sötét: - helyszínleírás - látható és felevhető tárgyak
+   * felsorolása. Ha sötét van, és van ellenség, az megöli a játékost, egyébként csak jelzi, hogy
+   * sötét van.
    *
    * @return megfelelő szövege üzenet
    */
@@ -54,11 +54,16 @@ class Jatek {
       if (!ellensegek.isEmpty()) {
         szoveg.append('\n');
         szoveg.append(ellensegek);
+        Set<Elem> ellenek = helyszin.elemSzuro(elem -> elem.getClass().equals(Ellenseg.class));
+        ellenek.stream() // az aktív ellenségek automatikusan tovább gerjednek támadóvá
+          .filter(ellen -> ellen.checkAllapot(Allapot.AKTIV))
+          .map(ellen -> (Ellenseg) ellen)
+          .forEach(ellenseg -> ellenseg.gerjeszt());
       }
     } else {
-      Set<Elem> ellensegek = helyszin.elemSzuro(elem -> elem.getClass().equals(Ellenseg.class));
-      if (!ellensegek.isEmpty()) {
-        for (Elem ellen : ellensegek) {
+      Set<Elem> ellenek = helyszin.elemSzuro(elem -> elem.getClass().equals(Ellenseg.class));
+      if (!ellenek.isEmpty()) {
+        for (Elem ellen : ellenek) {
           if (ellen.checkAllapot(Allapot.EL) || ellen.checkAllapot(Allapot.AKTIV)
             || ellen.checkAllapot(Allapot.TAMAD)) {
             szoveg.append(Uzenet.SOTETBEN_TAMAD.toString());
